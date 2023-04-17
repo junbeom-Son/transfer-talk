@@ -6,37 +6,32 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/eclipse-workspace/lib/mysql-connector-java-8.0.25.jar">
+	<classpathentry kind="lib" path="C:/eclipse-workspace/transferTalk/src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.25.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/eclipse-workspace/lib/ojdbc8-19.12.0.0.jar">
+	<classpathentry kind="lib" path="C:/eclipse-workspace/transferTalk/src/main/webapp/WEB-INF/lib/jsoup-1.15.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/eclipse-workspace/lib/taglibs-standard-compat-1.2.5.jar">
+	<classpathentry kind="lib" path="C:/eclipse-workspace/transferTalk/src/main/webapp/WEB-INF/lib/taglibs-standard-compat-1.2.5.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/eclipse-workspace/lib/taglibs-standard-impl-1.2.5.jar">
+	<classpathentry kind="lib" path="C:/eclipse-workspace/transferTalk/src/main/webapp/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/eclipse-workspace/lib/taglibs-standard-jstlel-1.2.5.jar">
+	<classpathentry kind="lib" path="C:/eclipse-workspace/transferTalk/src/main/webapp/WEB-INF/lib/taglibs-standard-jstlel-1.2.5.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/eclipse-workspace/lib/taglibs-standard-spec-1.2.5.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/eclipse-workspace/lib/jsoup-1.15.4.jar">
+	<classpathentry kind="lib" path="C:/eclipse-workspace/transferTalk/src/main/webapp/WEB-INF/lib/taglibs-standard-spec-1.2.5.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
@@ -48,6 +43,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/eclipse-workspace/lib/lombok.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse-workspace/transferTalk/src/main/webapp/WEB-INF/lib/lombok.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
