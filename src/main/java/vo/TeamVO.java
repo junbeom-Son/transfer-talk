@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TeamVO {
 	private int team_id;
-	private int league_id;
 	private String team_name;
+	private int league_id;
 }
