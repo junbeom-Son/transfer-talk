@@ -16,6 +16,7 @@ public class PlayerDAO {
 	private ResultSet rs;
 	private int resultCount; 
 	
+
 	public int insertPlayer(PlayerVO player) {
 		String sql = """
 				insert into player(player_id, player_name) values (?, ?)
@@ -35,5 +36,30 @@ public class PlayerDAO {
 		
 		return resultCount;
 	}
+	
+	
+	public PlayerVO selectPlayerById(int player_id) {
+		String sql ="""
+				select Player_id
+				from player 
+				where Player_id = ? 
+				""";
 		
+		PlayerVO player = null;
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			rs = st.executeQuery(sql);
+			player = new PlayerVO();
+			while (rs.next()) {
+				player.setPlayer_id(player_id);
+				player.setPlayer_name(rs.getString("player_name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(null, pst, conn);
+		}
+		return player;
+	}
 }
