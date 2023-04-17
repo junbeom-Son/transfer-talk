@@ -44,5 +44,8 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/eclipse-workspace/transferTalk/src/main/webapp/WEB-INF/lib/lombok.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse-workspace/transferTalk/src/main/webapp/WEB-INF/lib/jackson-annotations-2.14.1.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse-workspace/transferTalk/src/main/webapp/WEB-INF/lib/jackson-core-2.14.1.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse-workspace/transferTalk/src/main/webapp/WEB-INF/lib/jackson-databind-2.14.1.wso2v1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
