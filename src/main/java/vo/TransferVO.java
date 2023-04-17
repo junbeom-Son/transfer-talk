@@ -14,8 +14,8 @@ public class TransferVO {
 	private String player_position;
 	private int transfer_year;
 	private String fee;
-	private int player_id;
-  private int age;
-  private int previous_team_id;
-	private int new_team_id;
+	private PlayerVO player;
+	private int age;
+	private TeamVO previous_team;
+	private TeamVO new_team;
 }

@@ -17,6 +17,8 @@ public class Crawling {
 	public void Crawl() throws IOException {
 		String currentLeague = "England";
 		String URL = "https://www.transfermarkt.com/premier-league/transfers/wettbewerb/GB1/saison_id/2022";
+//		https://www.transfermarkt.com/premier-league/transfers/wettbewerb/GB1/plus/?saison_id=2022&s_w=s&leihe=1&intern=0&intern=1
+//		https://www.transfermarkt.com/laliga/transfers/wettbewerb/ES1/plus/?saison_id=2022&s_w=s&leihe=1&intern=0&intern=1
 		Document doc = Jsoup.connect(URL).get();
 		Elements teamElements = doc.select(".show-for-small ~ .box");
 		List<PlayerVO> players = new ArrayList<>();
@@ -45,6 +47,25 @@ public class Crawling {
 				player.setPlayer_id(Integer.parseInt(player_id));
 				player.setPlayer_name(player_name);
 				players.add(player);
+				
+				LeagueVO league = new LeagueVO();
+	            league.setLeague_name(previousLeague);
+	            league.setLeague_country(nation);
+	            leagues.add(league);
+				
+				TeamVO team = new TeamVO();
+	            team.setTeam_name(previousTeam);
+	            team.setLeague(league);
+	            teams.add(team);
+				
+				TransferVO transfer = new TransferVO();
+				transfer.setAge(Integer.parseInt(age));
+				transfer.setFee(fee);
+				transfer.setPlayer(player);
+				transfer.setPlayer_position(position);
+				transfer.setPrevious_team(team);
+//				transfer.setTransfer_year(j);
+//				현재 팀 및 국가 설정
 			}
 
 			// out
@@ -63,6 +84,25 @@ public class Crawling {
 				player.setPlayer_id(Integer.parseInt(player_id));
 				player.setPlayer_name(player_name);
 				players.add(player);
+				
+				LeagueVO league = new LeagueVO();
+	            league.setLeague_name(newLeague);
+	            league.setLeague_country(nation);
+	            leagues.add(league);
+				
+				TeamVO team = new TeamVO();
+	            team.setTeam_name(newTeam);
+	            team.setLeague(league);
+	            teams.add(team);
+				
+				TransferVO transfer = new TransferVO();
+				transfer.setAge(Integer.parseInt(age));
+				transfer.setFee(fee);
+				transfer.setPlayer(player);
+				transfer.setPlayer_position(position);
+				transfer.setPrevious_team(team);
+//				transfer.setTransfer_year(j);
+//				현재 팀 및 국가 설정
 			}
 		}
 	}
