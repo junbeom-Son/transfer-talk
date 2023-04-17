@@ -13,4 +13,5 @@ public class TeamVO {
 	private int team_id;
 	private String team_name;
 	private int league_id;
+	private String league_name;
 }
