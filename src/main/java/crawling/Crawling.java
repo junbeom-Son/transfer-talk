@@ -23,7 +23,7 @@ public class Crawling {
 		List<TransferVO> transfers = new ArrayList<>();
 		List<TeamVO> teams = new ArrayList<>();
 		List<LeagueVO> leagues = new ArrayList<>();
-		for (int i = 0; i < teams.size(); i++) {
+		for (int i = 0; i < teamElements.size(); i++) {
 			String team = teamElements.get(i).select("h2 > a").get(1).text();
 			Elements inPlayers = teamElements.get(i).select(".responsive-table").get(0).select("table > tbody > tr");
 			Elements outPlayers = teamElements.get(i).select(".responsive-table").get(0).select("table > tbody > tr");
