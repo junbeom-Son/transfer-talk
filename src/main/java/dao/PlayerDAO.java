@@ -16,7 +16,11 @@ public class PlayerDAO {
 	private ResultSet rs;
 	private int resultCount; 
 	
-
+	/**
+	 * 1. player_id, player_name insert 하는것
+	 * @param player
+	 * @return 저장 성공 시 1, 실패시 0
+	 */
 	public int insertPlayer(PlayerVO player) {
 		String sql = """
 				insert into player(player_id, player_name) values (?, ?)
@@ -38,6 +42,12 @@ public class PlayerDAO {
 	}
 	
 	
+	/**
+	*****Null return 가능*****
+    * player_id를 받아 아이디에 해당하는 PlayerVO 리턴 
+    * @param player_id
+    * @return 해당하는 아이디가 있으면 PlayerVO, 없으면 null return
+	 */
 	public PlayerVO selectPlayerById(int player_id) {
 		String sql ="""
 				select Player_id
