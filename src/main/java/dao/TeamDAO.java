@@ -20,6 +20,11 @@ public class TeamDAO {
 	
 	CallableStatement cst;
 	
+	/**
+    * team_id를 받아 아이디에 해당하는 TeamVO 리턴 
+    * @param team_id
+    * @return 해당하는 아이디가 있으면 TeamVO, 없으면 null return
+    */
 	public TeamVO selectByTeamName(int team_id) {
 		TeamVO team = null;
 		String sql = """

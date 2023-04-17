@@ -10,11 +10,7 @@ import java.sql.Statement;
 import dbUtil.util;
 import vo.TransferVO;
 
-/**
- * 
- * @author User
- *
- */
+
 public class TransferDAO {
 	private Connection conn;
 	private Statement st;
@@ -23,6 +19,12 @@ public class TransferDAO {
 	private int resultCount; 
 	
 	CallableStatement cst;
+	
+	/**
+	 * TransferVO에 맞게 insert 하는것
+	 * @param transfer
+	 * @return 저장 성공 시 1, 실패시 0
+	 */
 	public int insertTransfer(TransferVO transfer) {
 		String sql = """
 				insert into values(?, ?, ?, ?, ?, ?, ?)
@@ -48,6 +50,12 @@ public class TransferDAO {
 		return resultCount;
 	}
 	
+	/**
+	*****Null return 가능*****
+    * player_id를 받아 아이디에 해당하는 TransferVO 리턴 
+    * @param player_id
+    * @return 해당하는 아이디가 있으면 TransferVO, 없으면 null return
+    */
 	public TransferVO selectByLastTransfer(int playerId) {
 		TransferVO player = null;
 		String sql = """
