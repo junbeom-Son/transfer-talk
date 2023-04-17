@@ -13,7 +13,10 @@ public class PlayerService {
 	 * @return 저장 성공 시 1, 실패시 0
 	 */
 	public int insertPlayer(PlayerVO player) {
-		return playerDao.insertPlayer(player);
+		if (selectPlayerById(player.getPlayer_id()) == null) {
+			return playerDao.insertPlayer(player);
+		}
+		return 0;
 	}
 
 	/**
