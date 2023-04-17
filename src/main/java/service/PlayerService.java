@@ -10,4 +10,7 @@ public class PlayerService {
 		return playerDao.insertPlayer(player);
 	}
 
+	public PlayerVO selectPlayerById(int player_id) {
+		return playerDao.selectPlayerById(player_id);
+	}
 }
