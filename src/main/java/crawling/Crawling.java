@@ -27,6 +27,7 @@ public class Crawling {
 	private Set<TeamVO> teams;
 	private Set<LeagueVO> leagues;
 	private Map<String, String> leagueNames = new HashMap<>();
+	private Map<String, String> leagueCodes = new HashMap<>();
 	
 	private int curYear;
 	
@@ -39,6 +40,7 @@ public class Crawling {
 	 */
 	public void crawl() throws IOException {
 		initializeDefaultLeagueNames();
+		initializeContryCodes(leagueCodes);
 		for (int year = FIRST_YEAR; year <= CUR_YEAR; ++year) {
 			curYear = year;
 			crawlBySeason('s');
@@ -75,12 +77,12 @@ public class Crawling {
 	 * 작성자 : 손준범
 	 */
 	public void crawlBySeason(char season) throws IOException {
-		Map<String, String> countryCodes = new HashMap<>();
-		initializeContryCodes(countryCodes);
-		for (String countryName : countryCodes.keySet()) {
-			String countryCode = countryCodes.get(countryName);
-			String URL = "https://www.transfermarkt.com/" + countryName + "/transfers/wettbewerb/"+
-					countryCode + "/plus/?saison_id=&s_w=s&leihe=1&intern=0&intern=1";
+		
+		for (String leagueName : leagueCodes.keySet()) {
+			String leagueCode = leagueCodes.get(leagueName);
+			String URL = "https://www.transfermarkt.com/" + leagueName + "/transfers/wettbewerb/"+
+					leagueCode + "/plus/?saison_id=" + curYear + "&s_w=" + season
+							+ "&leihe=1&intern=0&intern=1";
 			Document doc = Jsoup.connect(URL).get();
 			Elements teamElements = doc.select(".show-for-small ~ .box");
 			players = new HashSet<>();
