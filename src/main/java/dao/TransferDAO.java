@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import dbUtil.util;
+import vo.TeamVO;
 import vo.TransferVO;
 
 
@@ -27,19 +28,20 @@ public class TransferDAO {
 	 */
 	public int insertTransfer(TransferVO transfer) {
 		String sql = """
-				insert into values(?, ?, ?, ?, ?, ?, ?)
+				insert into transfer (player_position, transfer_year, fee, player_id, age, previous_team_id, new_team_id) 
+						values(?, ?, ?, ?, ?, ?, ?)
 				""";
 		conn = util.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
-			pst.setInt(1, transfer.getPlayer_id());
-			pst.setString(2, transfer.getPlayer_position());
-			pst.setInt(3, transfer.getTransfer_year());
-			pst.setString(4, transfer.getFee());
-			pst.setInt(5, transfer.getPlayer_id());
-			pst.setInt(6, transfer.getPrevious_team_id());
-			pst.setInt(7, transfer.getNew_team_id());
-			resultCount = pst.executeUpdate(); //DML문장 실행한다. 
+			pst.setString(1, transfer.getPlayer_position());
+			pst.setInt(2, transfer.getTransfer_year());
+			pst.setString(3, transfer.getFee());
+			pst.setInt(4, transfer.getPlayer().getPlayer_id());
+			pst.setInt(5, transfer.getAge());
+			pst.setInt(6, transfer.getPrevious_team().getTeam_id());
+			pst.setInt(7, transfer.getNew_team().getTeam_id());
+			resultCount = pst.executeUpdate(); 
 		} catch (SQLException e) {
 			resultCount = -1;
 			e.printStackTrace();
@@ -56,24 +58,28 @@ public class TransferDAO {
     * @param player_id
     * @return 해당하는 아이디가 있으면 TransferVO, 없으면 null return
     */
-	public TransferVO selectByLastTransfer(int playerId) {
-		TransferVO player = null;
-		String sql = """
-				select * from transfer 
-				 		where player_id = ? ORDER BY transfer_id DESC LIMIT 1
-				""";
+	public TransferVO selectByLastTransfer(int player_id) {
+		TransferVO transfer = null;
+		String sql = "select * from transfer join team on (transfer.previous_team_id = team.team_id) where player_id = "+ player_id +" ORDER BY transfer_id DESC LIMIT 1";
 		conn = util.getConnection();
 		try {
-			pst = conn.prepareStatement(sql);
-			pst.setInt(1,playerId);
-			rs = pst.executeQuery();
-			player = new TransferVO(rs.getInt(1), rs.getString(2),rs.getInt(3),rs.getString(4),playerId,rs.getInt(6),rs.getInt(7));
-
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while(rs.next()) {
+				transfer = new TransferVO();
+				transfer.setTransfer_id(rs.getInt("transfer_id"));
+				transfer.setPlayer_position(rs.getString("player_position"));
+				transfer.setTransfer_year(rs.getInt("transfer_year"));
+				transfer.setFee(rs.getString("fee"));
+				TeamVO t = new TeamVO();
+				t.setTeam_name(rs.getString("team_name"));
+				transfer.setPrevious_team(t);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			util.dbDisconnect(rs, st, conn);
 		}
-		return player;
+		return transfer;
 	}
 }

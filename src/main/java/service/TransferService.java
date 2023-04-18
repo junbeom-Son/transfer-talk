@@ -2,7 +2,6 @@ package service;
 
 import dao.TeamDAO;
 import dao.TransferDAO;
-import vo.TeamVO;
 import vo.TransferVO;
 
 public class TransferService {
@@ -17,12 +16,12 @@ public class TransferService {
 	public int insertTransfer(TransferVO transfer) {
 		int result = 0;
 		// 신규 선수인지
-		TransferVO lastTransfer = this.selectByLastTransfer(transfer.getPlayer_id()); 
+		TransferVO lastTransfer = selectByLastTransfer(transfer.getPlayer().getPlayer_id()); 
 		// db마지막팀과 입력받은데이터에 떠나는팀이 일치하는지
-		TeamVO lastTeam = teamDao.selectByTeamName(lastTransfer.getPrevious_team_id()); 
+		String lastTeam = lastTransfer.getPrevious_team().getTeam_name(); 
 		
 		//입력성공 -> result : 1
-		if(lastTransfer==null || lastTeam.getTeam_id() == transfer.getPrevious_team_id()) {
+		if(lastTransfer==null || lastTeam.equals(transfer.getPrevious_team().getTeam_name())) {
 			result = transferDao.insertTransfer(transfer);
 		}
 		return result;
