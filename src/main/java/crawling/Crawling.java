@@ -26,6 +26,7 @@ public class Crawling {
 	private List<TransferVO> transfers;
 	private Set<TeamVO> teams;
 	private Set<LeagueVO> leagues;
+	private Map<String, String> leagueNames = new HashMap<>();
 	
 	private int curYear;
 	
@@ -37,11 +38,32 @@ public class Crawling {
 	 * 작성자 : 손준범
 	 */
 	public void crawl() throws IOException {
+		initializeDefaultLeagueNames();
 		for (int year = FIRST_YEAR; year <= CUR_YEAR; ++year) {
 			curYear = year;
 			crawlBySeason('s');
 			crawlBySeason('w');			
 		}
+	}
+	
+	/**
+	 * 국가명 → 해당 국가 리그명으로 변환
+	 * map 리스트에 키값이 없을경우 국가명+league로 변환
+	 * 작성자 : 김창겸
+	 */
+	private void initializeDefaultLeagueNames() {
+		leagueNames.put("England", "Premier_League");
+		leagueNames.put("Spain", "LaLiga");
+		leagueNames.put("Germany", "BundesLiga");
+		leagueNames.put("Italy", "Serie_A");
+		leagueNames.put("France", "Ligue_1");
+		leagueNames.put("Brazil", "Breasileirao");
+		leagueNames.put("Argentina", "Superliga_Argentina");
+		leagueNames.put("Netherlands", "Eredivisie");
+		leagueNames.put("Portugal", "Primeira_Liga");
+		leagueNames.put("United States", "MLS");
+		leagueNames.put("Republic of Korea", "K리그");
+		leagueNames.put("Scotland", "Scotland Premiership");
 	}
 	
 	/**
@@ -117,12 +139,15 @@ public class Crawling {
 			String previousTeamName = inPlayers.get(j).select("td.zentriert > a > img").get(0).attr("title");
 			String previousLeagueName = inPlayers.get(j).select("td.verein-flagge-transfer-cell > img").size() == 0 ? 
 					"-" : inPlayers.get(j).select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
+			if(leagueNames.get(previousLeagueName) == null) {
+				leagueNames.put(previousLeagueName, previousLeagueName + "_league");
+			}
 			String fee = inPlayers.get(j).select("td.rechts > a").get(0).text();
 
 			PlayerVO player = makePlayer(player_id, player_name);
 			players.add(player);
 			
-			LeagueVO league = makeLeagueVO(previousLeagueName, nation); 
+			LeagueVO league = makeLeagueVO(leagueNames.get(previousLeagueName), nation); 
             leagues.add(league);
 			
 			TeamVO previousTeam = makeTeamVO(previousTeamName, league);
@@ -152,11 +177,15 @@ public class Crawling {
 			String newTeamName = outPlayers.get(j).select("td.zentriert > a > img").get(0).attr("title");
 			String newLeagueName = outPlayers.get(j).select("td.verein-flagge-transfer-cell > img").size() == 0 ? "-"
 					: outPlayers.get(j).select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
+			if(leagueNames.get(newLeagueName) == null) {
+				leagueNames.put(newLeagueName, newLeagueName + "_league");
+			}
+			
 			String fee = outPlayers.get(j).select("td.rechts > a").get(0).text();
 			PlayerVO player = makePlayer(player_id, player_name);
 			players.add(player);
 			
-			LeagueVO league = makeLeagueVO(newLeagueName, nation);
+			LeagueVO league = makeLeagueVO(leagueNames.get(newLeagueName), nation);
 			leagues.add(league);
 			
 			TeamVO previousTeam = makeTeamVO(previousTeamName, league);
