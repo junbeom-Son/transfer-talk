@@ -3,6 +3,8 @@ package crawling;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,7 +16,7 @@ import vo.TeamVO;
 import vo.TransferVO;
 
 public class Crawling {
-	public void Crawl() throws IOException {
+	public static void Crawl() throws IOException {
 		String currentLeague = "England";
 		String URL = "https://www.transfermarkt.com/premier-league/transfers/wettbewerb/GB1/saison_id/2022";
 		Document doc = Jsoup.connect(URL).get();
@@ -23,6 +25,10 @@ public class Crawling {
 		List<TransferVO> transfers = new ArrayList<>();
 		List<TeamVO> teams = new ArrayList<>();
 		List<LeagueVO> leagues = new ArrayList<>();
+		Map<String, String> leagueNames = new HashMap<>();
+		
+		
+		
 		for (int i = 0; i < teamElements.size(); i++) {
 			String teamName = teamElements.get(i).select("h2 > a").get(1).text();
 			Elements inPlayers = teamElements.get(i).select(".responsive-table").get(0).select("table > tbody > tr");
@@ -41,10 +47,34 @@ public class Crawling {
 						: inPlayers.get(j).select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
 				String fee = inPlayers.get(j).select("td.rechts > a").get(0).text();
 
+				leagueNames.put("England", "Premier_League");
+				leagueNames.put("Spain", "LaLiga");
+				leagueNames.put("Germany", "BundesLiga");
+				leagueNames.put("Italy", "Serie_A");
+				leagueNames.put("France", "Ligue_1");
+				leagueNames.put("Brazil", "Breasileirao");
+				leagueNames.put("Argentina", "Superliga_Argentina");
+				leagueNames.put("Netherlands", "Eredivisie");
+				leagueNames.put("Portugal", "Primeira_Liga");
+				leagueNames.put("United States", "MLS");
+				leagueNames.put("Republic of Korea", "K리그");
+				leagueNames.put("Scotland", "Scotland Premiership");
+				
+				if(!previousLeague.equals(leagueNames)) {
+					
+					leagueNames.put(previousLeague , previousLeague + "_league");
+				}
+				
+				
 				PlayerVO player = new PlayerVO();
 				player.setPlayer_id(Integer.parseInt(player_id));
 				player.setPlayer_name(player_name);
 				players.add(player);
+				System.out.println(previousLeague);
+				LeagueVO league = new LeagueVO();
+				league.setLeague_name(previousLeague);
+				league.setLeague_country(nation);
+				leagues.add(league);
 			}
 
 			// out
@@ -59,11 +89,39 @@ public class Crawling {
 				String newLeague = outPlayers.get(j).select("td.verein-flagge-transfer-cell > img").size() == 0 ? "-"
 						: inPlayers.get(j).select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
 				String fee = outPlayers.get(j).select("td.rechts > a").get(0).text();
+				
+				leagueNames.put("England", "Premier_League");
+				leagueNames.put("Spain", "LaLiga");
+				leagueNames.put("Germany", "BundesLiga");
+				leagueNames.put("Italy", "Serie_A");
+				leagueNames.put("France", "Ligue_1");
+				leagueNames.put("Brazil", "Breasileirao");
+				leagueNames.put("Argentina", "Superliga_Argentina");
+				leagueNames.put("Netherlands", "Eredivisie");
+				leagueNames.put("Portugal", "Primeira_Liga");
+				leagueNames.put("United States", "MLS");
+				leagueNames.put("Republic of Korea", "K리그");
+				leagueNames.put("Scotland", "Scotland Premiership");
+				
+				if(!newLeague.equals(leagueNames)) {
+				leagueNames.put(newLeague , newLeague + "_league");
+				}
+				
 				PlayerVO player = new PlayerVO();
 				player.setPlayer_id(Integer.parseInt(player_id));
 				player.setPlayer_name(player_name);
 				players.add(player);
+				System.out.println(newLeague);
+				LeagueVO league = new LeagueVO();
+				league.setLeague_name(newLeague);
+				league.setLeague_country(nation);
+				leagues.add(league);
+				
 			}
-		}
+		}	
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Crawl();
 	}
 }
