@@ -50,25 +50,24 @@ public class PlayerDAO {
 	 */
 	public PlayerVO selectPlayerById(int player_id) {
 		String sql ="""
-				select Player_id
+				select player_id, player_name
 				from player 
-				where Player_id = ? 
-				""";
+				where player_id = """ + player_id;
 		
 		PlayerVO player = null;
 		conn = util.getConnection();
 		try {
-			pst = conn.prepareStatement(sql);
+			st = conn.createStatement();
 			rs = st.executeQuery(sql);
-			player = new PlayerVO();
 			while (rs.next()) {
+				player = new PlayerVO();
 				player.setPlayer_id(player_id);
 				player.setPlayer_name(rs.getString("player_name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			util.dbDisconnect(null, pst, conn);
+			util.dbDisconnect(null, st, conn);
 		}
 		return player;
 	}
