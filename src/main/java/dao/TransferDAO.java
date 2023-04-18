@@ -60,7 +60,7 @@ public class TransferDAO {
     */
 	public TransferVO selectByLastTransfer(int player_id) {
 		TransferVO transfer = null;
-		String sql = "select * from transfer join team on (transfer.previous_team_id = team.team_id) where player_id = "+ player_id +" ORDER BY transfer_id DESC LIMIT 1";
+		String sql = "select * from transfer join team on (transfer.new_team_id = team.team_id) where player_id = "+ player_id +" ORDER BY transfer_id DESC LIMIT 1";
 		conn = util.getConnection();
 		try {
 			st = conn.createStatement();
@@ -71,9 +71,11 @@ public class TransferDAO {
 				transfer.setPlayer_position(rs.getString("player_position"));
 				transfer.setTransfer_year(rs.getInt("transfer_year"));
 				transfer.setFee(rs.getString("fee"));
-				TeamVO t = new TeamVO();
-				t.setTeam_name(rs.getString("team_name"));
-				transfer.setPrevious_team(t);
+				
+				TeamVO team = new TeamVO();
+				team.setTeam_id(rs.getInt("team_id"));
+				team.setTeam_name(rs.getString("team_name"));
+				transfer.setNew_team(team);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
