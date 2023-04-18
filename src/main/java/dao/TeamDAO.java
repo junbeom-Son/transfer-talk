@@ -10,7 +10,6 @@ import java.sql.Statement;
 import dbUtil.util;
 import vo.LeagueVO;
 import vo.TeamVO;
-import vo.TransferVO;
 
 
 public class TeamDAO {
