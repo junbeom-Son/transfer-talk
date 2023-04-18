@@ -9,11 +9,9 @@ import java.sql.Statement;
 
 import dbUtil.util;
 import vo.LeagueVO;
-import vo.TeamVO;
-import vo.TransferVO;
+import vo.PlayerVO;
 
-
-public class TeamDAO {
+public class LeagueDAO {
 	private Connection conn;
 	private Statement st;
 	private PreparedStatement pst; // ?지원
@@ -23,19 +21,19 @@ public class TeamDAO {
 	CallableStatement cst;
 	
 	/**
-	 * team_id, team_name, league_id를 insert 하는것
+	 * league_name, country를 insert 하는것
 	 * @param team
 	 * @return 저장 성공 시 1, 실패시 0
 	 */
-	public int insertTeam(TeamVO team) {
+	public int insertLeague(LeagueVO league) {
 		String sql = """
-				insert into team (team_name, league_id) values(?, ?)
+				insert into league (league_name, country_name) values(?, ?)
 				""";
 		conn = util.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
-			pst.setString(1, team.getTeam_name());
-			pst.setInt(2, team.getLeague().getLeague_id());
+			pst.setString(1, league.getLeague_name());
+			pst.setString(2, league.getLeague_country());
 			resultCount = pst.executeUpdate(); //DML문장 실행한다. 
 		} catch (SQLException e) {
 			resultCount = -1;
@@ -46,38 +44,31 @@ public class TeamDAO {
 		
 		return resultCount;
 	}
-
 	
 	/**
-    * team_name를 받아 아이디에 해당하는 TeamVO 리턴 
-    * @param team_name
-    * @return 해당하는 아이디가 있으면 TeamVO, 없으면 null return
+	*****Null return 가능*****
+    * league_name를 받아 아이디에 해당하는 LeagueVO 리턴 
+    * @param league_name
+    * @return 해당하는 리그 이름이 있으면 LeagueVO, 없으면 null return
     */
-	public TeamVO selectTeamByTeamName(String team_name) {
-		TeamVO team = null;
-		String sql = "select * from team join league on (team.league_id = league.league_id) where team_name = " + team_name;
+	public LeagueVO selectLeagueByLeagueName(String league_name) {
+		LeagueVO league = null;
+		String sql ="select * from league where league_name = " + league_name;
 		conn = util.getConnection();
 		try {
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
 			while(rs.next()) {
-				team = new TeamVO();
-				team.setTeam_id(rs.getInt("team_id"));
-				team.setTeam_name(team_name);
-				
-				LeagueVO league = new LeagueVO();
+				league = new LeagueVO();
 				league.setLeague_id(rs.getInt("league_id"));
 				league.setLeague_name(rs.getString("league_name"));
 				league.setLeague_country(rs.getString("country_name"));
-				
-				team.setLeague(league);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			util.dbDisconnect(rs, st, conn);
+			util.dbDisconnect(null, pst, conn);
 		}
-		return team;
+		return league;
 	}
 }
