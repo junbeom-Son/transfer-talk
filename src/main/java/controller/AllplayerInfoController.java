@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +22,9 @@ public class AllplayerInfoController implements Controller {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
 		PlayerService service = new PlayerService();
 		String playerName = request.getParameter("playerName");		
-		PlayerVO player = service.selectPlayerByName(playerName);
-		request.setAttribute("PlayerAll", player);
+		List<PlayerVO> players = service.selectPlayerByName(playerName);
+		System.out.println(players);
+		request.setAttribute("PlayerAll", players);
 				
 		return "PlayerAll.jsp";
 	}
