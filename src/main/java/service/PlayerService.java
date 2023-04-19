@@ -43,9 +43,9 @@ public class PlayerService {
 	 * @param playerName
 	 * 작성자 : 서준호
 	 */
-	public List<PlayerVO> selectPlayerByName(String playerName) {
+	public List<PlayerVO> selectPlayersByName(String playerName) {
 		
-		return playerDao.selectPlayerByName(playerName);
+		return playerDao.selectPlayersByName(playerName);
 	}
 	
 	

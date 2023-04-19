@@ -79,18 +79,19 @@ public class PlayerDAO {
 	 * @param playerName
 	 * @return List<PlayerVO> players
 	 */
-	public List<PlayerVO> selectPlayerByName(String playerName) {
+	public List<PlayerVO> selectPlayersByName(String playerName) {
 		String sql ="""
 				select *
 				from player
-				where player_name like '%?%'
+				where player_name like ?
 				""";
 		
 		List<PlayerVO> players = new ArrayList<>();
 		conn = util.getConnection();
 		try {
-			st = conn.createStatement();
-			rs = st.executeQuery(sql);
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, "%" + playerName + "%");
+			rs = pst.executeQuery();
 			while (rs.next()) {
 				PlayerVO player = new PlayerVO();
 				player.setPlayer_id(rs.getInt("player_id"));
@@ -100,7 +101,7 @@ public class PlayerDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			util.dbDisconnect(null, st, conn);
+			util.dbDisconnect(null, pst, conn);
 		}
 		return players;
 	}	

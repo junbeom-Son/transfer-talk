@@ -12,17 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/transferTalk") //기본주소 : /transferTalk
+@WebServlet("/") //기본주소 : /transferTalk
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getServletPath();
+		
 		Controller controller = null;
 		Map<String, Object> data = new HashMap<>();
 		data.put("method", request.getMethod());
 		data.put("request", request);
 		data.put("response", response);
+		System.out.println(path);
 		switch (path) {
 		case "/transfer/league":
 			controller = new TransferInfoController();

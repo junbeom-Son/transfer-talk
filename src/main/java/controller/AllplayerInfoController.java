@@ -20,9 +20,9 @@ public class AllplayerInfoController implements Controller {
 	@Override
 	public String execute(Map<String, Object> data) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
-		PlayerService service = new PlayerService();
+		PlayerService playerService = new PlayerService();
 		String playerName = request.getParameter("playerName");		
-		List<PlayerVO> players = service.selectPlayerByName(playerName);
+		List<PlayerVO> players = playerService.selectPlayersByName(playerName);
 		System.out.println(players);
 		request.setAttribute("PlayerAll", players);
 				
