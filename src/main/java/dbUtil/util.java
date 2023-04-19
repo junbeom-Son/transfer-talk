@@ -6,23 +6,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class util {
 	//1.DB연결
 		public static Connection getConnection() {
 			Connection conn = null;
-			String url = "jdbc:mysql://192.168.0.101/transfer_talk";
-			String userid = "root";
-			String pass="1234";
-			
+			Context initContext;
 			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				conn = DriverManager.getConnection(url, userid, pass);
-			} catch (ClassNotFoundException e) {
+				initContext = new InitialContext();
+				Context envContext  = (Context)initContext.lookup("java:/comp/env");
+				DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
+				conn = ds.getConnection();
+			} catch (NamingException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
 			return conn;
 		}
 		
