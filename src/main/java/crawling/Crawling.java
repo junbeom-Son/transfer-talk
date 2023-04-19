@@ -13,6 +13,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import service.LeagueService;
 import service.PlayerService;
 import vo.LeagueVO;
 import vo.PlayerVO;
@@ -20,7 +21,7 @@ import vo.TeamVO;
 import vo.TransferVO;
 
 public class Crawling {
-	private static int FIRST_YEAR = 1992; // 시작은 1992
+	private static int FIRST_YEAR = 1994; // 시작은 1992
 	private static int CUR_YEAR = 2023; //test 목적으로 변경, 추후 2023으로 복귀
 	
 	private Set<PlayerVO> players;
@@ -33,6 +34,7 @@ public class Crawling {
 	private int curYear;
 	
 	private PlayerService playerService = new PlayerService();
+	private LeagueService leagueService = new LeagueService();
 	
 	/**
 	 * 크롤링 시작 메서드
@@ -91,7 +93,6 @@ public class Crawling {
 			Document doc = Jsoup.connect(URL).maxBodySize(0).get();
 			Elements teamElements = doc.select(".show-for-small ~ .box");
 			
-			System.out.println(teamElements.size());
 			players = new HashSet<>();
 			transfers = new ArrayList<>();
 			teams = new HashSet<>();
@@ -101,7 +102,8 @@ public class Crawling {
 			}
 //			시즌별로 저장한 정보 service에 저장하기 위한 호출 코드 입력 하기
 			
-			playerService.insertPlayers(players);
+//			playerService.insertPlayers(players);
+			leagueService.insertLeagues(leagues);
 		}
 	}
 	
@@ -170,11 +172,9 @@ public class Crawling {
 			}
 			String previousLeagueName = inPlayers.get(j).select("td.verein-flagge-transfer-cell > img").size() == 0 ? 
 					"-" : inPlayers.get(j).select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
-			
 			if(leagueNames.get(previousLeagueName) == null) {
 				leagueNames.put(previousLeagueName, previousLeagueName + "_league");
 			}
-			
 			if (inPlayers.get(j).select("td.rechts > a").size() == 0) {
 				System.out.println(inPlayers.get(j));				
 			}
@@ -183,8 +183,8 @@ public class Crawling {
 			PlayerVO player = makePlayer(player_id, player_name);
 			players.add(player);
 			
-//			LeagueVO league = makeLeagueVO(leagueNames.get(previousLeagueName), nation); 
-//            leagues.add(league);
+			LeagueVO league = makeLeagueVO(leagueNames.get(previousLeagueName), previousLeagueName); 
+            leagues.add(league);
 			
 //			TeamVO previousTeam = makeTeamVO(previousTeamName, league);
 //			TeamVO newTeam = makeTeamVO(newTeamName, league);
@@ -244,8 +244,8 @@ public class Crawling {
 			PlayerVO player = makePlayer(player_id, player_name);
 			players.add(player);
 			
-//			LeagueVO league = makeLeagueVO(leagueNames.get(newLeagueName), nation);
-//			leagues.add(league);
+			LeagueVO league = makeLeagueVO(leagueNames.get(newLeagueName), newLeagueName);
+			leagues.add(league);
 //			
 //			TeamVO previousTeam = makeTeamVO(previousTeamName, league);
 //			TeamVO newTeam = makeTeamVO(newTeamName, league);
