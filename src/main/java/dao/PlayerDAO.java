@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import dbUtil.util;
 import vo.PlayerVO;
@@ -71,4 +73,35 @@ public class PlayerDAO {
 		}
 		return player;
 	}
+	
+	/**
+	 * playerName을 받아 %이름%에 해당하는 모든선수 조회
+	 * @param playerName
+	 * @return List<PlayerVO> players
+	 */
+	public List<PlayerVO> selectPlayerByName(String playerName) {
+		String sql ="""
+				select *
+				from player
+				where player_name like '%?%'
+				""";
+		
+		List<PlayerVO> players = new ArrayList<>();
+		conn = util.getConnection();
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				PlayerVO player = new PlayerVO();
+				player.setPlayer_id(rs.getInt("player_id"));
+				player.setPlayer_name(rs.getString("player_name"));
+				players.add(player);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(null, st, conn);
+		}
+		return players;
+	}	
 }

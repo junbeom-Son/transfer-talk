@@ -1,5 +1,6 @@
 package service;
 
+import java.util.List;
 import java.util.Set;
 
 import dao.PlayerDAO;
@@ -36,4 +37,16 @@ public class PlayerService {
 			insertPlayer(player);
 		}
 	}
+	
+	/**
+	 * playerName을 받아 이름에 해당하는 List<PlayerVO> 리턴
+	 * @param playerName
+	 * 작성자 : 서준호
+	 */
+	public List<PlayerVO> selectPlayerByName(String playerName) {
+		
+		return playerDao.selectPlayerByName(playerName);
+	}
+	
+	
 }
