@@ -54,11 +54,14 @@ public class TeamDAO {
     */
 	public TeamVO selectTeamByTeamName(String team_name) {
 		TeamVO team = null;
-		String sql = "select * from team join league on (team.league_id = league.league_id) where team_name = " + team_name;
+		String sql = """
+				select * from team join league on (team.league_id = league.league_id) where team_name = ?
+				""";
 		conn = util.getConnection();
 		try {
-			st = conn.createStatement();
-			rs = st.executeQuery(sql);
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, team_name);
+			rs = pst.executeQuery();
 			while(rs.next()) {
 				team = new TeamVO();
 				team.setTeam_id(rs.getInt("team_id"));
@@ -75,7 +78,7 @@ public class TeamDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			util.dbDisconnect(rs, st, conn);
+			util.dbDisconnect(rs, pst, conn);
 		}
 		return team;
 	}
