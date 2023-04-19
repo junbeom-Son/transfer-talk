@@ -10,7 +10,7 @@ public class util {
 	//1.DB연결
 		public static Connection getConnection() {
 			Connection conn = null;
-			String url = "jdbc:mysql://localhost/transfer_talk";
+			String url = "jdbc:mysql://192.168.0.101/transfer_talk";
 			String userid = "root";
 			String pass="1234";
 			
