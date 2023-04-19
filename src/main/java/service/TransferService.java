@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import dao.TeamDAO;
 import dao.TransferDAO;
 import vo.TeamVO;
@@ -41,5 +43,13 @@ public class TransferService {
 	 */
 	public TransferVO selectByLastTransfer(int playerId) {
 		return transferDao.selectByLastTransfer(playerId); 
+	}
+	
+	public int insertTransfers(List<TransferVO> transfers) {
+		int result = 0;
+		for (TransferVO transfer : transfers) {
+			result += insertTransfer(transfer);
+		}
+		return result;
 	}
 }
