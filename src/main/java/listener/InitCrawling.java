@@ -25,6 +25,7 @@ public class InitCrawling implements ServletContextListener {
     	Crawling crawling = new Crawling();
     	try {
 			crawling.crawl();
+//    		crawling.crawlTeams();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
