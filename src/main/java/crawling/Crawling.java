@@ -24,6 +24,9 @@ public class Crawling {
 	private static int FIRST_YEAR = 1994; // 시작은 1992
 	private static int CUR_YEAR = 2023; //test 목적으로 변경, 추후 2023으로 복귀
 	
+	private static char INTO_THE_TEAM = 'i';
+	private static char OUT_OF_THE_TEAM = 'o';
+	
 	private Set<PlayerVO> players;
 	private List<TransferVO> transfers;
 	private Set<TeamVO> teams;
@@ -131,123 +134,86 @@ public class Crawling {
 	 */
 	public void transferByTheTeam(Element teamElement) { // in, out에 해당 팀을 넣어주기
 		String teamName = teamElement.select("h2 > a").get(1).text();
-		transferToTheTeam(teamElement.select(".responsive-table").get(0).select("table > tbody > tr"), teamName);
+		transfer(teamElement.select(".responsive-table").get(0).select("table > tbody > tr"), INTO_THE_TEAM, teamName);
 		if (teamElement.select(".responsive-table").size() > 1) {
-			transferFromTheTeam(teamElement.select(".responsive-table").get(1).select("table > tbody > tr"), teamName);			
+			transfer(teamElement.select(".responsive-table").get(1).select("table > tbody > tr"), OUT_OF_THE_TEAM, teamName);			
 		}
 	}
 	
 	/**
-	 * 해당 팀에 들어온 선수들 정보로 데이터 수집
-	 * @param inPlayers
-	 * @param newTeamName
-	 * 작성자 : 손준범
+	 * inOrOut 값에 따라 해당팀에 들어오는 이적 정보인지,
+	 * 해당팀에서 다른팀으로 이적을 나가는 정보인지 구분하여
+	 * 이적 정보를 하나의 메소드에서 처리
+	 * @param playerElements
+	 * @param inOrOut
+	 * @param teamName
 	 */
-	public void transferToTheTeam(Elements inPlayers, String newTeamName) {
-		for (int j = 0; j < inPlayers.size(); j++) {
-			Elements idElements = inPlayers.get(j).select("td > .di > .show-for-small > a");
+	public void transfer(Elements playerElements, char inOrOut, String teamName) { // i : in, o : out
+		for (int i = 0; i < players.size(); ++i) {
+			Element playerElement = playerElements.get(i);
+			Elements idElements = playerElement.select("td > .di > .show-for-small > a");
 			if (idElements.size() == 0) {
 				continue;
 			}
 			String idStr = idElements.get(0).attr("href");
 			int player_id = Integer.parseInt(idStr.substring(idStr.lastIndexOf("/") + 1, idStr.length()));
-			String player_name = inPlayers.get(j).select("td > .di > .show-for-small > a").get(0).text();
-			String ageStr = inPlayers.get(j).select("td").get(1).text().replaceAll("[^0-9]", "");
+			String player_name = playerElement.select("td > .di > .show-for-small > a").get(0).text();
+			String ageStr = playerElement.select("td").get(1).text().replaceAll("[^0-9]", "");
 			int age = 0;
 			if (!ageStr.equals("")) {
 				age = Integer.parseInt(ageStr);
 			}
 			String nation = null;
-			if (inPlayers.get(j).select("td > img").size() > 0) {
-				nation = inPlayers.get(j).select("td > img").get(0).attr("title");
+			if (playerElement.select("td > img").size() > 0) {
+				nation = playerElement.select("td > img").get(0).attr("title");
 			}
 			
-			if (inPlayers.get(j).select("td").size() < 3) {
+			if (playerElement.select("td").size() < 3) {
 				System.out.println(player_name + "doesn't have a position******");
 			}
-			String position = inPlayers.get(j).select("td").get(3).text();
+			
+			String position = playerElement.select("td").get(3).text();
+			
 			String previousTeamName = null;
-			if (inPlayers.get(j).select("td.zentriert > a > img").size() > 0) {
-				previousTeamName = inPlayers.get(j).select("td.zentriert > a > img").get(0).attr("title");
+			String previousLeagueName = null;
+			String newTeamName = null;
+			String newLeagueName = null;
+			LeagueVO league = null;
+			
+			if (inOrOut == 'i') {
+				newTeamName = teamName;
+				if (playerElement.select("td.zentriert > a > img").size() > 0) {
+					previousTeamName = playerElement.select("td.zentriert > a > img").get(0).attr("title");
+				}
+				previousLeagueName = playerElement.select("td.verein-flagge-transfer-cell > img").size() == 0 ? 
+						"-" : playerElement.select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
+				if(leagueNames.get(previousLeagueName) == null) {
+					leagueNames.put(previousLeagueName, previousLeagueName + "_league");
+				}
+				league = makeLeagueVO(leagueNames.get(previousLeagueName), previousLeagueName); 
 			}
-			String previousLeagueName = inPlayers.get(j).select("td.verein-flagge-transfer-cell > img").size() == 0 ? 
-					"-" : inPlayers.get(j).select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
-			if(leagueNames.get(previousLeagueName) == null) {
-				leagueNames.put(previousLeagueName, previousLeagueName + "_league");
+			else {
+				previousTeamName = teamName;
+				if (playerElement.select("td.zentriert > a > img").size() > 0) {
+					newTeamName = playerElement.select("td.zentriert > a > img").get(0).attr("title");
+				}
+				newLeagueName = playerElement.select("td.verein-flagge-transfer-cell > img").size() == 0 ? "-"
+						: playerElement.select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
+				
+				if(leagueNames.get(newLeagueName) == null) {
+					leagueNames.put(newLeagueName, newLeagueName + "_league");
+				}
+				league = makeLeagueVO(leagueNames.get(newLeagueName), newLeagueName); 
 			}
-			if (inPlayers.get(j).select("td.rechts > a").size() == 0) {
-				System.out.println(inPlayers.get(j));				
-			}
-			String fee = inPlayers.get(j).select("td.rechts > a").get(0).text();
+			
+			String fee = playerElement.select("td.rechts > a").get(0).text();
 
 			PlayerVO player = makePlayer(player_id, player_name);
 			players.add(player);
 			
-			LeagueVO league = makeLeagueVO(leagueNames.get(previousLeagueName), previousLeagueName); 
             leagues.add(league);
 			
-//			TeamVO previousTeam = makeTeamVO(previousTeamName, league);
-//			TeamVO newTeam = makeTeamVO(newTeamName, league);
-//            teams.add(previousTeam);
-			
-//            TransferVO transfer = makeTransferVO(age, fee, player, position, previousTeam, newTeam);
-//            transfers.add(transfer);
-		}
-		
-	}
-	
-	/**
-	 * 해당 팀에서 나가는 선수들 정보로 데이터 수집
-	 * @param outPlayers
-	 * @param previousTeamName
-	 * 작성자 : 손준범
-	 */
-	public void transferFromTheTeam(Elements outPlayers, String previousTeamName) {
-		for (int j = 0; j < outPlayers.size(); j++) {
-			Elements idElements = outPlayers.get(j).select("td > .di > .show-for-small > a");
-			if (idElements.size() == 0) {
-				continue;
-			}
-			String outStr = idElements.get(0).attr("href");
-			int player_id = Integer.parseInt(outStr.substring(outStr.lastIndexOf("/") + 1, outStr.length()));
-			String player_name = outPlayers.get(j).select("td > .di > .show-for-small > a").get(0).text();
-			String ageStr = outPlayers.get(j).select("td").get(1).text().replaceAll("[^0-9]", "");
-			int age = 0;
-			if (!ageStr.equals("")) {
-				age = Integer.parseInt(ageStr);
-			}
-			
-			String nation = null;
-			if (outPlayers.get(j).select("td > img").size() > 0) {
-				nation = outPlayers.get(j).select("td > img").get(0).attr("title");
-			}
-			if (outPlayers.get(j).select("td").size() < 3) {
-				System.out.println(player_name + "doesn't have a position******");
-				System.out.println(outPlayers.get(j).select("td"));
-			}
-			String position = outPlayers.get(j).select("td").get(3).text();
-			String newTeamName = null;
-			if (outPlayers.get(j).select("td.zentriert > a > img").size() > 0) {
-				newTeamName = outPlayers.get(j).select("td.zentriert > a > img").get(0).attr("title");
-			}
-			String newLeagueName = outPlayers.get(j).select("td.verein-flagge-transfer-cell > img").size() == 0 ? "-"
-					: outPlayers.get(j).select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
-			if(leagueNames.get(newLeagueName) == null) {
-				leagueNames.put(newLeagueName, newLeagueName + "_league");
-			}
-			
-			if (outPlayers.get(j).select("td.rechts > a").size() == 0) {
-
-				System.out.println(outPlayers.get(j));
-			}
-			String fee = outPlayers.get(j).select("td.rechts > a").get(0).text();
-			PlayerVO player = makePlayer(player_id, player_name);
-			players.add(player);
-			
-			LeagueVO league = makeLeagueVO(leagueNames.get(newLeagueName), newLeagueName);
-			leagues.add(league);
-//			
-//			TeamVO previousTeam = makeTeamVO(previousTeamName, league);
+//          TeamVO previousTeam = makeTeamVO(previousTeamName, league);
 //			TeamVO newTeam = makeTeamVO(newTeamName, league);
 //            teams.add(newTeam);
 			
