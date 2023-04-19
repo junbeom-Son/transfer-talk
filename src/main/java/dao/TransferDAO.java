@@ -25,6 +25,7 @@ public class TransferDAO {
 	 * TransferVO에 맞게 insert 하는것
 	 * @param transfer
 	 * @return 저장 성공 시 1, 실패시 0
+	 * 작성자 : 한진
 	 */
 	public int insertTransfer(TransferVO transfer) {
 		String sql = """
@@ -57,6 +58,7 @@ public class TransferDAO {
     * player_id를 받아 아이디에 해당하는 TransferVO 리턴 
     * @param player_id
     * @return 해당하는 아이디가 있으면 TransferVO, 없으면 null return
+    * 작성자 : 한진
     */
 	public TransferVO selectByLastTransfer(int player_id) {
 		TransferVO transfer = null;
