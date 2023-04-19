@@ -11,9 +11,10 @@ public class TransferService {
 	TeamService teamService = new TeamService();
 	
 	/**
-	 * TransferVO를 받아 저장하는 기능 (신규선수이거나 db에 최종팀이 들어온 데이터의 이적전 팀과 같을때만 저장)
+	 * TransferVO를 받아 저장하는 기능 (db에 최종팀이 들어온 데이터의 이적전 팀과 같을때만 저장)
 	 * @param transfer
 	 * @return 저장 성공 시 1, 실패시 0
+	 * 작성자 : 한진
 	 */
 	public int insertTransfer(TransferVO transfer) {
 		//팀 id 추가
@@ -33,9 +34,10 @@ public class TransferService {
 	
 	/**
 	 * *****Null return 가능*****
-	 * player_id를 받아 아이디에 해당하는 TransferVO 리턴 
-	 * @param player_id
+	 * playerId를 받아 아이디에 해당하는 TransferVO 리턴 
+	 * @param playerId
 	 * @return 해당하는 id가 있으면 TransferVO, 없으면 null return
+	 * 작성자 : 한진
 	 */
 	public TransferVO selectByLastTransfer(int playerId) {
 		return transferDao.selectByLastTransfer(playerId); 

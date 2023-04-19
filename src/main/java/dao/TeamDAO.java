@@ -22,9 +22,10 @@ public class TeamDAO {
 	CallableStatement cst;
 	
 	/**
-	 * team_id, team_name, league_id를 insert 하는것
+	 * team_name, league_id를 insert 하는것
 	 * @param team
 	 * @return 저장 성공 시 1, 실패시 0
+	 * 작성자 : 한진
 	 */
 	public int insertTeam(TeamVO team) {
 		String sql = """
@@ -51,6 +52,7 @@ public class TeamDAO {
     * team_name를 받아 아이디에 해당하는 TeamVO 리턴 
     * @param team_name
     * @return 해당하는 아이디가 있으면 TeamVO, 없으면 null return
+    * 작성자 : 한진
     */
 	public TeamVO selectTeamByTeamName(String team_name) {
 		TeamVO team = null;

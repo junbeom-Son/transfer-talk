@@ -22,8 +22,9 @@ public class LeagueDAO {
 	
 	/**
 	 * league_name, country를 insert 하는것
-	 * @param team
+	 * @param league
 	 * @return 저장 성공 시 1, 실패시 0
+	 * 작성자 : 한진
 	 */
 	public int insertLeague(LeagueVO league) {
 		String sql = """
@@ -50,6 +51,7 @@ public class LeagueDAO {
     * league_name를 받아 아이디에 해당하는 LeagueVO 리턴 
     * @param league_name
     * @return 해당하는 리그 이름이 있으면 LeagueVO, 없으면 null return
+    * 작성자 : 한진
     */
 	public LeagueVO selectLeagueByLeagueName(String league_name) {
 		LeagueVO league = null;
