@@ -1,5 +1,7 @@
 package service;
 
+import java.util.Set;
+
 import dao.LeagueDAO;
 import vo.LeagueVO;
 
@@ -16,5 +18,13 @@ public class LeagueService {
 	
 	public LeagueVO selectLeagueByLeagueName(String league_name) {
 		return leagueDao.selectLeagueByLeagueName(league_name);
+	}
+	
+	public int insertLeagues(Set<LeagueVO> leagues) {
+		int result = 0;
+		for (LeagueVO league : leagues) {
+			result += insertLeague(league);
+		}
+		return result;
 	}
 }

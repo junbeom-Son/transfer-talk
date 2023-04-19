@@ -1,5 +1,7 @@
 package service;
 
+import java.util.Set;
+
 import dao.TeamDAO;
 import vo.TeamVO;
 
@@ -21,5 +23,13 @@ public class TeamService {
 	
 	public TeamVO selectTeamByTeamName(String team_name) {
 		return teamDao.selectTeamByTeamName(team_name);
+	}
+	
+	public int insertTeams(Set<TeamVO> teams) {
+		int result = 0;
+		for (TeamVO team : teams) {
+			result += insertTeam(team);
+		}
+		return result;
 	}
 }

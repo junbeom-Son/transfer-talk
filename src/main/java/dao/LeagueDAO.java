@@ -53,11 +53,15 @@ public class LeagueDAO {
     */
 	public LeagueVO selectLeagueByLeagueName(String league_name) {
 		LeagueVO league = null;
-		String sql ="select * from league where league_name = " + league_name;
+		String sql = """
+				select * from league
+				where league_name = ?
+				""";
 		conn = util.getConnection();
 		try {
-			st = conn.createStatement();
-			rs = st.executeQuery(sql);
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, league_name);
+			rs = pst.executeQuery();
 			while(rs.next()) {
 				league = new LeagueVO();
 				league.setLeague_id(rs.getInt("league_id"));
