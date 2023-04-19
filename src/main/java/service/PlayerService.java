@@ -1,5 +1,7 @@
 package service;
 
+import java.util.Set;
+
 import dao.PlayerDAO;
 import vo.PlayerVO;
 
@@ -27,5 +29,11 @@ public class PlayerService {
 	 */
 	public PlayerVO selectPlayerById(int player_id) {
 		return playerDao.selectPlayerById(player_id);
+	}
+	
+	public void insertPlayers(Set<PlayerVO> players) {
+		for (PlayerVO player : players) {
+			insertPlayer(player);
+		}
 	}
 }
