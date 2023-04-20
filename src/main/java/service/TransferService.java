@@ -1,5 +1,6 @@
 package service;
 
+import java.util.List;
 import java.util.Queue;
 
 import dao.TeamDAO;
@@ -74,7 +75,7 @@ public class TransferService {
 	 * @return 해당하는 id가 있으면 TransferVO, 없으면 null return
 	 * 작성자 : 서준호
 	 */
-	public TransferVO selectPlayerDetailById(int playerId) {
+	public List<TransferVO> selectPlayerDetailById(int playerId) {
 		return transferDao.selectPlayerDetailById(playerId); 
 	}
 }
