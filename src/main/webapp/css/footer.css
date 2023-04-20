@@ -1,0 +1,10 @@
+footer{
+	height: var(--bottomGap);
+	display:flex;
+	justify-content:center;
+}
+#footer-container{
+	width: var(--viewWidth);
+	height:100%;
+	border:1px solid green;
+}
