@@ -24,7 +24,6 @@ public class FrontController extends HttpServlet {
 		data.put("method", request.getMethod());
 		data.put("request", request);
 		data.put("response", response);
-		System.out.println(path);
 		switch (path) {
 		case "/transfer/country":
 			controller = new AllTransferCountryController();
@@ -47,7 +46,9 @@ public class FrontController extends HttpServlet {
 		case "/transfer/top_transfer_fee":
 			controller = new RankerController();
 			break;
-			
+		case "/transfer/summary":
+			controller = new SummaryController();
+			break;
 //		case "/site-result/changePhoto.do":
 //			controller = new ChangePhotoController();
 //			break;
