@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class RankerController implements Controller {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
 		TransferService service = new TransferService();
 		int year = Integer.parseInt(request.getParameter("year"));		
-		TransferVO transfer = service.selectTransferTop5(year);
+		List<TransferVO> transfer = service.selectTransferTop5(year);
 		request.setAttribute("transferTop5", transfer);
 				
 		return "transferTop5.jsp";
