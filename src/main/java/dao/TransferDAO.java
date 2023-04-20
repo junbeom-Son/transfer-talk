@@ -119,11 +119,13 @@ public class TransferDAO {
 				player.setPlayer_name(rs.getString("player_name"));
 				transfer.setPlayer(player);
 				
-				TeamVO previousteam = new TeamVO();
+				TeamVO previousteam = new TeamVO();				
+				previousteam.setTeam_id(rs.getInt("team_id"));
 				previousteam.setTeam_name(rs.getString("team_name"));
 				transfer.setPrevious_team(previousteam);
 				
 				TeamVO newteam = new TeamVO();
+				newteam.setTeam_id(rs.getInt("team_id"));
 				newteam.setTeam_name(rs.getString("team_name"));
 				transfer.setNew_team(newteam);
 				transfers.add(transfer);
@@ -169,11 +171,13 @@ public class TransferDAO {
 				player.setPlayer_name(rs.getString("player_name"));
 				transfer.setPlayer(player);
 				
-				TeamVO previousteam = new TeamVO();
+				TeamVO previousteam = new TeamVO();				
+				previousteam.setTeam_id(rs.getInt("team_id"));
 				previousteam.setTeam_name(rs.getString("team_name"));
 				transfer.setPrevious_team(previousteam);
 				
 				TeamVO newteam = new TeamVO();
+				newteam.setTeam_id(rs.getInt("team_id"));
 				newteam.setTeam_name(rs.getString("team_name"));
 				transfer.setNew_team(newteam);
 				transfers.add(transfer);
@@ -216,11 +220,13 @@ public class TransferDAO {
 				player.setPlayer_name(rs.getString("player_name"));
 				transfer.setPlayer(player);
 				
-				TeamVO previousteam = new TeamVO();
+				TeamVO previousteam = new TeamVO();				
+				previousteam.setTeam_id(rs.getInt("team_id"));
 				previousteam.setTeam_name(rs.getString("team_name"));
 				transfer.setPrevious_team(previousteam);
 				
 				TeamVO newteam = new TeamVO();
+				newteam.setTeam_id(rs.getInt("team_id"));
 				newteam.setTeam_name(rs.getString("team_name"));
 				transfer.setNew_team(newteam);
 				transfers.add(transfer);
