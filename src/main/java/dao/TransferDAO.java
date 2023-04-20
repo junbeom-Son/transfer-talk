@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import dbUtil.util;
+import vo.PlayerVO;
 import vo.TeamVO;
 import vo.TransferVO;
 
@@ -78,6 +79,50 @@ public class TransferDAO {
 				team.setTeam_id(rs.getInt("team_id"));
 				team.setTeam_name(rs.getString("team_name"));
 				transfer.setNew_team(team);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(rs, st, conn);
+		}
+		return transfer;
+	}
+	/**
+	 * Null return 가능
+	 * playerId를 받아 아이디에 해당하는 TransferVO리턴
+	 * transfer, player 테이블의 모든 정보 조회
+	 * @param playerId
+	 * @return 해당하는 아이디가 있으면 TransferVO, 없으면 null return
+	 * 작성자 : 서준호
+	 */
+	public TransferVO selectPlayerDetailById(int playerId) {
+		TransferVO transfer = null;
+		String sql = "select * from transfer where player_id = ?";
+		conn = util.getConnection();
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while(rs.next()) {
+				transfer = new TransferVO();
+				transfer.setTransfer_id(rs.getInt("transfer_id"));
+				transfer.setPlayer_position(rs.getString("player_position"));
+				transfer.setTransfer_year(rs.getInt("transfer_year"));
+				transfer.setFee(rs.getString("fee"));
+				transfer.setAge(rs.getInt("age"));
+				
+				PlayerVO player = new PlayerVO();
+				player.setPlayer_id(rs.getInt("player_id"));
+				player.setPlayer_name(rs.getString("player_name"));
+				transfer.setPlayer(player);
+				
+				TeamVO previousteam = new TeamVO();
+				previousteam.setTeam_name(rs.getString("team_name"));
+				transfer.setPrevious_team(previousteam);
+				
+				TeamVO newteam = new TeamVO();
+				newteam.setTeam_name(rs.getString("team_name"));
+				transfer.setNew_team(newteam);
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
