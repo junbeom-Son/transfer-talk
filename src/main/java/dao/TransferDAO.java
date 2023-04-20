@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import dbUtil.util;
 import vo.PlayerVO;
@@ -95,15 +97,17 @@ public class TransferDAO {
 	 * @return 해당하는 아이디가 있으면 TransferVO, 없으면 null return
 	 * 작성자 : 서준호
 	 */
-	public TransferVO selectPlayerDetailById(int playerId) {
-		TransferVO transfer = null;
+	public List<TransferVO> selectPlayerDetailById(int playerId) {
+		
 		String sql = "select * from transfer where player_id = ?";
+		List<TransferVO> transfers = new ArrayList<>();
 		conn = util.getConnection();
 		try {
-			st = conn.createStatement();
-			rs = st.executeQuery(sql);
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, playerId);
+			rs = pst.executeQuery();
 			while(rs.next()) {
-				transfer = new TransferVO();
+				TransferVO transfer = new TransferVO();
 				transfer.setTransfer_id(rs.getInt("transfer_id"));
 				transfer.setPlayer_position(rs.getString("player_position"));
 				transfer.setTransfer_year(rs.getInt("transfer_year"));
@@ -122,13 +126,14 @@ public class TransferDAO {
 				TeamVO newteam = new TeamVO();
 				newteam.setTeam_name(rs.getString("team_name"));
 				transfer.setNew_team(newteam);
+				transfers.add(transfer);
 				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			util.dbDisconnect(rs, st, conn);
+			util.dbDisconnect(null, pst, conn);
 		}
-		return transfer;
+		return transfers;
 	}
 }
