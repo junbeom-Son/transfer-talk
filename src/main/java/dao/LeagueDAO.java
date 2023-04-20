@@ -104,4 +104,31 @@ public class LeagueDAO {
 		}
 		return country;
 	}
+	
+	/**
+	 * country_name를 받아 모든 league_name 데이터를 리턴
+	 * @param country_name
+	 * @return league_name
+	 * 작성자 : 한진
+	 */
+	public List<String> selectAllLeagueByCountry(String country_name) {
+		List<String> leagues = new ArrayList<>();
+		String sql = """
+				select distinct(league_name) from league where country_name = ?
+				""";
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, country_name);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				leagues.add(rs.getString("league_name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(null, pst, conn);
+		}
+		return leagues;
+	}
 }

@@ -44,7 +44,22 @@ public class LeagueService {
 		return result;
 	}
 	
+	/**
+	 * 모든 country_name의 데이터를 리턴
+	 * @return 모든 country_name return
+	 * 작성자 : 한진
+	 */
 	public List<String> selectAllCountry() {
 		return leagueDao.selectAllCountry();
+	}
+	
+	/**
+	 * country_name를 받아 모든 league_name 데이터를 리턴
+	 * @param country_name
+	 * @return league_name
+	 * 작성자 : 한진
+	 */
+	public List<String> selectAllLeagueByCountry(String country_name) {
+		return leagueDao.selectAllLeagueByCountry(country_name);
 	}
 }

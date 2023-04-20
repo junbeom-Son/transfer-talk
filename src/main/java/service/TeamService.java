@@ -1,5 +1,6 @@
 package service;
 
+import java.util.List;
 import java.util.Set;
 
 import dao.TeamDAO;
@@ -43,5 +44,15 @@ public class TeamService {
 			result += insertTeam(team);
 		}
 		return result;
+	}
+	
+	/**
+	 * league_name를 받아 모든 team_name 데이터를 리턴
+	 * @param league_name
+	 * @return team_name
+	 * 작성자 : 한진
+	 */
+	public List<String> selectTeamsByleague(String league_name) {
+		return teamDao.selectTeamsByleague(league_name);
 	}
 }

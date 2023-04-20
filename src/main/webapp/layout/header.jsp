@@ -7,7 +7,7 @@
 					<div class="header-selecter-contents header-selecter-title">My Team</div>
 					<div class="header-selecter-contents header-selecter-form">
 						<form>
-						  <select name="header-nation" id="header-nation">
+						  <select name="header-country" id="header-country">
 						  	<option value="none">국가를 선택하세요.</option>
 						  </select>
 						</form>
@@ -15,7 +15,7 @@
 					<div class="header-selecter-contents header-selecter-sign">>></div>
 					<div class="header-selecter-contents header-selecter-form">
 						<form>
-						  <select name="header-nation" id="header-nation">
+						  <select name="header-league" id="header-league">
 						  	<option value="none">리그를 선택하세요.</option>
 						  </select>
 						</form>
@@ -23,9 +23,8 @@
 					<div class="header-selecter-contents header-selecter-sign">>></div>
 					<div class="header-selecter-contents header-selecter-form">
 						<form>
-						  <select name="header-nation" id="header-nation">
+						  <select name="header-team" id="header-team">
 						  	<option value="none">팀을 선택하세요.</option>
-						    <option value="ccc">ccc</option>
 						  </select>
 						</form>
 					</div> 
