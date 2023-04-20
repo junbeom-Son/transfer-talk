@@ -1,6 +1,9 @@
 package service;
 
+import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.LeagueDAO;
 import vo.LeagueVO;
@@ -39,5 +42,9 @@ public class LeagueService {
 			result += insertLeague(league);
 		}
 		return result;
+	}
+	
+	public List<String> selectAllCountry() {
+		return leagueDao.selectAllCountry();
 	}
 }
