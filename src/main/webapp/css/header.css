@@ -1,0 +1,10 @@
+header{
+	height: var(--topGap);
+	display:flex;
+	justify-content:center;
+}
+#header-container{
+	width: var(--viewWidth);
+	height:100%;
+	border:1px solid blue;
+}
