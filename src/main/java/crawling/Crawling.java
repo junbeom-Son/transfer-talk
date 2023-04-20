@@ -1,11 +1,11 @@
 package crawling;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 import org.jsoup.Jsoup;
@@ -16,20 +16,21 @@ import org.jsoup.select.Elements;
 import service.LeagueService;
 import service.PlayerService;
 import service.TeamService;
+import service.TransferService;
 import vo.LeagueVO;
 import vo.PlayerVO;
 import vo.TeamVO;
 import vo.TransferVO;
 
 public class Crawling {
-	private static int FIRST_YEAR = 1993; // 시작은 1992
+	private static int FIRST_YEAR = 2021; // 시작은 1992
 	private static int CUR_YEAR = 2023; // test 목적으로 변경, 추후 2023으로 복귀
 
 	private static char INTO_THE_TEAM = 'i';
 	private static char OUT_OF_THE_TEAM = 'o';
 
 	private Set<PlayerVO> players;
-	private List<TransferVO> transfers;
+	private Queue<TransferVO> transfers;
 	private Set<TeamVO> teams;
 	private Set<LeagueVO> leagues;
 	private Map<String, String> leagueNames = new HashMap<>();
@@ -41,6 +42,7 @@ public class Crawling {
 	private PlayerService playerService = new PlayerService();
 	private LeagueService leagueService = new LeagueService();
 	private TeamService teamService = new TeamService();
+	private TransferService transferService = new TransferService();
 
 	/**
 	 * 크롤링 시작 메서드 연도 -> 시즌(여름, 겨울) -> 팀 -> in -> out 순으로 순회 : 먼저 발생한 순서대로 데이터를 저장하기
@@ -90,7 +92,7 @@ public class Crawling {
 			Elements teamElements = doc.select(".show-for-small ~ .box");
 
 			players = new HashSet<>();
-			transfers = new ArrayList<>();
+			transfers = new LinkedList<>();
 			teams = new HashSet<>();
 			leagues = new HashSet<>();
 			for (int i = 0; i < teamElements.size(); i++) {
@@ -99,9 +101,9 @@ public class Crawling {
 //			시즌별로 저장한 정보 service에 저장하기 위한 호출 코드 입력 하기
 
 //			playerService.insertPlayers(players);
-			leagueService.insertLeagues(leagues);
-			teamService.insertTeams(teams);
-			
+//			leagueService.insertLeagues(leagues);
+//			teamService.insertTeams(teams);
+//			transferService.insertTransfers(transfers);
 		}
 	}
 
@@ -150,7 +152,7 @@ public class Crawling {
 			}
 			String idStr = idElements.get(0).attr("href");
 			int player_id = Integer.parseInt(idStr.substring(idStr.lastIndexOf("/") + 1, idStr.length()));
-			String player_name = playerElement.select("td > .di > .show-for-small > a").get(0).text();
+			String player_name = playerElement.select("td > .di > .hide-for-small > a").get(0).text();
 			String ageStr = playerElement.select("td").get(1).text().replaceAll("[^0-9]", "");
 			int age = 0;
 			if (!ageStr.equals("")) {
@@ -177,6 +179,8 @@ public class Crawling {
 				newTeamName = teamName;
 				if (playerElement.select("td.zentriert > a > img").size() > 0) {
 					previousTeamName = playerElement.select("td.zentriert > a > img").get(0).attr("alt");
+				} else {
+					previousTeamName = playerElement.select("td.zentriert > img").get(playerElement.select("td.zentriert > img").size() - 1).attr("alt");
 				}
 				previousLeagueName = playerElement.select("td.verein-flagge-transfer-cell > img").size() == 0 ? "-"
 						: playerElement.select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
@@ -188,6 +192,8 @@ public class Crawling {
 				previousTeamName = teamName;
 				if (playerElement.select("td.zentriert > a > img").size() > 0) {
 					newTeamName = playerElement.select("td.zentriert > a > img").get(0).attr("alt");
+				} else {
+					newTeamName = playerElement.select("td.zentriert > img").get(playerElement.select("td.zentriert > img").size() - 1).attr("alt");
 				}
 				newLeagueName = playerElement.select("td.verein-flagge-transfer-cell > img").size() == 0 ? "-"
 						: playerElement.select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
@@ -199,6 +205,9 @@ public class Crawling {
 			}
 
 			String fee = playerElement.select("td.rechts > a").get(0).text();
+			if (fee.contains("loan")) {
+				continue;
+			}
 
 			PlayerVO player = makePlayer(player_id, player_name);
 			players.add(player);
@@ -208,8 +217,8 @@ public class Crawling {
 			TeamVO newTeam = makeTeamVO(newTeamName, league);
 			teams.add(previousTeam);
 			teams.add(newTeam);
-//			TransferVO transfer = makeTransferVO(age, fee, player, position, previousTeam, newTeam);
-//			transfers.add(transfer);
+			TransferVO transfer = makeTransferVO(age, fee, player, position, previousTeam, newTeam);
+			transfers.add(transfer);
 		}
 	}
 	
