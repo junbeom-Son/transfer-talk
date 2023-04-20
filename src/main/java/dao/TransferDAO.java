@@ -206,12 +206,18 @@ public class TransferDAO {
 				TransferVO transfer = new TransferVO();
 				transfer.setTransfer_id(rs.getInt("transfer_id"));
 				transfer.setPlayer_position(rs.getString("player_position"));
+				transfer.setTransfer_year(rs.getInt("transfer_year"));
 				transfer.setFee(rs.getString("fee"));
+				transfer.setAge(rs.getInt("age"));
 				
 				PlayerVO player = new PlayerVO();
 				player.setPlayer_id(rs.getInt("player_id"));
 				player.setPlayer_name(rs.getString("player_name"));
 				transfer.setPlayer(player);
+				
+				TeamVO previousteam = new TeamVO();
+				previousteam.setTeam_name(rs.getString("team_name"));
+				transfer.setPrevious_team(previousteam);
 				
 				TeamVO newteam = new TeamVO();
 				newteam.setTeam_name(rs.getString("team_name"));
