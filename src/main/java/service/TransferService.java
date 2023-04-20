@@ -78,4 +78,15 @@ public class TransferService {
 	public List<TransferVO> selectPlayerDetailById(int playerId) {
 		return transferDao.selectPlayerDetailById(playerId); 
 	}
+	/**
+	 *  Null return 가능
+	 * leagueName를 받아 아이디에 해당하는 TransferVO 리턴
+	 * @param leagueName
+	 * @return 해당하는 leagueName이 있으면 TransferVO, 없으면 null return
+	 * 작성자 : 서준호
+	 */
+	//연도, 시즌 조건은 아직 추가 안함
+	public List<TransferVO> selectTransferAll(String leagueName) {
+		return transferDao.selectTransferAll(leagueName);
+	}
 }
