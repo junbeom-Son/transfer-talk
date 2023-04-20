@@ -1,6 +1,6 @@
 package service;
 
-import java.util.List;
+import java.util.Queue;
 
 import dao.TeamDAO;
 import dao.TransferDAO;
@@ -25,12 +25,21 @@ public class TransferService {
 		transfer.getPrevious_team().setTeam_id(prevTeam.getTeam_id());
 		transfer.getNew_team().setTeam_id(currentTeam.getTeam_id());
 		
-		// 신규선수가 아닐 때, db마지막팀과 입력받은데이터에 떠나는팀이 일치하는지
-		TransferVO lastTransfer = selectByLastTransfer(transfer.getPlayer().getPlayer_id()); 
-		String lastTeam = lastTransfer.getNew_team().getTeam_name(); 
-		if(lastTeam.equals(transfer.getPrevious_team().getTeam_name())) {
+		
+		
+		// 신규 선수 이거나
+		// 마지막 이적의 새팀과, 현재 이적 기록의 이전팀의 팀이 같을 때 insert 진행
+		TransferVO lastTransfer = selectByLastTransfer(transfer.getPlayer().getPlayer_id());
+		if (lastTransfer == null ||
+				lastTransfer.getNew_team().getTeam_name().
+				equals(transfer.getPrevious_team().getTeam_name())) { 
 			return transferDao.insertTransfer(transfer);
 		}
+		
+//		System.out.println(lastTransfer.getNew_team().getTeam_name().
+//				equals(transfer.getPrevious_team().getTeam_name()));
+		
+		
 		return 0;
 	}
 	
@@ -45,10 +54,16 @@ public class TransferService {
 		return transferDao.selectByLastTransfer(playerId); 
 	}
 	
-	public int insertTransfers(List<TransferVO> transfers) {
+	public int insertTransfers(Queue<TransferVO> transfers) {
 		int result = 0;
-		for (TransferVO transfer : transfers) {
-			result += insertTransfer(transfer);
+		while (!transfers.isEmpty()) {
+			TransferVO transfer = transfers.poll();
+			insertTransfer(transfer);
+//			if (insertTransfer(transfer) == 0) {
+//				transfers.add(transfer);
+//			} else {
+//				++result;
+//			}
 		}
 		return result;
 	}
