@@ -90,7 +90,7 @@ public class TransferDAO {
 		return transfer;
 	}
 	/**
-	 *
+	 * 선수 상세정보 조회 메서드
 	 * playerId를 받아 아이디에 해당하는 TransferVO리턴
 	 * transfer, player 테이블의 모든 정보 조회
 	 * @param playerId
@@ -137,7 +137,7 @@ public class TransferDAO {
 		return transfers;
 	}
 	/**
-	 * 
+	 * 해당리그 이적 조회 메서드
 	 * leagueName를 받아 아이디에 해당하는 TransferVO리턴
 	 * league, team, transfer 테이블 조인
 	 * leagueName을 통해 transfer 테이블의 모든 정보 조회
@@ -187,6 +187,7 @@ public class TransferDAO {
 		return transfers;
 	}
 	/**
+	 * 특정년도 이적료 상위5 조회 메서드
 	 * year을 받아 연도에 해당하는 TransferVO리턴
 	 * 연봉 상위 5위 선수조회
 	 * transfer, team테이블 조인
