@@ -1,10 +1,23 @@
 header{
-	height: var(--topGap);
+	/* height: var(--topGap); */
 	display:flex;
 	justify-content:center;
 }
-#header-container{
+#header-containers{
 	width: var(--viewWidth);
 	height:100%;
 	border:1px solid blue;
+}
+#header-container{
+	display: flex;
+	justify-content:center;
+	align-items:center;
+	padding:20px;
+}
+
+.header-selecter-container, .header-hover-container{
+	display:flex;
+}
+.header-selecter-contents {
+	margin-right:10px;
 }

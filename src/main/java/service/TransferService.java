@@ -89,4 +89,12 @@ public class TransferService {
 	public List<TransferVO> selectTransferAll(String leagueName) {
 		return transferDao.selectTransferAll(leagueName);
 	}
+	/**
+	 * year을 받아 연도에 해당하는 TransferVO 리턴
+	 * @param year
+	 * 작성자 : 서준호
+	 */
+	public List<TransferVO> selectTransferTop5(int year) {
+		return transferDao.selectTransferTop5(year);
+	}
 }
