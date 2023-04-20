@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import service.TransferService;
@@ -19,7 +20,7 @@ public class TransferInfoController implements Controller {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
 		TransferService service = new TransferService();
 		String leagueName = request.getParameter("leagueName");		
-		TransferVO transfer = service.selectTransferAll(leagueName);
+		List<TransferVO> transfer = service.selectTransferAll(leagueName);
 		request.setAttribute("transferInfo", transfer);
 				
 		return "transferInfo.jsp";
