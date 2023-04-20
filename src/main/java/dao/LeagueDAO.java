@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import dbUtil.util;
 import vo.LeagueVO;
@@ -76,5 +78,30 @@ public class LeagueDAO {
 			util.dbDisconnect(null, pst, conn);
 		}
 		return league;
+	}
+	
+	/**
+    * 모든 country_name의 데이터를 추출
+    * @return 모든 country_name return
+    * 작성자 : 한진
+    */
+	public List<String> selectAllCountry() {
+		List<String> country = new ArrayList<>();
+		String sql = """
+				select distinct(country_name) from league where country_name !='-'
+				""";
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				country.add(rs.getString("country_name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(null, pst, conn);
+		}
+		return country;
 	}
 }

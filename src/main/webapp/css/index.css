@@ -1,7 +1,7 @@
 /* index.css */
 @import 'header.css';
 @import 'footer.css';
-
+@import 'spinner.css';
 
 :root{
 	--viewWidth: 100%;
@@ -21,3 +21,6 @@ body{
   	font-family: 'Nanum Gothic', sans-serif;
 }
 
+li {
+	list-style: none;
+}

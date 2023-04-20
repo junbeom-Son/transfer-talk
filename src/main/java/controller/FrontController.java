@@ -26,6 +26,15 @@ public class FrontController extends HttpServlet {
 		data.put("response", response);
 		System.out.println(path);
 		switch (path) {
+		case "/transfer/country":
+			controller = new AllTransferCountryController();
+			break;
+		/*
+		 * case "/transfer/country/leagues": controller = new
+		 * AllTransferLeaguesInCountryController(); break; case
+		 * "/transfer/country/league/teams": controller = new
+		 * AllTransferTeamsInLeagueController(); break;
+		 */
 		case "/transfer/league":
 			controller = new TransferInfoController();
 			break;
@@ -51,17 +60,18 @@ public class FrontController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-//		if (page.indexOf("redirect:") >= 0) {
-//			response.sendRedirect(page.substring(9));
-//		} else if(page.indexOf("download") >= 0) {
-//			response.getWriter().append("download OK");
-//		} else if (page.indexOf("responseBody:")>=0) {
-//			response.getWriter().append(page.substring(13));
-//		}
-//		else {
-//			RequestDispatcher rd = request.getRequestDispatcher(page);
-//			rd.forward(request, response);
-//		}
+		if (page.indexOf("redirect:") >= 0) {
+			response.sendRedirect(page.substring(9));
+		} else if(page.indexOf("download") >= 0) {
+			response.getWriter().append("download OK");
+		} else if (page.indexOf("responseBody:")>=0) {
+			response.setContentType("application/json; charset=utf-8");
+			response.getWriter().append(page.substring(13));
+		}
+		else {
+			RequestDispatcher rd = request.getRequestDispatcher(page);
+			rd.forward(request, response);
+		}
 	}
 
 	
