@@ -67,4 +67,14 @@ public class TransferService {
 		}
 		return result;
 	}
+	/**
+	 * Null return 가능
+	 * playerId를 받아 아이디에 해당하는 TransferVO 리턴
+	 * @param playerId
+	 * @return 해당하는 id가 있으면 TransferVO, 없으면 null return
+	 * 작성자 : 서준호
+	 */
+	public TransferVO selectPlayerDetailById(int playerId) {
+		return transferDao.selectPlayerDetailById(playerId); 
+	}
 }
