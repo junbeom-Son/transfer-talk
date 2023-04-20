@@ -78,6 +78,7 @@ public class PlayerDAO {
 	 * playerName을 받아 %이름%에 해당하는 모든선수 조회
 	 * @param playerName
 	 * @return List<PlayerVO> players
+	 * 작성자 : 서준호
 	 */
 	public List<PlayerVO> selectPlayersByName(String playerName) {
 		String sql ="""
