@@ -1,0 +1,24 @@
+@charset "UTF-8";
+.summary-container {
+	display: grid;
+}
+
+.summary-category {
+	grid-row:1/6;
+}
+
+.summary-name {
+	grid-column:2;
+}
+
+.summary-fee {
+	grid-column:3;
+}
+
+.summary-previous-team {
+	grid-column:4;
+}
+
+.summary-new-team {
+	grid-column:5;
+}
