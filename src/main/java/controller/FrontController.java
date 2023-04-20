@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/") //기본주소 : /transferTalk
+@WebServlet({"/transfer/*", "/player/*"}) //기본주소 : /transferTalk
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = request.getServletPath();
+		String path = request.getRequestURI().substring(request.getContextPath().length());
 		
 		Controller controller = null;
 		Map<String, Object> data = new HashMap<>();
