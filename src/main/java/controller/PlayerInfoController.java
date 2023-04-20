@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +21,11 @@ public class PlayerInfoController implements Controller {
 	@Override
 	public String execute(Map<String, Object> data) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
-		PlayerService service = new PlayerService();
+		TransferService  transferservice = new TransferService();
 		int playerId = Integer.parseInt(request.getParameter("playerId"));		
-		PlayerVO player = service.selectPlayerById(playerId);
-		request.setAttribute("PlayerDetail", player);
-				
+		List<TransferVO> transfer = transferservice.selectPlayerDetailById(playerId);
+		request.setAttribute("PlayerDetail", transfer);
+			
 		return "PlayerDetail.jsp";
 	}
 }

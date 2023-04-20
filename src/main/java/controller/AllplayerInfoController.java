@@ -23,7 +23,6 @@ public class AllplayerInfoController implements Controller {
 		PlayerService playerService = new PlayerService();
 		String playerName = request.getParameter("playerName");		
 		List<PlayerVO> players = playerService.selectPlayersByName(playerName);
-		System.out.println(players);
 		request.setAttribute("PlayerAll", players);
 				
 		return "PlayerAll.jsp";
