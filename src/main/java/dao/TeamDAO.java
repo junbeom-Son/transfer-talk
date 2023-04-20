@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import dbUtil.util;
 import vo.LeagueVO;
@@ -83,5 +85,35 @@ public class TeamDAO {
 			util.dbDisconnect(rs, pst, conn);
 		}
 		return team;
+	}
+	
+	/**
+	 * league_name를 받아 모든 team_name 데이터를 리턴
+	 * @param league_name
+	 * @return team_name
+	 * 작성자 : 한진
+	 */
+	public List<String> selectTeamsByleague(String league_name) {
+		List<String> teams = new ArrayList<>();
+		String sql = """
+				select distinct(team_name) 
+				from team
+				join league on (team.league_id = league.league_id) 
+				where league_name = ?
+				""";
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, league_name);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				teams.add(rs.getString("team_name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(null, pst, conn);
+		}
+		return teams;
 	}
 }
