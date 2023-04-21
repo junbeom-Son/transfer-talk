@@ -18,7 +18,6 @@ public class FrontController extends HttpServlet {
        
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getRequestURI().substring(request.getContextPath().length());
-		
 		Controller controller = null;
 		Map<String, Object> data = new HashMap<>();
 		data.put("method", request.getMethod());
@@ -43,11 +42,8 @@ public class FrontController extends HttpServlet {
 		case "/player/{id}":
 			controller = new PlayerInfoController();
 			break;
-		case "/transfer/top_transfer_fee":
-			controller = new RankerController();
-			break;
 		case "/transfer/summary":
-			controller = new SummaryController();
+			controller = new RankerController();
 			break;
 //		case "/site-result/changePhoto.do":
 //			controller = new ChangePhotoController();

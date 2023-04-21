@@ -8,8 +8,4 @@
 	<div class="summary-previous-team">이전팀</div>
 	<div class="summary-new-team">새팀</div>
 	
-	<div class="summary-name summary-content"></div>
-	<div class="summary-fee summary-content"></div>
-	<div class="summary-previous-team summary-content"></div>
-	<div class="summary-new-team summary-content"></div>
 </div>

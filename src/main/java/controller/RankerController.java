@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import service.TransferService;
 import vo.TransferVO;
 
@@ -21,10 +23,11 @@ public class RankerController implements Controller {
 	public String execute(Map<String, Object> data) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
 		TransferService service = new TransferService();
-		int year = Integer.parseInt(request.getParameter("year"));		
-		List<TransferVO> transfer = service.selectTransferTop5(year);
-		request.setAttribute("transferTop5", transfer);
-				
-		return "transferTop5.jsp";
+		String leagueName = request.getParameter("league");
+		String teamName = request.getParameter("team");
+		String year = request.getParameter("year");
+		List<TransferVO> transfers = service.selectTransferTop5(year, leagueName, teamName);
+		ObjectMapper objectMapper = new ObjectMapper();
+		return "responseBody:" + objectMapper.writeValueAsString(transfers);
 	}
 }
