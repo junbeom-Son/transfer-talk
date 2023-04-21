@@ -1,19 +1,17 @@
 
-callSummary({});
-callSummary({
-	containerData:{'year':'2022'}, 
-	containerIndex:1
-});
 
 
-function callSummary({
+callSummary = function ({
 	containerData = {},
 	containerIndex = 0,
 	
 }) {
 	callAjax({
 		url: "transfer/summary",
-		data: containerData,
+		data: {
+			top5:true,
+			...containerData
+		},
 		beforeSend:function(){
 			const parent =$(".summary-container").get(containerIndex);
 			while(parent.children.length > 6){
@@ -49,3 +47,8 @@ function callSummary({
 }
 
 
+callSummary({});
+callSummary({
+	containerData:{'year':'2022'}, 
+	containerIndex:1
+});

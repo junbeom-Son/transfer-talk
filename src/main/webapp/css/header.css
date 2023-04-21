@@ -1,6 +1,7 @@
 header{
 	height: var(--topGap);
 	border:1px solid blue;
+	margin-bottom:20px;
 }
 
 /* 국가-리그-팀 선택 dropdown css */
@@ -9,7 +10,6 @@ header{
 	display: flex;
 	justify-content:center;
 	align-items:center;
-	padding:20px;
 	height: 70%;
 	background-color:skyblue; 
 }
@@ -22,21 +22,22 @@ header{
 }
 
 /* menu hover css */
-.header-hover-container{
-	background-color : yellow; 
+.header-hover-container{ 
 	height: 30%;
 }
- .header-left-contents{
-	width: 70%;
+.header-left-contents{
+ 	margin-left:20px;
+ 	height:100%;
 	display:flex;
-	
+	align-items:center;
 }
 
 header .header-item{
-	width : 33%;
+	width : 20%;
+	
 }
 header .header-item .item-name{
-	padding: 10px 20px;
+	padding:0 20px;
 	font-family: Arial, sans-serif;
 	font-size:20px;
 	border:1px solid red;
@@ -56,9 +57,23 @@ header .header-item:hover .item-contents{
 }
 
 header.header-item .item-contents .contents-menu{ 
-  background-color: #2c2a29;
-  height: 200px;
+  /* background-color: #2c2a29; */
+  background-color: blue;
+  height: 200px;  
 } 
+header .header-item .item-contents .contents-menu .inner {
+	width : 20%;
+	background-color: orange;
+	z-index: 10
+}
+
+header .header-item .item-contents .contents-menu .inner > li {
+	width:100%;
+	background-color: green;
+	left:0
+}
+
+
 
 @media screen and (max-width: 700px) {
   .header-selecter-container, .header-hover-container{

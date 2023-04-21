@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <header>
 
 	<div class="header-dropdown-container">
+	
 		<div class="header-selecter-container">
-				<div class="header-selecter-contents header-selecter-title">My Team</div>
+				<img alt="homeIcon" src="${path}/images/home.png" width="50px" height="50px">
 				<div class="header-selecter-contents header-selecter-form">
 					<form>
 					  <select name="header-country" id="header-country">
@@ -28,6 +31,7 @@
 					  </select>
 					</form>
 				</div> 
+				<button class="header-selecter-contents header-detail-btn">자세히보기</button>
 		</div>
 	</div>
 	<div class="header-hover-container">
