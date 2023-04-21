@@ -1,38 +1,66 @@
 //index.js
 
+
+/* callAjax : ajax 호출함수
+ * params url, method, dataType, data(object타입), beforeSend(callback함수), success(callback함수), error(callback함수)
+ * retrun : 없음
+ */
+function callAjax({
+	url,
+	method="get",
+	dataType="json",
+	data,
+	beforeSend,
+	success,
+	error
+}){
+	$.ajax({
+		url:url,
+		method:method,
+		dataType:dataType,
+		beforeSend : function(){
+			if(beforeSend)beforeSend();
+	        $("#my-spinner").show();
+	     },
+	    data:data,
+		success:function(res){
+			//console.log('success',res)
+			if(success)success(res);
+			$("#my-spinner").hide();
+		},
+		error:function(err){
+			console.warn('error',err)
+			if(error)error(res);
+			$("#my-spinner").hide();
+		}
+	});
+};
+
 // 초기 header에 country데이터 가저오기
-$.ajax({
+callAjax({
 	url:"transfer/country",
 	method:"post",
-	dataType:"json",
-	beforeSend : function(){
-        $("#my-spinner").show();
-     },
-	success:function(res){
-		//console.log('success',res)
+	success: function(res){
 		res.sort();
 		const selectCountryElement = document.querySelector("#header-country");
 		res.forEach((el,i) => {
 			createElement('option', selectCountryElement, el,el);
 		});
-		$("#my-spinner").hide();
-	},
-	error:function(err){
-		//console.warn('error',err)
-		$("#my-spinner").hide();
 	}
 });
+
+
+
 
 // country 선택시  header에 leagues데이터 가저오기
 $("#header-country").change(function(){
     const country = $(this).val();
-    $.ajax({
+    callAjax({
 		url:"transfer/country/leagues",
 		method:"post",
 		data:{
 			country
 		},
-		dataType:"json",
 		beforeSend : function(){
 			 const selectLeagueElement = document.querySelector("#header-league");
 			 const selectTeamElement = document.querySelector("#header-team");
@@ -42,54 +70,39 @@ $("#header-country").change(function(){
 			 while (selectTeamElement.children.length > 1) {
 			    selectTeamElement.removeChild(selectTeamElement.lastChild);
 			 }
-	        $("#my-spinner").show();
-	     },
-		success:function(res){
-			//console.log('success',res)
+		},
+		success: function(res){
 			res.sort();
 			const selectLeagueElement = document.querySelector("#header-league");
 			res.forEach((el,i) => {
 				createElement('option', selectLeagueElement, el, el);
 			});
-			$("#my-spinner").hide();
 		},
-		error:function(err){
-			//console.warn('error',err)
-			$("#my-spinner").hide();
-		}
 	});
 });
 
 //league 선택시  header에 teams데이터 가저오기
 $("#header-league").change(function(){
     const league = $(this).val();
-    $.ajax({
+    callAjax({
 		url:"transfer/country/league/teams",
 		method:"post",
 		data:{
 			league
 		},
-		dataType:"json",
 		beforeSend : function(){
-			const selectTeamElement = document.querySelector("#header-team");
+			 const selectTeamElement = document.querySelector("#header-team");
 			 while (selectTeamElement.children.length > 1) {
 			    selectTeamElement.removeChild(selectTeamElement.lastChild);
 			 }
-	        $("#my-spinner").show();
-	     },
-		success:function(res){
-			//console.log('success',res)
+		},
+		success: function(res){
 			res.sort();
 			const selectTeamElement = document.querySelector("#header-team");
 			res.forEach((el,i) => {
 				createElement('option', selectTeamElement, el, el);
 			});
-			$("#my-spinner").hide();
 		},
-		error:function(err){
-			//console.warn('error',err)
-			$("#my-spinner").hide();
-		}
 	});
 });
 
