@@ -218,7 +218,7 @@ public class TransferDAO {
 		if (teamName != null) {
 			sql += " and n_team.team_name = ?";
 		} else if (leagueName != null) {
-			sql += " and league.league_name = ?";
+			sql += " and n_league.league_name = ?";
 		}
 		if (year != null) {
 			sql += " and transfer_year = ?";
