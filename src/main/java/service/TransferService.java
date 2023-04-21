@@ -94,7 +94,7 @@ public class TransferService {
 	 * @param year
 	 * 작성자 : 서준호
 	 */
-	public List<TransferVO> selectTransferTop5(String year, String leagueName, String teamName) {
-		return transferDao.selectTransferTop5(year, leagueName, teamName);
+	public List<TransferVO> selectTransfers(String year, String leagueName, String teamName, boolean top5) {
+		return transferDao.selectTransfers(year, leagueName, teamName, top5);
 	}
 }

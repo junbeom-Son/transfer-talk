@@ -26,7 +26,8 @@ public class RankerController implements Controller {
 		String leagueName = request.getParameter("league");
 		String teamName = request.getParameter("team");
 		String year = request.getParameter("year");
-		List<TransferVO> transfers = service.selectTransferTop5(year, leagueName, teamName);
+		boolean top5 = request.getParameter("top5").equals("true");
+		List<TransferVO> transfers = service.selectTransfers(year, leagueName, teamName, top5);
 		ObjectMapper objectMapper = new ObjectMapper();
 		return "responseBody:" + objectMapper.writeValueAsString(transfers);
 	}
