@@ -16,6 +16,12 @@
 <body>
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <main>
+	<div>이전팀</div>
+	<div>새팀</div>
+	<div>포지션</div>
+	<div>이적 당시 나이</div>
+	<div>이적료</div>
+	
 	
 </main>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
