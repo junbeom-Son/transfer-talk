@@ -159,7 +159,24 @@ $("#header-team").change(function(){
 $(".header-detail-btn").click(function(){
 	const leagueName = $(document.querySelector("#header-league")).val() ==="none" ? null : $(document.querySelector("#header-league")).val();
 	const teamName = $(document.querySelector("#header-team")).val() === "none" ? null : $(document.querySelector("#header-team")).val();
-	location.href=getContextPath() +"/transfer/summary?league=" + leagueName+'&team='+teamName+'&top5='+false;
+	let url = getContextPath() + "/transfer/transferList?"
+	let needAndChar = false;
+	if (leagueName !== null) {
+		url += "league=" + leagueName;
+		needAndChar = true;
+	}
+	if (teamName !== null) {
+		if (needAndChar) {
+			url += "&";
+		}
+		url += "team=" + teamName;
+		needAndChar = true;
+	}
+	if (needAndChar) {
+		url += "&";
+	}
+	url += "top5=false";
+	location.href=url;
 });
 
 //home버튼 클릭 시 함수
