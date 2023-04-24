@@ -69,7 +69,7 @@ public class TransferService {
 		return result;
 	}
 	/**
-	 * Null return 가능
+	 * 선수 상세정보 조회 메서드
 	 * playerId를 받아 아이디에 해당하는 TransferVO 리턴
 	 * @param playerId
 	 * @return 해당하는 id가 있으면 TransferVO, 없으면 null return
@@ -79,7 +79,7 @@ public class TransferService {
 		return transferDao.selectPlayerDetailById(playerId); 
 	}
 	/**
-	 *  Null return 가능
+	 * 해당리그 이적 조회 메서드
 	 * leagueName를 받아 아이디에 해당하는 TransferVO 리턴
 	 * @param leagueName
 	 * @return 해당하는 leagueName이 있으면 TransferVO, 없으면 null return
@@ -90,6 +90,7 @@ public class TransferService {
 		return transferDao.selectTransferAll(leagueName);
 	}
 	/**
+	 * 특정년도 이적료 상위5 조회 메서드
 	 * year을 받아 연도에 해당하는 TransferVO 리턴
 	 * @param year
 	 * 작성자 : 서준호

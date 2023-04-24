@@ -75,6 +75,7 @@ public class PlayerDAO {
 	}
 	
 	/**
+	 * 검색하는 이름에 해당하는 모든선수 조회 메서드
 	 * playerName을 받아 %이름%에 해당하는 모든선수 조회
 	 * @param playerName
 	 * @return List<PlayerVO> players
