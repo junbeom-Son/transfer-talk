@@ -13,35 +13,47 @@ callSummary = function ({
 			...containerData
 		},
 		beforeSend:function(){
-			const parent =$(".summary-container").get(containerIndex);
+			const parent =$(".summary-contents").get(containerIndex);
 			while(parent.children.length > 6){
 				parent.removeChild(parent.lastChild);
 			}
 		},
 		success:function(data) {
-			data.forEach(function(item) {
-				let playerName = document.createElement("div")
-				playerName.innerText = item.player.player_name;
-				playerName.className = "summary-name";
-				let fee = document.createElement("div")
-				fee.innerText = item.fee;
-				fee.className = "summary-fee";
-				let previousTeam = document.createElement("div")
-				previousTeam.innerText = item.previous_team.team_name;
-				previousTeam.className = "summary-previous-team";
-				let newTeam = document.createElement("div")
-				newTeam.innerText = item.new_team.team_name;
-				newTeam.className = "summary-new-team"
-				let age = document.createElement("div");
-				age.innerText = item.age;
-				age.className = "summary-age";
-				
-				$(".summary-container").get(containerIndex).append(playerName);
-				$(".summary-container").get(containerIndex).append(fee);
-				$(".summary-container").get(containerIndex).append(previousTeam);
-				$(".summary-container").get(containerIndex).append(newTeam);
-				$(".summary-container").get(containerIndex).append(age);
-			});
+			const parentElement = $(".summary-contents");
+			if(data.length == 0){
+				const noData = document.createElement("div");
+				noData.innerText = "선수 정보가 없습니다.";
+				noData.className = "grid-noData-style";
+				parentElement.get(containerIndex).append(noData);
+			}else {
+				data.forEach(function(item,i) {
+					const playerRank = document.createElement("div");
+					playerRank.innerText = i+1;
+					playerRank.className = "summary-rank";
+					const playerName = document.createElement("div");
+					playerName.innerText = item.player.player_name;
+					playerName.className = "summary-name";
+					const fee = document.createElement("div");
+					fee.innerText = item.fee;
+					fee.className = "summary-fee";
+					const previousTeam = document.createElement("div");
+					previousTeam.innerText = item.previous_team.team_name;
+					previousTeam.className = "summary-previous-team";
+					const newTeam = document.createElement("div");
+					newTeam.innerText = item.new_team.team_name;
+					newTeam.className = "summary-new-team"
+					const age = document.createElement("div");
+					age.innerText = item.age;
+					age.className = "summary-age";
+					
+					parentElement.get(containerIndex).append(playerRank);
+				  	parentElement.get(containerIndex).append(playerName);
+				  	parentElement.get(containerIndex).append(fee);
+				  	parentElement.get(containerIndex).append(previousTeam);
+				  	parentElement.get(containerIndex).append(newTeam);
+				  	parentElement.get(containerIndex).append(age);
+				});
+			}
 		}
 	});
 }

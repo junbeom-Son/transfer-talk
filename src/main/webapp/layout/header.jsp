@@ -3,39 +3,53 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <header>
-
+	<div class="header-homelogo">
+		<img alt="homeIcon" src="${path}/images/home.png">
+	</div>
 	<div class="header-dropdown-container">
-	
 		<div class="header-selecter-container">
-				<img alt="homeIcon" src="${path}/images/home.png" width="50px" height="50px">
-				<div class="header-selecter-contents header-selecter-form">
-					<form>
-					  <select name="header-country" id="header-country">
-					  	<option value="none">국가를 선택하세요.</option>
+				<%-- <div class="header-homelogo">
+					<img alt="homeIcon" src="${path}/images/home.png">
+				</div> --%>
+				<div class="header-selecter-contents">
+					<form class="header-selecter-form">
+					  <select name="header-country" id="header-country" class="header-selecter-select">
+					  	<option value="none" class="header-selecter-option">국가를 선택하세요.</option>
 					  </select>
+					  <span class="iconArrow"><img src="${path}/images/arrow-down.png" alt="arrow_down"></span>
 					</form>
 				</div> 
-				<div class="header-selecter-contents header-selecter-sign">>></div>
-				<div class="header-selecter-contents header-selecter-form">
-					<form>
-					  <select name="header-league" id="header-league">
-					  	<option value="none">리그를 선택하세요.</option>
+				<div class="header-selecter-sign sign1">
+					<img class="next-arrow-Img selected" src="${path}/images/next-arrow.png" alt="next-arrow">
+					<img class="next-arrow-selected-Img" src="${path}/images/next-arrow-selected.png" alt="next-arrow-selected">
+				</div>
+				<div class="header-selecter-contents">
+					<form class="header-selecter-form">
+					  <select name="header-league" id="header-league" class="header-selecter-select">
+					  	<option value="none" class="header-selecter-option">리그를 선택하세요.</option>
 					  </select>
+					  <span class="iconArrow"><img src="${path}/images/arrow-down.png" alt="arrow_down"></span>
 					</form>
 				</div> 
-				<div class="header-selecter-contents header-selecter-sign">>></div>
-				<div class="header-selecter-contents header-selecter-form">
-					<form>
-					  <select name="header-team" id="header-team">
-					  	<option value="none">팀을 선택하세요.</option>
+				<div class="header-selecter-sign sign2">
+					<img class="next-arrow-Img selected" src="${path}/images/next-arrow.png" alt="next-arrow">
+					<img class="next-arrow-selected-Img" src="${path}/images/next-arrow-selected.png" alt="next-arrow-selected">
+				</div>
+				<div class="header-selecter-contents">
+					<form class="header-selecter-form">
+					  <select name="header-team" id="header-team" class="header-selecter-select">
+					  	<option value="none" class="header-selecter-option">팀을 선택하세요.</option>
 					  </select>
+					  <span class="iconArrow"><img src="${path}/images/arrow-down.png" alt="arrow_down"></span>
 					</form>
 				</div> 
-				<button class="header-selecter-contents header-detail-btn">자세히보기</button>
+				<div class="header-detail-btn detail-btn">
+					<button>상세보기</button>
+				</div>
 		</div>
 	</div>
 	<div class="header-hover-container">
-		<div class="header-left-contents">
+		<div class="header-hover-contents">
 			<li class="header-item">
 				<div class="item-name">이적정보</div>
 				<div class="item-contents">
@@ -70,13 +84,26 @@
 					</div>
 				</div>
 			</li>
+			<li class="header-item">
+				<div class="item-name">나의 메뉴</div>
+				<div class="item-contents">
+					<div class="contents-menu">
+						<ul class="inner">
+							<li>My Team</li>
+							<li>My Player</li>
+						</ul>
+					</div>
+				</div>
+			</li>
 		</div>
-		<!-- <li class="login-container">
-			<div class="item-name">로그인</div>
-			<div class="item-contents">
-				로그인 관련 div
-			</div>
-		</li> -->
 	</div>
-	
+	<div class="loginOut login-container">
+		<button class="login-button">
+			<img alt="loginIcon" src="${path}/images/login.png">
+			<div>Login</div>
+		</button>
+	</div>
+	<div class="loginOut logout-container hidden">
+		<button class="logout-button">Logout</button>
+	</div>
 </header>

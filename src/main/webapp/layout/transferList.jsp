@@ -14,10 +14,9 @@ request.setCharacterEncoding("utf-8");
 <link rel="stylesheet" href="${path}/css/summary.css">
 <link rel="stylesheet" href="${path}/css/transferList.css">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script defer src="${path}/js/index.js"></script>
-<script defer src="${path}/js/transferList.js"></script>
+
 </head>
 
 <body>

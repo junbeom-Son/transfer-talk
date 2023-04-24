@@ -1,55 +1,137 @@
 header{
+	position: relative;
 	height: var(--topGap);
-	border:1px solid blue;
 	margin-bottom:20px;
+	background-color:beige;
+}
+
+/* 홈버튼 */
+.header-homelogo{
+	position:absolute;
+	display:flex;
+	align-items:center;
+	height: 65%;
+    top: calc((var(--topGap) * 0.3 - var(--loginButtonHeight)) / 2);
+    left: 20px;	
+}
+.header-homelogo > img{
+	width:inherit;
+	height:inherit;
+}
+.header-homelogo:hover >img{
+	cursor:pointer;
 }
 
 /* 국가-리그-팀 선택 dropdown css */
-
 .header-dropdown-container{
 	display: flex;
-	justify-content:center;
+	justify-content:end;
 	align-items:center;
 	height: 70%;
-	background-color:skyblue; 
 }
 
 .header-selecter-container{
 	display:flex;
+	width: 90%;
+	height: 50%;
+	margin-right:20px;
+    justify-content: end;
 }
-.header-selecter-contents {
-	margin-right:10px;
+.header-selecter-contents{
+	margin:0 var(--headerItemMarginRight);
+	width: 20%;
+}
+.header-selecter-form{
+	width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position:relative;
+}
+.header-selecter-select{
+	width: 100%;
+    height: 80%;
+    border-radius: 10px;
+    background: transparent;
+    padding: 10px;
+    z-index: 2;
+    
+	-o-appearance: none;
+  	-webkit-appearance: none;
+  	-moz-appearance: none;
+  	appearance: none;
+}
+.header-selecter-select::-ms-expand { 
+	display: none;
 }
 
-/* menu hover css */
-.header-hover-container{ 
-	height: 30%;
+.iconArrow{
+	position:absolute;
+	right:10px;
 }
-.header-left-contents{
- 	margin-left:20px;
- 	height:100%;
+.iconArrow > img{
+  width: 15px; 
+  height: inherit;
+}
+
+
+.header-selecter-sign{
+	position:relative;
+	width:40px;
 	display:flex;
 	align-items:center;
 }
 
+.header-selecter-sign > img{
+  position:absolute;
+  width: inherit; 
+  height: inherit;
+  display:none;
+}
+.header-selecter-sign .next-arrow-Img{
+	rotate:90deg;
+}
+
+.header-selecter-sign > img.selected{
+	display:block;
+}
+
+
+
+/* menu hover css */
+.header-hover-container{ 
+	height: 30%;
+    display: flex;
+    margin-right:10px;
+    justify-content: end;
+}
+.header-hover-contents{
+ 	height:100%;
+	display:flex;
+	align-items:center;
+	width: var(--navWidth);
+}
+
 header .header-item{
-	width : 20%;
-	
+	width : calc(100% / 3);
+	height: 100%;
 }
 header .header-item .item-name{
 	padding:0 20px;
 	font-family: Arial, sans-serif;
-	font-size:20px;
-	border:1px solid red;
+	font-size:18px;
+	height: 100%;
+    text-align: center;
+    line-height: calc(var(--topGap)*0.3);
 }
 header .header-item:hover .item-name{
-  background-color: #2c2a29;
-  color: #669900;
+  background-color: #669900;
+  color: orange;
   border-radius: 6px 6px 0 0;
+  cursor:pointer;
 }
 header .header-item .item-contents{
   width: 100%;
-  position: fixed;
   display: none;
 }
 header .header-item:hover .item-contents{
@@ -61,25 +143,160 @@ header.header-item .item-contents .contents-menu{
   background-color: blue;
   height: 200px;  
 } 
-header .header-item .item-contents .contents-menu .inner {
-	width : 20%;
-	background-color: orange;
-	z-index: 10
-}
 
 header .header-item .item-contents .contents-menu .inner > li {
-	width:100%;
-	background-color: green;
-	left:0
+	position:relative;
+    width: 100%;
+	background-color: gray;
+	color:white;
+	padding:15px 0;
+	left:0;
+	text-align:center;
+	z-index: 10;
+}
+header .header-item .item-contents .contents-menu .inner > li:hover{
+	background-color: lightgray;
+	cursor:pointer;
 }
 
 
+/* login css */
+.login-container{
+	position:fixed;
+	top: calc(var(--topGap) - var(--loginButtonHeight) - var(--loginButtonButtomGap));
+	left:calc((100vw - var(--bodyWidth))/2 + 25px);
+	width:60px;
+	transition:width 1s;
+	height:var(--loginButtonHeight);
+}
 
-@media screen and (max-width: 700px) {
-  .header-selecter-container, .header-hover-container{
+.login-container > .login-button{
+	width:inherit;
+	height:inherit;
+	border-radius: 10px;
+	background-color:white;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	border:none;
+}
+.login-container:hover{	
+	width: 150px;
+	transition:width 1s;
+}
+
+.login-container:hover > .login-button{
+	background-color:#4661f5;
+	cursor:pointer;
+	color:black;
+	transition:background-color 1s;
+}
+
+
+.login-container > .login-button > img{
+	display:inline;
+	width:auto;
+	height:95%;
+}
+.login-container:hover > .login-button > img{
+	width:inherit;
+	display:none;
+}
+
+.login-container > .login-button > div {
+	width:inherit;
+	display:none;
+}
+.login-container:hover > .login-button> div{
 	display:block;
+	color:white;
+}
+
+
+/* logout css */
+.logout-container{
+	position:fixed;
+	top: calc(var(--topGap) - var(--loginButtonHeight) - var(--loginButtonButtomGap));
+	left:calc((100vw - var(--bodyWidth))/2 + 20px);
+	width:150px;
+	height:var(--loginButtonHeight);
+}
+
+.logout-container > .logout-button{
+	width:inherit;
+	height:inherit;
+	border-radius: 10px;
+	background-color:#4661f5;
+	color:white;
+	border:none;
+}
+.logout-container:hover > .logout-button{
+	background-color:blue;
+	cursor:pointer;
+}
+
+/* login, logout 공통  */
+.login-container.hidden, .logout-container.hidden, .login-container.scrollHidden, .logout-container.scrollHidden{
+	display:none;
+}
+
+/* media-query */
+@media (max-width: 850px) {
+  header{
+  	height:auto;
+  }
+  .header-homelogo{
+  	position:static;
+  	height:40px;
+  	justify-content: start;
+    padding-top: 10px;
+    margin-left: 20px;
+  }
+  .header-dropdown-container, .header-hover-container{
+  	width:100%;
+	height:auto;
+  }
+  .header-selecter-container, .header-hover-contents{
+	display:block;
+    width: 70%;
+    margin: 10px auto;
   }
   .header-selecter-contents{
-  	width: 80%;
+  	width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  .header-selecter-sign{
+    display: none;
+  }
+  .header-detail-btn{
+  	height: 40px;
+  }
+  .header-detail-btn > button{
+  	width: 30%;
+  }
+  header .header-item {
+  	width:100%;
+  }
+  header .header-item:hover .item-contents{
+  	position: static;
+    display: block;
+    transition:.6s;
+  }
+  header.header-item .item-contents .contents-menu{ 
+  	width:100%;
+  }
+  header .header-item .item-contents .contents-menu .inner {
+  	width: 100%;
+  }
+  header .header-item .item-contents .contents-menu .inner > li {
+  	width : calc(100% - 2px);
+  }
+  
+  .login-container, .logout-container{
+    top: 10px;
+    left: auto;
+    right: 20px;
   }
 }

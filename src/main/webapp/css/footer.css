@@ -1,10 +1,19 @@
 footer{
 	height: var(--bottomGap);
-	display:flex;
-	justify-content:center;
+	margin: 20px 0;
 }
 #footer-container{
+	position:relative;
 	width: var(--viewWidth);
 	height:100%;
-	border:1px solid green;
+	background-color : beige;
+	display:flex;
+	align-items: center;
+}
+
+/* 메인로고 */
+#footer-container > img{
+	height:90%;
+	width: 20%;
+	margin : 0 20px 0;
 }
