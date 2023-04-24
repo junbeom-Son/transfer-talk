@@ -23,7 +23,7 @@ request.setCharacterEncoding("utf-8");
 <body>
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<main>
-		<h1>전체 데이터</h1>
+		<h1>${title != null ? title : '전체데이터'}</h1>
 		<div class="transfer-contents">
 			<div class="transfer-name">이름</div>
 			<div class="transfer-fee">이적료</div>
