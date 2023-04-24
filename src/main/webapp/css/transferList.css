@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.transfer-contents {
+.transfer-contents-in, .transfer-contents-out {
 	display: grid;
 	grid-template-columns:repeat(7, 1fr);
 }

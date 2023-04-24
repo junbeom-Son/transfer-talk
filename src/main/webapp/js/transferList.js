@@ -8,15 +8,21 @@ function callTransferList ({
 			...containerData
 		},
 		success:function(data) {
-			const parentElement = $(".transfer-contents");
+			let parentElement = $(".transfer-contents-in");
 			if(data.length == 0){
 				const noData = document.createElement("div");
 				noData.innerText = "선수 정보가 없습니다.";
 				noData.className = "grid-noData-style";
 				parentElement.append(noData);
 			}else {
-				data.forEach(function(item,i) {
-					const playerName = document.createElement("div");
+				data.forEach(function(transfers, index) {
+					if (index === 0) {
+						parentElement = $(".transfer-contents-in");
+					} else if (index === 1) {
+						parentElement = $(".transfer-contents-out");
+					}
+					transfers.forEach(function(item) {
+						const playerName = document.createElement("div");
 					playerName.className = "transfer-name";
 					
 					const playerLink = document.createElement("a");
@@ -55,6 +61,7 @@ function callTransferList ({
 				  	parentElement.append(age);
 				  	parentElement.append(player_position);
 				  	parentElement.append(transfer_year);
+					});
 				});
 			}
 		}

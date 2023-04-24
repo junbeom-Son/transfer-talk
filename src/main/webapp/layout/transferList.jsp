@@ -24,7 +24,18 @@ request.setCharacterEncoding("utf-8");
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<main>
 		<h1>${title != null ? title : '전체데이터'}</h1>
-		<div class="transfer-contents">
+		<h2>in</h2>
+		<div class="transfer-contents-in">
+			<div class="transfer-name">이름</div>
+			<div class="transfer-fee">이적료</div>
+			<div class="transfer-previous-team">이전팀</div>
+			<div class="transfer-new-team">새팀</div>
+			<div class="transfer-age-at-transfer">이적 당시 나이</div>
+			<div class="transfer-position">포지션</div>
+			<div class="transfer-year">이적 년도</div>
+		</div>
+		<h2>out</h2>
+		<div class="transfer-contents-out">
 			<div class="transfer-name">이름</div>
 			<div class="transfer-fee">이적료</div>
 			<div class="transfer-previous-team">이전팀</div>
