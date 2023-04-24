@@ -31,7 +31,10 @@ callSummary = function ({
 					playerRank.innerText = i+1;
 					playerRank.className = "summary-rank";
 					const playerName = document.createElement("div");
-					playerName.innerText = item.player.player_name;
+					const playerLink = document.createElement("a");
+					playerLink.innerText = item.player.player_name;
+					playerLink.href = getContextPath() + "/player/" + item.player.player_id;
+					playerName.append(playerLink);
 					playerName.className = "summary-name";
 					const fee = document.createElement("div");
 					fee.innerText = item.fee;
