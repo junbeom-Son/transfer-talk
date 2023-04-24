@@ -39,6 +39,7 @@ public class PlayerService {
 	}
 	
 	/**
+	 * 검색하는 이름에 해당하는 모든 선수 조회 메서드
 	 * playerName을 받아 이름에 해당하는 List<PlayerVO> 리턴
 	 * @param playerName
 	 * 작성자 : 서준호
