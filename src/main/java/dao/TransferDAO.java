@@ -91,15 +91,12 @@ public class TransferDAO {
 	}
 
 	/**
-<<<<<<< HEAD
 	 *
 	 * playerId를 받아 아이디에 해당하는 TransferVO리턴 transfer, player 테이블의 모든 정보 조회
 	 * 
-=======
 	 * 선수 상세정보 조회 메서드
 	 * playerId를 받아 아이디에 해당하는 TransferVO리턴
 	 * transfer, player 테이블의 모든 정보 조회
->>>>>>> 82b39c168512c65d4361841deefa7bc13e834876
 	 * @param playerId
 	 *
 	 *                 작성자 : 서준호
@@ -125,14 +122,9 @@ public class TransferDAO {
 				player.setPlayer_id(rs.getInt("player_id"));
 				player.setPlayer_name(rs.getString("player_name"));
 				transfer.setPlayer(player);
-<<<<<<< HEAD
-
-				TeamVO previousteam = new TeamVO();
-=======
 				
 				TeamVO previousteam = new TeamVO();				
 				previousteam.setTeam_id(rs.getInt("team_id"));
->>>>>>> 82b39c168512c65d4361841deefa7bc13e834876
 				previousteam.setTeam_name(rs.getString("team_name"));
 				transfer.setPrevious_team(previousteam);
 
@@ -152,14 +144,11 @@ public class TransferDAO {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * 
 	 * leagueName를 받아 아이디에 해당하는 TransferVO리턴 league, team, transfer 테이블 조인
-=======
 	 * 해당리그 이적 조회 메서드
 	 * leagueName를 받아 아이디에 해당하는 TransferVO리턴
 	 * league, team, transfer 테이블 조인
->>>>>>> 82b39c168512c65d4361841deefa7bc13e834876
 	 * leagueName을 통해 transfer 테이블의 모든 정보 조회
 	 * 
 	 * @param leagueName
@@ -187,14 +176,9 @@ public class TransferDAO {
 				player.setPlayer_id(rs.getInt("player_id"));
 				player.setPlayer_name(rs.getString("player_name"));
 				transfer.setPlayer(player);
-<<<<<<< HEAD
-
-				TeamVO previousteam = new TeamVO();
-=======
 				
 				TeamVO previousteam = new TeamVO();				
 				previousteam.setTeam_id(rs.getInt("team_id"));
->>>>>>> 82b39c168512c65d4361841deefa7bc13e834876
 				previousteam.setTeam_name(rs.getString("team_name"));
 				transfer.setPrevious_team(previousteam);
 
@@ -214,15 +198,12 @@ public class TransferDAO {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * year을 받아 연도에 해당하는 TransferVO리턴 연봉 상위 5위 선수조회 transfer, team테이블 조인
 	 * 
-=======
 	 * 특정년도 이적료 상위5 조회 메서드
 	 * year을 받아 연도에 해당하는 TransferVO리턴
 	 * 연봉 상위 5위 선수조회
 	 * transfer, team테이블 조인
->>>>>>> 82b39c168512c65d4361841deefa7bc13e834876
 	 * @param year
 	 * @return player_id, player_name, team_name, transfer_id, player_position, fee
 	 *         작성자 : 서준호
@@ -290,47 +271,15 @@ public class TransferDAO {
 				transfer.setTransfer_id(rs.getInt("transfer_id"));
 				transfer.setPlayer_position(rs.getString("player_position"));
 				transfer.setTransfer_year(rs.getInt("transfer_year"));
-<<<<<<< HEAD
+				
 				transfer.setAge(rs.getInt("age"));
 				transfer.setFee(rs.getString("fee"));
 
-=======
-				transfer.setFee(rs.getString("fee"));
-				transfer.setAge(rs.getInt("age"));
-				
->>>>>>> 82b39c168512c65d4361841deefa7bc13e834876
 				PlayerVO player = new PlayerVO();
 				player.setPlayer_id(rs.getInt("player_id"));
 				player.setPlayer_name(rs.getString("player_name"));
 
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				transfer.setPlayer(player);
-<<<<<<< HEAD
 
 				TeamVO previousTeam = new TeamVO();
 				previousTeam.setTeam_id(rs.getInt("p_team_id"));
@@ -352,18 +301,6 @@ public class TransferDAO {
 				newLeague.setLeague_name(rs.getString("n_league_name"));
 				newTeam.setLeague(newLeague);
 
-=======
-				
-				TeamVO previousteam = new TeamVO();				
-				previousteam.setTeam_id(rs.getInt("team_id"));
-				previousteam.setTeam_name(rs.getString("team_name"));
-				transfer.setPrevious_team(previousteam);
-				
-				TeamVO newteam = new TeamVO();
-				newteam.setTeam_id(rs.getInt("team_id"));
-				newteam.setTeam_name(rs.getString("team_name"));
-				transfer.setNew_team(newteam);
->>>>>>> 82b39c168512c65d4361841deefa7bc13e834876
 				transfers.add(transfer);
 			}
 		} catch (SQLException e) {
