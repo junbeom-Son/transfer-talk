@@ -159,7 +159,7 @@ $("#header-team").change(function(){
 $(".header-detail-btn").click(function(){
 	const leagueName = $(document.querySelector("#header-league")).val() ==="none" ? null : $(document.querySelector("#header-league")).val();
 	const teamName = $(document.querySelector("#header-team")).val() === "none" ? null : $(document.querySelector("#header-team")).val();
-	let url = getContextPath() + "/transfer/summary?"
+	let url = getContextPath() + "/transfer/transferList?"
 	let needAndChar = false;
 	if (leagueName !== null) {
 		url += "league=" + leagueName;
