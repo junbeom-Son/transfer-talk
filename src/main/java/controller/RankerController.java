@@ -23,8 +23,14 @@ public class RankerController implements Controller {
 	public String execute(Map<String, Object> data) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
 		TransferService service = new TransferService();
-		String leagueName = request.getParameter("league").replace("%20", " ");
-		String teamName = request.getParameter("team").replace("%20", " ");
+		String leagueName = request.getParameter("league");
+		if (leagueName != null) {
+			leagueName = leagueName.replace("%20", " ");
+		}
+		String teamName = request.getParameter("team");
+		if (teamName != null) {
+			teamName = teamName.replace("%20", " ");
+		}
 		String year = request.getParameter("year");
 		boolean top5 = request.getParameter("top5").equals("true");
 		List<TransferVO> transfers = service.selectTransfers(year, leagueName, teamName, top5);
