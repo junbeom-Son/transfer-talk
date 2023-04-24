@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +34,15 @@ public class RankerController implements Controller {
 		}
 		String year = request.getParameter("year");
 		boolean top5 = request.getParameter("top5").equals("true");
-		List<TransferVO> transfers = service.selectTransfers(year, leagueName, teamName, top5);
 		ObjectMapper objectMapper = new ObjectMapper();
+		List<TransferVO> inTransfers = service.selectInTransfers(year, leagueName, teamName, top5);
+		if (top5) {
+			return "responseBody:" + objectMapper.writeValueAsString(inTransfers);
+		}
+		List<List<TransferVO>> transfers = new ArrayList<>();
+		List<TransferVO> outTransfers = service.selectFromTransfers(year, leagueName, teamName, top5);
+		transfers.add(inTransfers);
+		transfers.add(outTransfers);
 		return "responseBody:" + objectMapper.writeValueAsString(transfers);
 	}
 }

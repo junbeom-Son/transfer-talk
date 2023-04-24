@@ -194,7 +194,7 @@ public class TransferDAO {
 	 * @return player_id, player_name, team_name, transfer_id, player_position, fee
 	 *         작성자 : 서준호
 	 */
-	public List<TransferVO> selectTransfers(String year, String leagueName, String teamName, boolean top5) {
+	public List<TransferVO> selectTransfers(String year, String leagueName, String teamName, boolean top5, boolean in) {
 		String sql = """
 				select transfer_id, player_position, transfer_year, fee, age, t.player_id as player_id, player_name,
 				t.previous_team_id as p_team_id, p_team.team_name as p_team_name,
@@ -216,9 +216,18 @@ public class TransferDAO {
 				""";
 		
 		if (teamName != null) {
-			sql += " and n_team.team_name = ?";
+			if (in) {
+				sql += " and n_team.team_name = ?";
+			} else {
+				sql += " and p_team.team_name = ?";
+			}
+			
 		} else if (leagueName != null) {
-			sql += " and n_league.league_name = ?";
+			if (in) {
+				sql += " and n_league.league_name = ?";				
+			} else {
+				sql += " and p_league.league_name = ?";
+			}
 		}
 		if (year != null) {
 			sql += " and transfer_year = ?";

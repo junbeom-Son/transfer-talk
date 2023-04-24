@@ -94,7 +94,20 @@ public class TransferService {
 	 * @param year
 	 * 작성자 : 서준호
 	 */
-	public List<TransferVO> selectTransfers(String year, String leagueName, String teamName, boolean top5) {
-		return transferDao.selectTransfers(year, leagueName, teamName, top5);
+	public List<TransferVO> selectInTransfers(String year, String leagueName, String teamName, boolean top5) {
+		return transferDao.selectTransfers(year, leagueName, teamName, top5, true);
+	}
+	
+	/**
+	 * 해당 팀 혹은 리그에서 빠져 나가는 TransferVO List 리턴
+	 * @param year
+	 * @param leagueName
+	 * @param teamName
+	 * @param top5
+	 * @param
+	 * 작성자 : 손준범
+	 */
+	public List<TransferVO> selectFromTransfers(String year, String leagueName, String teamName, boolean top5) {
+		return transferDao.selectTransfers(year, leagueName, teamName, top5, false);
 	}
 }
