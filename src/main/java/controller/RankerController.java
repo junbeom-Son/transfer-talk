@@ -29,13 +29,6 @@ public class RankerController implements Controller {
 		boolean top5 = request.getParameter("top5").equals("true");
 		List<TransferVO> transfers = service.selectTransfers(year, leagueName, teamName, top5);
 		ObjectMapper objectMapper = new ObjectMapper();
-//		if (top5) {
-//			return "responseBody:" + objectMapper.writeValueAsString(transfers);
-//		}
-//		else {
-//			request.setAttribute("transfers", transfers);
-//			return "/layout/transferList.jsp";
-//		}
 		return "responseBody:" + objectMapper.writeValueAsString(transfers);
 	}
 }
