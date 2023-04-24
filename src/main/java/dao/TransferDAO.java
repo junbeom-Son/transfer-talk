@@ -218,6 +218,33 @@ public class TransferDAO {
 				PlayerVO player = new PlayerVO();
 				player.setPlayer_id(rs.getInt("player_id"));
 				player.setPlayer_name(rs.getString("player_name"));
+
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				transfer.setPlayer(player);
 				
 				TeamVO previousteam = new TeamVO();				
