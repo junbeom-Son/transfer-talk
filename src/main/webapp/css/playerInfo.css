@@ -1,23 +1,35 @@
 @charset "UTF-8";
 .playerInfo-container{
-	display: grid;
-	grid-template-rows: repaeat(5, 100px);
-	grid-template-columns: repeat(4, 1fr);
+		display: grid;
+	grid-template-rows: repaeat(4, 100px);
+	grid-template-columns: repeat(5, 1fr);
 	gap: 20px 10px;
 	grid-template-areas:
-		"name age . ."
-		"picture1 . . ."
-		"previousteam picture2 newteam picture3"
-		"position picture4 picture4 picture4"
-		". . . fee"
+		"picture_player name previousteam . newteam"
+		"picture_player age picture_previousteam picture_arrow picture_newteam"
+		"picture_player position picture_previousteam picture_arrow picture_newteam"
+		"picture_player fee picture_previousteam picture_arrow picture_newteam"
 }
 #player_name{ grid-area: name; }
 #player_age{ grid-area: age; }
-#player_picture{ grid-area: picture1; }
+#picture_player{ grid-area: picture_player; }
 #previousteam{ grid-area: previousteam; }
-#previousteam_picture{ grid-area: picture2; }
+#picture_previousteam{ grid-area: picture_previousteam; }
 #newteam{ grid-area: newteam; }
-#newteam_picture{ grid-area: picture3; }
+#picture_newteam{ grid-area: picture_newteam; }
 #position{ grid-area: position; }
-#position_picture{ grid-area: picture4; }
 #fee{ grid-area: fee; }
+#picture_arrow{ 
+	grid-area: picture_arrow;
+	/*  object-fit: fill;
+	width: 50%; 
+	height: 50%;
+	max-width:100%;
+	max-height:100%; */  
+	}
+
+
+/* image {
+	width:50%;
+	height:50%;
+} */
