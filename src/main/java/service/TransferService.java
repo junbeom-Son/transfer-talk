@@ -75,8 +75,8 @@ public class TransferService {
 	 * @return 해당하는 id가 있으면 TransferVO, 없으면 null return
 	 * 작성자 : 서준호
 	 */
-	public List<TransferVO> selectPlayerDetailById(int playerId) {
-		return transferDao.selectPlayerDetailById(playerId); 
+	public List<TransferVO> selectTransfersByPlayerId(int playerId) {
+		return transferDao.selectTransfersByPlayerId(playerId); 
 	}
 	/**
 	 * 해당리그 이적 조회 메서드
