@@ -111,7 +111,7 @@ public class TransferDAO {
 				join player on(player.player_id = t.player_id)
 				join team p_team on (t.previous_team_id = p_team.team_id)
 				join team n_team on (t.new_team_id = n_team.team_id)
-				where player_id = ?
+				where t.player_id = ? order by transfer_id desc limit 1
 				""";
 		List<TransferVO> transfers = new ArrayList<>();
 		conn = util.getConnection();
