@@ -94,16 +94,25 @@ public class TransferDAO {
 	 *
 	 * playerId를 받아 아이디에 해당하는 TransferVO리턴 transfer, player 테이블의 모든 정보 조회
 	 * 
-	 * 선수 상세정보 조회 메서드
-	 * playerId를 받아 아이디에 해당하는 TransferVO리턴
-	 * transfer, player 테이블의 모든 정보 조회
+	 * 선수 상세정보 조회 메서드 playerId를 받아 아이디에 해당하는 TransferVO리턴 transfer, player 테이블의 모든
+	 * 정보 조회
+	 * 
 	 * @param playerId
 	 *
 	 *                 작성자 : 서준호
 	 */
-	public List<TransferVO> selectPlayerDetailById(int playerId) {
+	public List<TransferVO> selectTransfersByPlayerId(int playerId) {
 
-		String sql = "select * from transfer where player_id = ?";
+		String sql = """
+				select transfer_id, player_position, transfer_year, fee, age, t.player_id as player_id, player_name,
+				t.previous_team_id as p_team_id, p_team.team_name as p_team_name,
+				t.new_team_id as n_team_id, n_team.team_name as n_team_name
+				from transfer t
+				join player on(player.player_id = t.player_id)
+				join team p_team on (t.previous_team_id = p_team.team_id)
+				join team n_team on (t.new_team_id = n_team.team_id)
+				where player_id = ?
+				""";
 		List<TransferVO> transfers = new ArrayList<>();
 		conn = util.getConnection();
 		try {
@@ -122,15 +131,15 @@ public class TransferDAO {
 				player.setPlayer_id(rs.getInt("player_id"));
 				player.setPlayer_name(rs.getString("player_name"));
 				transfer.setPlayer(player);
-				
-				TeamVO previousteam = new TeamVO();				
-				previousteam.setTeam_id(rs.getInt("team_id"));
-				previousteam.setTeam_name(rs.getString("team_name"));
+
+				TeamVO previousteam = new TeamVO();
+				previousteam.setTeam_id(rs.getInt("p_team_id"));
+				previousteam.setTeam_name(rs.getString("p_team_name"));
 				transfer.setPrevious_team(previousteam);
 
 				TeamVO newteam = new TeamVO();
-				newteam.setTeam_id(rs.getInt("team_id"));
-				newteam.setTeam_name(rs.getString("team_name"));
+				newteam.setTeam_id(rs.getInt("n_team_id"));
+				newteam.setTeam_name(rs.getString("n_team_name"));
 				transfer.setNew_team(newteam);
 				transfers.add(transfer);
 
@@ -145,10 +154,8 @@ public class TransferDAO {
 
 	/**
 	 * 
-	 * leagueName를 받아 아이디에 해당하는 TransferVO리턴 league, team, transfer 테이블 조인
-	 * 해당리그 이적 조회 메서드
-	 * leagueName를 받아 아이디에 해당하는 TransferVO리턴
-	 * league, team, transfer 테이블 조인
+	 * leagueName를 받아 아이디에 해당하는 TransferVO리턴 league, team, transfer 테이블 조인 해당리그 이적
+	 * 조회 메서드 leagueName를 받아 아이디에 해당하는 TransferVO리턴 league, team, transfer 테이블 조인
 	 * leagueName을 통해 transfer 테이블의 모든 정보 조회
 	 * 
 	 * @param leagueName
@@ -176,8 +183,8 @@ public class TransferDAO {
 				player.setPlayer_id(rs.getInt("player_id"));
 				player.setPlayer_name(rs.getString("player_name"));
 				transfer.setPlayer(player);
-				
-				TeamVO previousteam = new TeamVO();				
+
+				TeamVO previousteam = new TeamVO();
 				previousteam.setTeam_id(rs.getInt("team_id"));
 				previousteam.setTeam_name(rs.getString("team_name"));
 				transfer.setPrevious_team(previousteam);
@@ -200,10 +207,9 @@ public class TransferDAO {
 	/**
 	 * year을 받아 연도에 해당하는 TransferVO리턴 연봉 상위 5위 선수조회 transfer, team테이블 조인
 	 * 
-	 * 특정년도 이적료 상위5 조회 메서드
-	 * year을 받아 연도에 해당하는 TransferVO리턴
-	 * 연봉 상위 5위 선수조회
-	 * transfer, team테이블 조인
+	 * 특정년도 이적료 상위5 조회 메서드 year을 받아 연도에 해당하는 TransferVO리턴 연봉 상위 5위 선수조회 transfer,
+	 * team테이블 조인
+	 * 
 	 * @param year
 	 * @return player_id, player_name, team_name, transfer_id, player_position, fee
 	 *         작성자 : 서준호
@@ -228,17 +234,17 @@ public class TransferDAO {
 				join league n_league on (n_team.league_id = n_league.league_id)
 				where fee like '€%'
 				""";
-		
+
 		if (teamName != null) {
 			if (in) {
 				sql += " and n_team.team_name = ?";
 			} else {
 				sql += " and p_team.team_name = ?";
 			}
-			
+
 		} else if (leagueName != null) {
 			if (in) {
-				sql += " and n_league.league_name = ?";				
+				sql += " and n_league.league_name = ?";
 			} else {
 				sql += " and p_league.league_name = ?";
 			}
@@ -249,7 +255,7 @@ public class TransferDAO {
 		if (top5) {
 			sql += " order by calculatedFee desc limit 5";
 		}
-		
+
 		List<TransferVO> transfers = new ArrayList<>();
 		conn = util.getConnection();
 		try {
@@ -271,7 +277,7 @@ public class TransferDAO {
 				transfer.setTransfer_id(rs.getInt("transfer_id"));
 				transfer.setPlayer_position(rs.getString("player_position"));
 				transfer.setTransfer_year(rs.getInt("transfer_year"));
-				
+
 				transfer.setAge(rs.getInt("age"));
 				transfer.setFee(rs.getString("fee"));
 

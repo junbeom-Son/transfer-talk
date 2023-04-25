@@ -42,7 +42,7 @@ public class FrontController extends HttpServlet {
 		case "/player/search":
 			controller = new AllplayerInfoController();
 			break;
-		case "/player/{id}":
+		case "/player":
 			controller = new PlayerInfoController();
 			break;
 		case "/transfer/summary":
