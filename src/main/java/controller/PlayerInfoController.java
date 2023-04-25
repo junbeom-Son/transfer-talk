@@ -22,10 +22,13 @@ public class PlayerInfoController implements Controller {
 	public String execute(Map<String, Object> data) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
 		TransferService  transferservice = new TransferService();
-		int playerId = Integer.parseInt(request.getParameter("playerId"));		
-		List<TransferVO> transfer = transferservice.selectPlayerDetailById(playerId);
-		request.setAttribute("PlayerDetail", transfer);
+		PlayerService playerservice = new PlayerService();
+		int playerId = Integer.parseInt(request.getParameter("playerId"));
+		PlayerVO player = playerservice.selectPlayerById(playerId);
+		List<TransferVO> transfers = transferservice.selectTransfersByPlayerId(playerId);
+		request.setAttribute("transfers", transfers);
+		request.setAttribute("player", player);
 			
-		return "PlayerDetail.jsp";
+		return "/layout/playerInfo.jsp";
 	}
 }

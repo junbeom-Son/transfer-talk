@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/css/index.css">
-<link rel="stylesheet" href="${path}/css/plyerInfo.css">
+<link rel="stylesheet" href="${path}/css/playerInfo.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script defer src="${path}/js/index.js"></script>
