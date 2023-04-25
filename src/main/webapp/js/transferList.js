@@ -29,7 +29,7 @@ function callTransferList({
 
 						const playerLink = document.createElement("a");
 						playerLink.innerText = item.player.player_name;
-						playerLink.href = getContextPath() + "/player/" + item.player.player_id;
+						playerLink.href = getContextPath() + "/player/detail?playerId=" + item.player.player_id;
 						playerName.append(playerLink);
 
 						const fee = document.createElement("div");
