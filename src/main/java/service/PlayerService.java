@@ -48,6 +48,15 @@ public class PlayerService {
 		
 		return playerDao.selectPlayersByName(playerName);
 	}
+
+	/**
+	 * 모든 플레이어 조회
+	 * @return 모든 플레이어
+	 */
+	public List<PlayerVO> selectAllPlayers() {
+		
+		return playerDao.selectAllPlayers();
+	}
 	
 	
 }

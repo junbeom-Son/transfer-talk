@@ -106,5 +106,27 @@ public class PlayerDAO {
 			util.dbDisconnect(null, pst, conn);
 		}
 		return players;
+	}
+
+
+	public List<PlayerVO> selectAllPlayers() {
+		String sql = "select * from player";
+		List<PlayerVO> players = new ArrayList<>();
+		conn = util.getConnection();
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				PlayerVO player = new PlayerVO();
+				player.setPlayer_id(rs.getInt("player_id"));
+				player.setPlayer_name(rs.getString("player_name"));
+				players.add(player);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(rs, st, conn);
+		}
+		return players;
 	}	
 }
