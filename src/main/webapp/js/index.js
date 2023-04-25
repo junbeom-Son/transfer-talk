@@ -206,22 +206,26 @@ function callAjax({
 	method="get",
 	dataType="json",
 	data,
+	async = true,
 	beforeSend,
 	success,
 	error,
 	loadingStart = true,
 	loadingEnd =true
 }){
+	let result;
 	$.ajax({
 		url:url,
 		method:method,
 		dataType:dataType,
+		async:async,
 		beforeSend : function(){
 			if(beforeSend)beforeSend();
 	        if(loadingStart) $("#my-spinner").show();
 	     },
 	    data:data,
 		success:function(res){
+			result = res;
 			//console.log('success',res)
 			if(success)success(res);
 			if(loadingEnd) $("#my-spinner").hide();
@@ -232,6 +236,7 @@ function callAjax({
 			if(loadingEnd) $("#my-spinner").hide();
 		}
 	});
+	return result;
 };
 
 
