@@ -58,5 +58,12 @@ public class PlayerService {
 		return playerDao.selectAllPlayers();
 	}
 	
-	
+	/**
+	 * 플레이어 업데이트
+	 * 대량으로 받아서 한번에 처리
+	 * 작성자 : 손준범
+	 */
+	public void updatePlayers(List<PlayerVO> players) {
+		playerDao.updatePlayers(players);
+	}
 }
