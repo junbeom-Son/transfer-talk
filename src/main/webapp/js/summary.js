@@ -33,7 +33,7 @@ callSummary = function ({
 					const playerName = document.createElement("div");
 					const playerLink = document.createElement("a");
 					playerLink.innerText = item.player.player_name;
-					playerLink.href = getContextPath() + "/player/" + item.player.player_id;
+					playerLink.href = playerLink.href = getContextPath() + "/player/detail?playerId=" + item.player.player_id;
 					playerName.append(playerLink);
 					playerName.className = "summary-name";
 					const fee = document.createElement("div");

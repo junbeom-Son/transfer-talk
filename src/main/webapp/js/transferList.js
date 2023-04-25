@@ -85,3 +85,21 @@ let transfers = callTransferList({
 	containerData: getContainerDataFromParameters(2022)
 });
 
+$("#transfer-in-show-btn").click(function() {
+	$(".transfer-contents-out").hide();
+	$(".transfer-contents-in").show();
+});
+
+$("#transfer-out-show-btn").click(function() {
+	$(".transfer-contents-in").hide();
+	$(".transfer-contents-out").show();
+	
+});
+
+$("#transfer-all-show-btn").click(function() {
+	$(".transfer-contents-in").hide();
+	$(".transfer-contents-out").hide();
+	$(".transfer-contents-in").show();
+	$(".transfer-contents-out").show();
+	
+});
