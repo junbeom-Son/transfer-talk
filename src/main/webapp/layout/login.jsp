@@ -40,7 +40,7 @@
 						<input type="button" class="btn btn-primary form-control" value="회원가입 페이지 이동" onclick="location.href='register.jsp';">
 					</div>	
 
-					<!-- 로그인 실패 시 에러 메시지 출력 -->
+					로그인 실패 시 에러 메시지 출력
 					<c:if test="${not empty errorMessage}">
 						<div class="alert alert-danger">
 							${errorMessage}
