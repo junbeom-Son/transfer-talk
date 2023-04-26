@@ -52,7 +52,7 @@ public class PlayerDAO {
 	 */
 	public PlayerVO selectPlayerById(int player_id) {
 		String sql ="""
-				select player_id, player_name
+				select player_id, player_name, player_img_src
 				from player 
 				where player_id = """ + player_id;
 		
@@ -65,6 +65,7 @@ public class PlayerDAO {
 				player = new PlayerVO();
 				player.setPlayer_id(player_id);
 				player.setPlayer_name(rs.getString("player_name"));
+				player.setImg_src(rs.getString("player_img_src"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
