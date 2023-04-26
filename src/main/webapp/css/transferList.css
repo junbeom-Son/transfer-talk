@@ -19,12 +19,18 @@
 	width:30%;
 	display:flex;
 	justify-content:end;
+	align-items:center;
 	margin-right:1rem;
 }
 .transfer-menu-select > select{
 	width:40%;
+	border-radius:10px;
+	text-align:center;
+	height:80%;
 }
-
+.transfer-menu-select option{
+	padding: 20px 0;
+}
 .transfer-contents-in > div, .transfer-contents-out > div{
 	border: 1px solid;
 	text-align: center;
@@ -41,4 +47,11 @@
 .transfer-noData-style{
 	grid-column : 1/-1;
 	padding :1rem;
+}
+
+.transfer-menu-btn > button {
+	width : 100px;
+	height : 50px;
+	border-radius:10px;
+	cursor:pointer;
 }
