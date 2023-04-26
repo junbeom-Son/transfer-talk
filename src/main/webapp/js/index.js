@@ -180,12 +180,6 @@ $(".logout-container").click(function(){
 	console.log('logout버튼 클릭 --> 코딩필요');
 });
 
-//회원가입 페이지 이동 버튼 클릭 시 함수
-$("#btn-register").click(function() {
-	location.href = PATH + "/login/signupPage" ;
-});
-
-
 //** 생성한 함수 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 /* callAjax : ajax 호출함수
