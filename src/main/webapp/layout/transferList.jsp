@@ -9,6 +9,7 @@ request.setCharacterEncoding("utf-8");
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/css/index.css">
 <link rel="stylesheet" href="${path}/css/summary.css">
@@ -24,30 +25,38 @@ request.setCharacterEncoding("utf-8");
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<main>
 		<h1>${title != null ? title : '전체데이터'}</h1>
-		<div>
-			<button id="transfer-in-show-btn">in</button>
-			<button id="transfer-out-show-btn">out</button>
-			<button id="transfer-all-show-btn">in & out</button>
+		<div class="transfer-menu">
+			<div class="transfer-menu-btn">
+				<button id="transfer-in-show-btn">in</button>
+				<button id="transfer-out-show-btn">out</button>
+				<button id="transfer-all-show-btn">in & out</button>
+			</div>
+			<div class="transfer-menu-select">
+				<select name="transfer-year" id="transfer-year" class="transfer-year-select">
+				  	<option value="none" class="transfer-year-selecter-option">연도</option>
+				</select>
+			</div>
 		</div>
+		
 		<div class="transfer-contents-in">
 			<h2 class="in-out-header">in</h2>
-			<div class="transfer-name">이름</div>
-			<div class="transfer-fee">이적료</div>
-			<div class="transfer-previous-team">이전팀</div>
-			<div class="transfer-new-team">새팀</div>
-			<div class="transfer-age-at-transfer">이적 당시 나이</div>
-			<div class="transfer-position">포지션</div>
-			<div class="transfer-year">이적 년도</div>
+			<div class="transfer-name transfer-title">이름</div>
+			<div class="transfer-fee transfer-title">이적료</div>
+			<div class="transfer-previous-team transfer-title">이전팀</div>
+			<div class="transfer-new-team transfer-title">새팀</div>
+			<div class="transfer-age-at-transfer transfer-title">이적 당시 나이</div>
+			<div class="transfer-position transfer-title">포지션</div>
+			<div class="transfer-year transfer-title">이적 년도</div>
 		</div>
 		<div class="transfer-contents-out">
 			<h2 class="in-out-header">out</h2>
-			<div class="transfer-name">이름</div>
-			<div class="transfer-fee">이적료</div>
-			<div class="transfer-previous-team">이전팀</div>
-			<div class="transfer-new-team">새팀</div>
-			<div class="transfer-age-at-transfer">이적 당시 나이</div>
-			<div class="transfer-position">포지션</div>
-			<div class="transfer-year">이적 년도</div>
+			<div class="transfer-name transfer-title">이름</div>
+			<div class="transfer-fee transfer-title">이적료</div>
+			<div class="transfer-previous-team transfer-title">이전팀</div>
+			<div class="transfer-new-team transfer-title">새팀</div>
+			<div class="transfer-age-at-transfer transfer-title">이적 당시 나이</div>
+			<div class="transfer-position transfer-title">포지션</div>
+			<div class="transfer-year transfer-title">이적 년도</div>
 		</div>
 
 	</main>
