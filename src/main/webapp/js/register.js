@@ -3,7 +3,7 @@ $(".register-id-check").click(function(){
 	const userid = $('#userid').val();
 	console.log(userid);
 	callAjax({
-		url:  getContextPath() + "/login/loginCheck",
+		url:  getContextPath() + "/login/duplicateIdCheck",
 		method : "get",
 		data: { 
 			user_id: userid 

@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import service.UserService;
 
-public class LoginCheckController implements Controller {
+public class DuplicateIdCheckController implements Controller {
 
 	@Override
 	public String execute(Map<String, Object> data) throws Exception {

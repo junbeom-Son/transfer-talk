@@ -24,8 +24,8 @@ public class FrontController extends HttpServlet {
 		data.put("request", request);
 		data.put("response", response);
 		switch (path) {
-		case "/login/loginCheck":
-			controller = new LoginCheckController();
+		case "/login/duplicateIdCheck":
+			controller = new DuplicateIdCheckController();
 			break;
 		case "/login/loginPage":
 			controller = new LoginPageController();
