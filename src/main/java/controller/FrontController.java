@@ -24,8 +24,23 @@ public class FrontController extends HttpServlet {
 		data.put("request", request);
 		data.put("response", response);
 		switch (path) {
-		case "/login/loginCheck":
+		case "/login/duplicateIdCheck":
+			controller = new DuplicateIdCheckController();
+			break;
+		case "/login/loginPage":
+			controller = new LoginPageController();
+			break;
+		case "/login/MainPage":
 			controller = new LoginCheckController();
+			break;
+//		case "/login/signin":
+//			controller = new LoginSignInController();
+//			break;
+		case "/login/signup":
+			controller = new SignUpController();
+			break;
+		case "/login/signupPage":
+			controller = new SignUpPageController();
 			break;
 		case "/transfer/country":
 			controller = new AllTransferCountryController();
@@ -47,6 +62,9 @@ public class FrontController extends HttpServlet {
 			break;
 		case "/player/detail":
 			controller = new PlayerInfoController();
+			break;
+		case "/player/img":
+			controller = new PlayerImgController();
 			break;
 		case "/transfer/summary":
 			controller = new RankerController();

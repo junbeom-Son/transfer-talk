@@ -15,6 +15,7 @@ public class TeamVO {
 	private int team_id;
 	private String team_name;
 	private LeagueVO league;
+	private String team_img_src;
 	@Override
 	public int hashCode() {
 		return Objects.hash(league.getLeague_name(), team_name);

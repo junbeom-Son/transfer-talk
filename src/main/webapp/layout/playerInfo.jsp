@@ -17,6 +17,7 @@ request.setCharacterEncoding("utf-8");
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script defer src="${path}/js/index.js"></script>
+<script defer src="${path}/js/playerInfo.js"></script>
 </head>
 
 <body>
@@ -25,11 +26,11 @@ request.setCharacterEncoding("utf-8");
 
 
 		<div class="playerInfo-container">
-			<div id="player_name">${player.player_name}</div>
+			<div id="player_name">이름 : ${player.player_name}</div>
 			<div id="player_age">${transfers[0].age }</div>
 			<div id="picture_player">
-				<img
-					src="https://img.a.transfermarkt.technology/portrait/header/427568-1681828000.jpg?lm=1">
+				<!-- <img
+					src="https://img.a.transfermarkt.technology/portrait/header/427568-1681828000.jpg?lm=1"> -->
 			</div>
 			<div id="previousteam">${transfers[0].previous_team.team_name }</div>
 			<div id="picture_previousteam">
@@ -43,7 +44,7 @@ request.setCharacterEncoding("utf-8");
 			</div>
 			<div id="position">${transfers[0].player_position }</div>
 			<div id="picture_arrow">
-				<img src="../images/arrow-right.png" style="width:150px; height:150px;">
+			 <img src="../images/arrow-right.png"> 
 			</div>
 			<div id="fee">${transfers[0].fee }</div>
 		</div>

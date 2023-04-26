@@ -55,4 +55,16 @@ public class TeamService {
 	public List<String> selectTeamsByleague(String league_name) {
 		return teamDao.selectTeamsByleague(league_name);
 	}
+	
+	/**
+	 * leagueId로 team 데이터 리턴
+	 * 작성자 손준범
+	 */
+	public List<TeamVO> selectTeamsByLeagueId(int leagueId) {
+		return teamDao.selectTeamsByLeagueId(leagueId);
+	}
+
+	public void updateTeams(List<TeamVO> updatedTeams) {
+		teamDao.updateTeams(updatedTeams);
+	}
 }
