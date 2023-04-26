@@ -24,7 +24,7 @@ request.setCharacterEncoding("utf-8");
 
 
 		<div class="playerInfo-container">
-			<div id="player_name">${player.player_name}</div>
+			<div id="player_name">이름 : ${player.player_name}</div>
 			<div id="player_age">${transfers[0].age }</div>
 			<div id="picture_player">
 				<img
@@ -42,7 +42,7 @@ request.setCharacterEncoding("utf-8");
 			</div>
 			<div id="position">${transfers[0].player_position }</div>
 			<div id="picture_arrow">
-				<img src="../images/arrow-right.png" style="width:150px; height:150px;">
+			 <img src="../images/arrow-right.png"> 
 			</div>
 			<div id="fee">${transfers[0].fee }</div>
 		</div>
