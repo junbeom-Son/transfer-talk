@@ -1,9 +1,12 @@
 package crawling;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
@@ -43,6 +46,35 @@ public class Crawling {
 	private LeagueService leagueService = new LeagueService();
 	private TeamService teamService = new TeamService();
 	private TransferService transferService = new TransferService();
+	
+	public void crawlPlayerImageSource() throws IOException {
+		List<PlayerVO> allPlayers = playerService.selectAllPlayers();
+		List<PlayerVO> targetPlayers = new ArrayList<>();
+		for (int i = 23000; i < allPlayers.size(); i++) {
+			if (i % 100 == 0) {
+				playerService.updatePlayers(targetPlayers);
+				targetPlayers.clear();
+				System.out.println("*****"+i+"*****");
+			}
+			PlayerVO player = allPlayers.get(i);
+			String userName = player.getPlayer_name().toLowerCase().replace(" ", "-");
+			userName = userName.replace(".", "-");
+			userName = userName.replace("'", "");
+			if (!Charset.forName("US-ASCII").newEncoder().canEncode(userName)) {
+				continue;
+			}
+			String URL = "https://www.transfermarkt.com/" + userName + "/profil/spieler/" + player.getPlayer_id();
+			Document doc = Jsoup.connect(URL).maxBodySize(0).get();
+			Element profile = doc.selectFirst("div.data-header__profile-container > div > img");
+			if (profile == null) {
+				continue;
+			}
+			player.setImg_src(profile.attr("src"));
+			targetPlayers.add(player);
+			System.out.println(profile.attr("src"));
+		}
+		playerService.updatePlayers(targetPlayers);
+	}
 
 	/**
 	 * 크롤링 시작 메서드 연도 -> 시즌(여름, 겨울) -> 팀 -> in -> out 순으로 순회 : 먼저 발생한 순서대로 데이터를 저장하기
