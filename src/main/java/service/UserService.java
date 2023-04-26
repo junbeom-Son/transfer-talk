@@ -1,6 +1,7 @@
 package service;
 
 import dao.UserDAO;
+import vo.UserVO;
 
 public class UserService {
 
@@ -22,6 +23,17 @@ public class UserService {
 	 */
 	public int register(String user_id, String user_pw, String user_name, String phone, String email) {
 		return userDao.register(user_id, user_pw, user_name, phone, email);
+	}
+	
+	/**
+	 * 로그인
+	 * @param user_id
+	 * @param user_pw
+	 * @return 1 -> 로그인 성공, 0 -> 로그인 실패
+	 * 작성자: 김창겸
+	 */
+	public int loginCheck(String user_id, String user_pw) {
+		return userDao.loginCheck(user_id, user_pw);
 	}
 
 }

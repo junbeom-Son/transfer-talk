@@ -25,7 +25,7 @@
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="">
-				<form method="post" action="${pageContext.request.contextPath}/login">
+				<form method="post" action="${pageContext.request.contextPath}/index.jsp">
 					<h3 style="text-align: center;">로그인 화면</h3>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="아이디" name="userid" maxlength="20">
