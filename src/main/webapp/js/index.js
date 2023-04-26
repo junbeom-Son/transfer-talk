@@ -165,7 +165,7 @@ $(".header-homelogo").click(() => location.href = PATH);
 
 //login버튼 클릭 시 함수
 $(".login-container").click(() => {
-	location.href = PATH +"/login/login.jsp"
+	location.href = PATH +"/login/loginPage"
 	/*callAjax({
 	url: getContextPath() + "/login/login.jsp",
 	method:"post",
