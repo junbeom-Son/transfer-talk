@@ -27,9 +27,9 @@ request.setCharacterEncoding("utf-8");
 		<h1>${title != null ? title : '전체데이터'}</h1>
 		<div class="transfer-menu">
 			<div class="transfer-menu-btn">
-				<button id="transfer-in-show-btn">in</button>
-				<button id="transfer-out-show-btn">out</button>
-				<button id="transfer-all-show-btn">in & out</button>
+				<button id="transfer-in-show-btn" class="btn-info">in</button>
+				<button id="transfer-out-show-btn" class="btn-info">out</button>
+				<button id="transfer-all-show-btn" class="btn-info">in & out</button>
 			</div>
 			<div class="transfer-menu-select">
 				<select name="transfer-year" id="transfer-year" class="transfer-year-select">
