@@ -48,20 +48,20 @@ public class Crawling {
 	private TransferService transferService = new TransferService();
 	
 	public void crawlTeamImageSource() throws IOException {
-		List<TeamVO> teams = teamService.selectTeamsByLeagueId(2);
+		List<TeamVO> teams = teamService.selectTeamsByLeagueId(1);
 		Map<String, TeamVO> teamMap = new HashMap<>();
 		for (TeamVO team : teams) {
 			teamMap.put(team.getTeam_name(), team);
 		}
 		List<TeamVO> updatedTeams = new ArrayList<>();
-		String URL = "https://www.transfermarkt.com/ligue-1/startseite/wettbewerb/FR1";
+		String URL = "https://www.transfermarkt.com/laliga/startseite/wettbewerb/ES1";
 		Document doc = Jsoup.connect(URL).maxBodySize(0).get();
 		Element container = doc.selectFirst("#yw1");
 		Elements rows = container.select("tbody > tr");
 		for (Element row : rows) {
 			Element a = row.selectFirst("td").selectFirst("a");
 			String teamName = a.attr("title");
-			String imgSrc = a.selectFirst("img").attr("src");
+			String imgSrc = a.selectFirst("img").attr("src").replace("tiny", "head");
 			TeamVO team = teamMap.get(teamName);
 			team.setTeam_img_src(imgSrc);
 			updatedTeams.add(team);
