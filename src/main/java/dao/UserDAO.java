@@ -25,14 +25,14 @@ public class UserDAO {
 	 * @return 1 -> 아이디 이미 존재, 0 -> 아이디 없음
 	 */
 	public int registerCheck(String userId) {
-		UserVO user = null;
 		String sql = "select * from users where user_id = ?";
 		resultCount = 0;
 		conn = util.getConnection();
 		try {
-			pst = conn.prepareStatement(sql);
+			pst = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			pst.setString(1, userId);
 			rs = pst.executeQuery();
+			rs.last();
 			resultCount = rs.getRow();
 		} catch (SQLException e) {
 			e.printStackTrace();
