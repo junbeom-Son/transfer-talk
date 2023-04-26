@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
+
 import dbUtil.util;
 import vo.UserVO;
 
@@ -97,5 +99,32 @@ public class UserDAO {
 			hexString.append(hex);
 		}
 		return hexString.toString();
+	}
+	
+	/**
+	 * 로그인 
+	 * @param user_id
+	 * @param user_pw
+	 * @return 입력한 정보가 있으면 1, 없으면 0
+	 * 작성자: 김창겸
+	 */
+	public int loginCheck(String user_id, String user_pw) {
+		UserVO admin = null;
+		String sql = "select * from users where user_id=? and user_pw = ?";
+		conn = util.getConnection();
+		resultCount = 0;
+		try {
+			pst = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pst.setString(1, user_id);
+			pst.setString(2, user_pw);
+			rs = pst.executeQuery();
+			rs.last();
+			resultCount = rs.getRow();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(rs, pst, conn);
+		}
+		return resultCount;
 	}
 }
