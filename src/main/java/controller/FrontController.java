@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet({"/transfer/*", "/player/*"}) //기본주소 : /transferTalk
+@WebServlet({"/transfer/*", "/player/*", "/login/*"}) //기본주소 : /transferTalk
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -24,6 +24,9 @@ public class FrontController extends HttpServlet {
 		data.put("request", request);
 		data.put("response", response);
 		switch (path) {
+		case "/login/loginCheck":
+			controller = new LoginCheckController();
+			break;
 		case "/transfer/country":
 			controller = new AllTransferCountryController();
 			break;
