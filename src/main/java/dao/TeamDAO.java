@@ -123,8 +123,8 @@ public class TeamDAO {
 		String sql = """
 				select *
 				from team
-				join team.league_id = league.league_id
-				where league_id = ?
+				join league on (team.league_id = league.league_id)
+				where team.league_id = ?
 				""";
 		conn = util.getConnection();
 		try {
@@ -139,7 +139,7 @@ public class TeamDAO {
 				LeagueVO league = new LeagueVO();
 				league.setLeague_id(rs.getInt("league.league_id"));
 				league.setLeague_name(rs.getString("league_name"));
-				league.setLeague_country(rs.getString("league_country"));
+				league.setLeague_country(rs.getString("country_name"));
 				team.setLeague(league);
 				teams.add(team);
 			}
