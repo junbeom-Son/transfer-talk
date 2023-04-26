@@ -1,7 +1,7 @@
 header{
 	position: relative;
 	height: var(--topGap);
-	margin-bottom:20px;
+	margin-bottom:2rem;
 	background-color:beige;
 }
 
@@ -12,7 +12,7 @@ header{
 	align-items:center;
 	height: 65%;
     top: calc((var(--topGap) * 0.3 - var(--loginButtonHeight)) / 2);
-    left: 20px;	
+    left: 2rem;	
 }
 .header-homelogo > img{
 	width:inherit;
@@ -34,7 +34,7 @@ header{
 	display:flex;
 	width: 90%;
 	height: 50%;
-	margin-right:20px;
+	margin-right:2rem;
     justify-content: end;
 }
 .header-selecter-contents{
@@ -54,7 +54,6 @@ header{
     border-radius: 10px;
     background: transparent;
     padding: 10px;
-    z-index: 2;
     
 	-o-appearance: none;
   	-webkit-appearance: none;
@@ -70,14 +69,14 @@ header{
 	right:10px;
 }
 .iconArrow > img{
-  width: 15px; 
+  width: 1.5rem; 
   height: inherit;
 }
 
 
 .header-selecter-sign{
 	position:relative;
-	width:40px;
+	width:2rem;
 	display:flex;
 	align-items:center;
 }
@@ -102,9 +101,16 @@ header{
 .header-hover-container{ 
 	height: 30%;
     display: flex;
-    margin-right:10px;
+    margin-right:1rem;
     justify-content: end;
 }
+.header-hover-loginOut{
+    display: flex;
+    align-items: center;
+    width: calc(100% - var(--navWidth));
+    margin-left: 2rem;
+}
+
 .header-hover-contents{
  	height:100%;
 	display:flex;
@@ -117,7 +123,7 @@ header .header-item{
 	height: 100%;
 }
 header .header-item .item-name{
-	padding:0 20px;
+	padding:0 2rem;
 	font-family: Arial, sans-serif;
 	font-size:18px;
 	height: 100%;
@@ -149,7 +155,7 @@ header .header-item .item-contents .contents-menu .inner > li {
     width: 100%;
 	background-color: gray;
 	color:white;
-	padding:15px 0;
+	padding:1rem 0;
 	left:0;
 	text-align:center;
 	z-index: 10;
@@ -162,10 +168,7 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
 
 /* login css */
 .login-container{
-	position:fixed;
-	top: calc(var(--topGap) - var(--loginButtonHeight) - var(--loginButtonButtomGap));
-	left:calc((100vw - var(--bodyWidth))/2 + 25px);
-	width:60px;
+	width:4rem;
 	transition:width 1s;
 	height:var(--loginButtonHeight);
 }
@@ -181,7 +184,7 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
 	border:none;
 }
 .login-container:hover{	
-	width: 150px;
+	width: 9rem;
 	transition:width 1s;
 }
 
@@ -215,10 +218,7 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
 
 /* logout css */
 .logout-container{
-	position:fixed;
-	top: calc(var(--topGap) - var(--loginButtonHeight) - var(--loginButtonButtomGap));
-	left:calc((100vw - var(--bodyWidth))/2 + 20px);
-	width:150px;
+ 	width:9rem;
 	height:var(--loginButtonHeight);
 }
 
@@ -247,10 +247,10 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
   }
   .header-homelogo{
   	position:static;
-  	height:40px;
+  	height:2rem;
   	justify-content: start;
-    padding-top: 10px;
-    margin-left: 20px;
+    padding-top: 1rem;
+    margin-left: 2rem;
   }
   .header-dropdown-container, .header-hover-container{
   	width:100%;
@@ -265,13 +265,13 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
   	width: 100%;
     display: flex;
     justify-content: center;
-    margin: 10px 0;
+    margin: 1rem 0;
   }
   .header-selecter-sign{
     display: none;
   }
   .header-detail-btn{
-  	height: 40px;
+  	height: 2.5rem;
   }
   .header-detail-btn > button{
   	width: 30%;
@@ -290,13 +290,10 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
   header .header-item .item-contents .contents-menu .inner {
   	width: 100%;
   }
-  header .header-item .item-contents .contents-menu .inner > li {
-  	width : calc(100% - 2px);
-  }
-  
-  .login-container, .logout-container{
-    top: 10px;
-    left: auto;
-    right: 20px;
+  .header-hover-loginOut{
+  	position:fixed;
+    top: 1rem;
+    width:auto;
+    right: 1rem;
   }
 }
