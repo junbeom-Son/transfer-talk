@@ -165,7 +165,7 @@ $(".header-homelogo").click(() => location.href = PATH);
 
 //login버튼 클릭 시 함수
 $(".login-container").click(() => {
-	location.href = PATH +"/login/loginPage"
+	location.href = PATH +"/login/loginPage";
 	/*callAjax({
 	url: getContextPath() + "/login/login.jsp",
 	method:"post",
@@ -180,7 +180,10 @@ $(".logout-container").click(function(){
 	console.log('logout버튼 클릭 --> 코딩필요');
 });
 
-
+//회원가입 페이지 이동 버튼 클릭 시 함수
+$("#btn-register").click(function() {
+	location.href = PATH + "/login/signup" ;
+});
 
 
 //** 생성한 함수 ------------------------------------------------------------------------------------------------------------------------------------------------
