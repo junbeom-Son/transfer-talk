@@ -8,8 +8,8 @@
 	--viewWidth: 100%;
 	--topGap : 180px;
 	--bottomGap : 100px;
-	--headerItemMarginRight : 10px;
-	--navWidth : 60%;
+	--headerItemMarginRight : 1rem;
+	--navWidth : 70%;
 	--loginButtonHeight : 40px;
 	--loginButtonButtomGap:10px;
 }
@@ -21,6 +21,7 @@ html{
 body{
 	margin:0;
 	width:var(--bodyWidth);
+	height:100vh;
 	margin: 0 auto;
 	color: #333;
   	font-size: 16px;
@@ -29,7 +30,7 @@ body{
     min-width:500px;
 }
 main{
-	width:95vw;
+	width:95%;
 	margin: 0 auto;
 }
 ul{
