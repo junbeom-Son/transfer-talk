@@ -7,7 +7,9 @@
 	--bodyWidth : 100vw;
 	--viewWidth: 100%;
 	--topGap : 180px;
+	--topMarginB : 2rem;
 	--bottomGap : 100px;
+	--bottomMarginT: 20px;
 	--headerItemMarginRight : 1rem;
 	--navWidth : 70%;
 	--loginButtonHeight : 40px;
@@ -32,6 +34,7 @@ body{
 main{
 	width:95%;
 	margin: 0 auto;
+	min-height:calc(100vh - (var(--topGap) + var(--bottomGap) + var(--topMarginB) + var(--bottomMarginT)));
 }
 ul{
 	margin:0;
