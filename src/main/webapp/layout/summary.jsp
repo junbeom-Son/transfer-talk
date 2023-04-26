@@ -14,7 +14,7 @@
 			<div class="summary-age table-title">나이</div>
 		</div>
 		<div class="summary-detail-container detail-btn">
-			<button>상세보기</button>
+			<button class="btn-primary">상세보기</button>
 		</div>
 	</div>
 </div>
