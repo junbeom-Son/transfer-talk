@@ -63,6 +63,9 @@ public class FrontController extends HttpServlet {
 		case "/player/detail":
 			controller = new PlayerInfoController();
 			break;
+		case "/player/img":
+			controller = new PlayerImgController();
+			break;
 		case "/transfer/summary":
 			controller = new RankerController();
 			break;
