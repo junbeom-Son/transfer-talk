@@ -8,7 +8,7 @@ const PATH = getContextPath();
 const isIndex = ['/','/index.jsp'].includes(location.pathname.replace(PATH,''));
 
 const topFiveLeague = ['Premier League','Bundesliga','LaLiga','Ligue 1','Serie A'];
-headerOptionCreateFunction(topFiveLeague,1); // 처음 리그 리스트 만들기
+optionTagCreateFunction(topFiveLeague,document.querySelector(dropdownMenu[1])); // 처음 리그 리스트 만들기
 
 
 // index.jsp가 아닐때만 초기 header에 country데이터 가져오기
@@ -22,7 +22,7 @@ headerOptionCreateFunction(topFiveLeague,1); // 처음 리그 리스트 만들�
 		url: PATH + "/transfer/country",
 		method:"post",
 		loadingEnd:!isIndex,
-		success: (res) => headerOptionCreateFunction(res,0)
+		success: (res) => optionTagCreateFunction(res,document.querySelector(dropdownMenu[0]))
 	}
 	return obj;
 }*/
@@ -37,9 +37,9 @@ headerOptionCreateFunction(topFiveLeague,1); // 처음 리그 리스트 만들�
 		data:{
 			country : countryName
 		},
-		beforeSend : () => headerBeforeSendFunction ([dropdownMenu[1],dropdownMenu[2]]),
+		beforeSend : () => removeOriginElement ([dropdownMenu[1],dropdownMenu[2]]),
 		success: (res) => {
-			headerOptionCreateFunction(res,1);
+			optionTagCreateFunction(res,document.querySelector(dropdownMenu[1]));
 			arrowImgEffect(".header-selecter-sign.sign1 > img");
 		}
 	}
@@ -57,9 +57,9 @@ function callTeam(){
 			league : leagueName
 		},
 		loadingEnd:!isIndex,
-		beforeSend : () => headerBeforeSendFunction ([dropdownMenu[2]]),
+		beforeSend : () => removeOriginElement([dropdownMenu[2]]),
 		success: (res) => {
-			headerOptionCreateFunction(res,2);
+			optionTagCreateFunction(res,document.querySelector(dropdownMenu[2]));
 			//arrowImgEffect(".header-selecter-sign.sign1 > img");
 			arrowImgEffect(".header-selecter-sign.sign2 > img",0);
 		}
@@ -115,7 +115,7 @@ $("#header-league").change(function(){
 	
 	if($(this).val() =='none') {
 		arrowImgEffect(".header-selecter-sign.sign2 > img", 1);
-		headerBeforeSendFunction ([dropdownMenu[2]]);
+		removeOriginElement([dropdownMenu[2]]);
 	}
 	
 	/*if(isIndex) promiseAjax([callTeam.bind(this)(), ...callLeagueSummary.bind(this)()]);
@@ -261,19 +261,19 @@ async function promiseAjax(params){
 }
 
 
-function headerOptionCreateFunction(response,index){
+function optionTagCreateFunction(response,parent){
 	response.sort();
 	response.forEach((el) => {
 		createElement({
 			tag:'option', 
-			appndElement:document.querySelector(dropdownMenu[index]), 
+			appndElement:parent, 
 			innerText:el, 
 			value:el
 		});
 	});	
 }
 
-function headerBeforeSendFunction (array){
+function removeOriginElement (array){
 	array.forEach(classEl=>{
 		 const classElement = document.querySelector(classEl);
 		 while (classElement.children.length > 1) {
@@ -287,7 +287,5 @@ function arrowImgEffect (element,removeIndex) {
 	$(element).each((i,item)=>{
 		   if(i==removeIndex) $(item).removeClass('selected');
 		   else $(item).addClass('selected');
-		  /* if($(item).hasClass("selected")) $(item).removeClass('selected');
-		   else $(item).addClass('selected');*/
 	});
 }
