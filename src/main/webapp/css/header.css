@@ -49,29 +49,35 @@ header{
     position:relative;
 }
 .header-selecter-select{
-	width: 100%;
-    height: 80%;
-    border-radius: 10px;
-    background: transparent;
-    padding: 10px;
-    
-	-o-appearance: none;
+	display: inline-block;
+  	width: 100%;
+  	height: calc(2.25rem + 2px);
+  	padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+  	line-height: 1.5;
+  	color: #495057;
+  	vertical-align: middle;
+  	background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
+  	background-size: 8px 10px;
+  	border: 1px solid #ced4da;
+ 	 border-radius: 0.25rem;
+  
   	-webkit-appearance: none;
   	-moz-appearance: none;
   	appearance: none;
+  	font-size: 110%;
 }
 .header-selecter-select::-ms-expand { 
 	display: none;
 }
 
-.iconArrow{
+/* .iconArrow{
 	position:absolute;
 	right:10px;
 }
 .iconArrow > img{
   width: 1.5rem; 
   height: inherit;
-}
+} */
 
 
 .header-selecter-sign{
@@ -94,7 +100,6 @@ header{
 .header-selecter-sign > img.selected{
 	display:block;
 }
-
 
 
 /* menu hover css */
@@ -125,10 +130,11 @@ header .header-item{
 header .header-item .item-name{
 	padding:0 2rem;
 	font-family: Arial, sans-serif;
-	font-size:18px;
+	font-size:20px;
 	height: 100%;
     text-align: center;
     line-height: calc(var(--topGap)*0.3);
+    font-weight:700;
 }
 header .header-item:hover .item-name{
   background-color: #669900;
@@ -181,7 +187,7 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
 	display:flex;
 	align-items:center;
 	justify-content:center;
-	border:none;
+	border: none;
 }
 .login-container:hover{	
 	width: 9rem;
@@ -189,9 +195,8 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
 }
 
 .login-container:hover > .login-button{
-	background-color:#4661f5;
+	background-color:#0069d9;
 	cursor:pointer;
-	color:black;
 	transition:background-color 1s;
 }
 
