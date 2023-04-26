@@ -63,7 +63,7 @@ const callSummary = function ({
 
 function callTotalSummary (){
 	const array = [
-		{f:callSummary, data:{loadingStart:false, loadingEnd:false}},
+		{f:callSummary, data:{loadingEnd:false}},
 		{f:callSummary, data:{containerData:{'year':'2022'},containerIndex:1, loadingStart:false}}
 	];
 	return array;
@@ -86,5 +86,4 @@ function callTeamSummary (){
 }
 
 //다수의 ajax가 실행되고 화면이 보여지도록 refactoring : 23.04.25 jin
-/*promiseAjax([callCountry(), ...callTotalSummary() ]);*/
 promiseAjax([...callTotalSummary() ]);

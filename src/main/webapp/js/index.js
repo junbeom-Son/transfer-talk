@@ -5,7 +5,7 @@ let headerHeight;
 const dropdownMenu=['#header-country','#header-league','#header-team'];
 const arrowClass = ['.header-selecter-sign.sign1 > img','.header-selecter-sign.sign2 > img'];
 const PATH = getContextPath();
-const isIndex = ['/','/index.jsp'].includes(location.pathname.replace(PATH,''))
+const isIndex = ['/','/index.jsp'].includes(location.pathname.replace(PATH,''));
 
 const topFiveLeague = ['Premier League','Bundesliga','LaLiga','Ligue 1','Serie A'];
 headerOptionCreateFunction(topFiveLeague,1); // 처음 리그 리스트 만들기
@@ -60,8 +60,8 @@ function callTeam(){
 		beforeSend : () => headerBeforeSendFunction ([dropdownMenu[2]]),
 		success: (res) => {
 			headerOptionCreateFunction(res,2);
-			arrowImgEffect(".header-selecter-sign.sign1 > img");
-			arrowImgEffect(".header-selecter-sign.sign2 > img");
+			//arrowImgEffect(".header-selecter-sign.sign1 > img");
+			arrowImgEffect(".header-selecter-sign.sign2 > img",0);
 		}
 	}
 	return obj;
@@ -103,14 +103,35 @@ window.addEventListener("resize", function(){
 
 //league 선택시  header에 teams데이터 가저오기
 $("#header-league").change(function(){
-	if(isIndex) promiseAjax([callTeam.bind(this)(), ...callLeagueSummary.bind(this)()]);
-	else promiseAjax([callTeam.bind(this)()]);
+	if(isIndex){
+		if($(this).val() =='none'){
+		  promiseAjax([...callTotalSummary() ]);
+		} else {
+		  promiseAjax([callTeam.bind(this)(), ...callLeagueSummary.bind(this)()]);
+		}
+	}else{
+		if($(this).val() !='none') promiseAjax([callTeam.bind(this)()]);
+	}
+	
+	if($(this).val() =='none') {
+		arrowImgEffect(".header-selecter-sign.sign2 > img", 1);
+		headerBeforeSendFunction ([dropdownMenu[2]]);
+	}
+	
+	/*if(isIndex) promiseAjax([callTeam.bind(this)(), ...callLeagueSummary.bind(this)()]);
+	else promiseAjax([callTeam.bind(this)()]);*/
 });
 
 //league 선택시  header에 teams데이터 가저오기
 $("#header-team").change(function(){
-	if(isIndex) promiseAjax([...callTeamSummary.bind(this)()]);
-	arrowImgEffect(".header-selecter-sign.sign2 > img");
+	if(isIndex){
+		if($(this).val() =='none'){
+		 promiseAjax([...callLeagueSummary.bind($("#header-league"))()]);
+		}else{
+		 promiseAjax([...callTeamSummary.bind(this)()]);	
+		}
+	}
+	arrowImgEffect(".header-selecter-sign.sign2 > img", $(this).val() =='none' ? 0 : 1);
 });
 
 //header에 자세히보기 버튼클릭 시 함수
@@ -261,9 +282,12 @@ function headerBeforeSendFunction (array){
 	});
 }
 
-function arrowImgEffect (element) {
+function arrowImgEffect (element,removeIndex) {
+	console.log(element,removeIndex)
 	$(element).each((i,item)=>{
-		   if($(item).hasClass("selected")) $(item).removeClass('selected');
+		   if(i==removeIndex) $(item).removeClass('selected');
 		   else $(item).addClass('selected');
+		  /* if($(item).hasClass("selected")) $(item).removeClass('selected');
+		   else $(item).addClass('selected');*/
 	});
 }
