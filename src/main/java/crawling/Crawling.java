@@ -47,6 +47,28 @@ public class Crawling {
 	private TeamService teamService = new TeamService();
 	private TransferService transferService = new TransferService();
 	
+	public void crawlTeamImageSource() throws IOException {
+		List<TeamVO> teams = teamService.selectTeamsByLeagueId(2);
+		Map<String, TeamVO> teamMap = new HashMap<>();
+		for (TeamVO team : teams) {
+			teamMap.put(team.getTeam_name(), team);
+		}
+		List<TeamVO> updatedTeams = new ArrayList<>();
+		String URL = "https://www.transfermarkt.com/ligue-1/startseite/wettbewerb/FR1";
+		Document doc = Jsoup.connect(URL).maxBodySize(0).get();
+		Element container = doc.selectFirst("#yw1");
+		Elements rows = container.select("tbody > tr");
+		for (Element row : rows) {
+			Element a = row.selectFirst("td").selectFirst("a");
+			String teamName = a.attr("title");
+			String imgSrc = a.selectFirst("img").attr("src");
+			TeamVO team = teamMap.get(teamName);
+			team.setTeam_img_src(imgSrc);
+			updatedTeams.add(team);
+		}
+		teamService.updateTeams(updatedTeams);
+	}
+	
 	public void crawlPlayerImageSource() throws IOException {
 		List<PlayerVO> allPlayers = playerService.selectAllPlayers();
 		List<PlayerVO> targetPlayers = new ArrayList<>();

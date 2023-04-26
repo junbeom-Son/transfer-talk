@@ -116,4 +116,67 @@ public class TeamDAO {
 		}
 		return teams;
 	}
+
+
+	public List<TeamVO> selectTeamsByLeagueId(int leagueId) {
+		List<TeamVO> teams = new ArrayList<>();
+		String sql = """
+				select *
+				from team
+				join team.league_id = league.league_id
+				where league_id = ?
+				""";
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, leagueId);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				TeamVO team = new TeamVO();
+				team.setTeam_id(rs.getInt("team_id"));
+				team.setTeam_name(rs.getString("team_name"));
+				
+				LeagueVO league = new LeagueVO();
+				league.setLeague_id(rs.getInt("league.league_id"));
+				league.setLeague_name(rs.getString("league_name"));
+				league.setLeague_country(rs.getString("league_country"));
+				team.setLeague(league);
+				teams.add(team);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return teams;
+	}
+
+
+	/**
+	 * 팀 데이터 한번에 업데이트
+	 * @param updatedTeams
+	 */
+	public void updateTeams(List<TeamVO> updatedTeams) {
+		String sql ="""
+				update team
+				set team_name = ?, league_id = ?, team_img_src = ?
+				where team_id = ?
+				""";
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			for (TeamVO team : updatedTeams) {
+				pst.setString(1, team.getTeam_name());
+				pst.setInt(2, team.getLeague().getLeague_id());
+				pst.setString(3, team.getTeam_img_src());
+				pst.setInt(4, team.getTeam_id());
+				
+				pst.addBatch();
+				pst.clearParameters();
+			}
+			pst.executeBatch();
+			pst.clearBatch();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
