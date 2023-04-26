@@ -1,165 +1,146 @@
 //** 처음 시작 시 호출------------------------------------------------------------------------------------------------------------------------------------------------
-// 초기 header에 country데이터 가저오기
-let callSummary;
-callAjax({
-	url:getContextPath() + "/transfer/country",
-	method:"post",
-	success: function(res){
-		res.sort();
-		const selectCountryElement = document.querySelector("#header-country");
-		res.forEach((el,i) => {
-			createElement({
-				tag:'option', 
-				appndElement:selectCountryElement, 
-				innerText:el, 
-				value:el
-			});
-		});
+//초기 선언 변수
+const mediaQueryWidth = 850;
+let headerHeight;
+const dropdownMenu=['#header-country','#header-league','#header-team'];
+const arrowClass = ['.header-selecter-sign.sign1 > img','.header-selecter-sign.sign2 > img'];
+const PATH = getContextPath();
+const isIndex = ['/','/index.jsp'].includes(location.pathname.replace(PATH,''));
+
+const topFiveLeague = ['Premier League','Bundesliga','LaLiga','Ligue 1','Serie A'];
+optionTagCreateFunction(topFiveLeague,document.querySelector(dropdownMenu[1])); // 처음 리그 리스트 만들기
+
+
+// index.jsp가 아닐때만 초기 header에 country데이터 가져오기
+/*if(!isIndex) promiseAjax([callCountry()]);*/
+
+// script시작과 동시에 실행이 되는 것이 아니고 promise함수가 실행될 때 시작하도록 변경 : 23.04.25 jin 수정
+/*function callCountry() {
+	const obj = {};
+	obj.f = callAjax;
+	obj.data = {
+		url: PATH + "/transfer/country",
+		method:"post",
+		loadingEnd:!isIndex,
+		success: (res) => optionTagCreateFunction(res,document.querySelector(dropdownMenu[0]))
 	}
-});
+	return obj;
+}*/
 
-
-
-//** 이벤트 발생시 처리하는 함수------------------------------------------------------------------------------------------------------------------------------------------------
-// scroll 위치가 변할 때 작업 함수
-window.addEventListener('scroll', function(){
-	const loginOutButton = document.querySelectorAll(".loginOut");
-	loginOutButton.forEach((divEl,i)=>{
-		if(!divEl.classList.contains('hidden')){
-			if(window.scrollY >= 200){
-				divEl.classList.add('scrollHidden');
-			}else{
-				divEl.classList.remove('scrollHidden');
-			}
-			
-		}
-	});
-});
-
-// country 선택시  header에 leagues데이터 가저오기
-$("#header-country").change(function(){
-    const countryName = $(this).val();
-    callAjax({
-		url:getContextPath() +"/transfer/country/leagues",
+/*function callLeague(){
+	const countryName = $(this).val();
+	const obj = {};
+	obj.f = callAjax;
+	obj.data = {
+		url: PATH +"/transfer/country/leagues",
 		method:"post",
 		data:{
 			country : countryName
 		},
-		beforeSend : function(){
-			 const selectLeagueElement = document.querySelector("#header-league");
-			 const selectTeamElement = document.querySelector("#header-team");
-			 while (selectLeagueElement.children.length > 1) {
-			    selectLeagueElement.removeChild(selectLeagueElement.lastChild);
-			 }
-			 while (selectTeamElement.children.length > 1) {
-			    selectTeamElement.removeChild(selectTeamElement.lastChild);
-			 }
-		},
-		success: function(res){
-			res.sort();
-			const selectLeagueElement = document.querySelector("#header-league");
-			res.forEach((el,i) => {
-				createElement({
-					tag:'option', 
-					appndElement:selectLeagueElement, 
-					innerText:el, 
-					value:el
-				});
-			});
-			$(".header-selecter-sign.sign1 > img").each((index,item)=>{
-				if(index === 0) $(item).removeClass('selected');
-				else  $(item).addClass('selected');
-			});
-			$(".header-selecter-sign.sign2 > img").each((index,item)=>{
-				if(index === 1) $(item).removeClass('selected');
-				else  $(item).addClass('selected');
-			});
+		beforeSend : () => removeOriginElement ([dropdownMenu[1],dropdownMenu[2]]),
+		success: (res) => {
+			optionTagCreateFunction(res,document.querySelector(dropdownMenu[1]));
+			arrowImgEffect(".header-selecter-sign.sign1 > img");
 		}
-	});
+	}
+	return obj;
+}*/
+
+function callTeam(){
+	const leagueName = $(this).val();
+	const obj = {};
+	obj.f = callAjax;
+	obj.data = {
+		url: PATH +"/transfer/country/league/teams",
+		method:"post",
+		data:{
+			league : leagueName
+		},
+		loadingEnd:!isIndex,
+		beforeSend : () => removeOriginElement([dropdownMenu[2]]),
+		success: (res) => {
+			optionTagCreateFunction(res,document.querySelector(dropdownMenu[2]));
+			//arrowImgEffect(".header-selecter-sign.sign1 > img");
+			arrowImgEffect(".header-selecter-sign.sign2 > img",0);
+		}
+	}
+	return obj;
+}
+
+//** 이벤트 발생시 처리하는 함수------------------------------------------------------------------------------------------------------------------------------------------------
+// scroll 위치가 변할 때 작업 함수
+window.addEventListener('scroll', function(){
+	//상단바 고정하기 변경 : 23.04.25 jin
+	const headerHoverContainer= document.querySelector(".header-hover-container");
+	headerHeight= document.querySelector("header").clientHeight;
+	if(this.scrollY >= headerHeight && this.innerWidth >= mediaQueryWidth){
+		headerHoverContainer.style.position = 'fixed';
+		headerHoverContainer.style.top = 0;
+		headerHoverContainer.style.backgroundColor = 'beige';
+		headerHoverContainer.style.width = '100%';
+		headerHoverContainer.style.height = '50px';
+	}else if(this.scrollY >= headerHeight && this.innerWidth < mediaQueryWidth){
+			headerHoverContainer.style.position = 'fixed';
+			headerHoverContainer.style.top = 0;
+			headerHoverContainer.style.backgroundColor = 'beige';
+	}else{
+		headerHoverContainer.style.position = 'static';
+	}
 });
+
+// 화면 size가 변할 때 작업 함수
+window.addEventListener("resize", function(){
+	headerHeight= document.querySelector("header").clientHeight;
+	const headerHoverContents= document.querySelector(".header-hover-container");
+	if(this.innerWidth < mediaQueryWidth) headerHoverContents.style.height = 'auto';
+	else headerHoverContents.style.height = '50px';
+});
+
+// country 선택시  header에 leagues데이터 가저오기
+/*$("#header-country").change(function(){
+    promiseAjax([callLeague.bind(this)()]);
+});*/
 
 //league 선택시  header에 teams데이터 가저오기
 $("#header-league").change(function(){
-    const leagueName = $(this).val();
-		callAjax({
-			url:getContextPath() +"/transfer/country/league/teams",
-			method:"post",
-			data:{
-				league : leagueName
-			},
-			beforeSend : function(){
-				 const selectTeamElement = document.querySelector("#header-team");
-				 while (selectTeamElement.children.length > 1) {
-				    selectTeamElement.removeChild(selectTeamElement.lastChild);
-				 }
-			},
-			success: function(res){
-				res.sort();
-				const selectTeamElement = document.querySelector("#header-team");
-				res.forEach((el,i) => {
-					createElement({
-						tag:'option', 
-						appndElement:selectTeamElement, 
-						innerText:el, 
-						value:el
-					});
-				});
-				$(".header-selecter-sign.sign1 > img").each((index,item)=>{
-					if(index === 1) $(item).removeClass('selected');
-					else  $(item).addClass('selected');
-				});
-				$(".header-selecter-sign.sign2 > img").each((index,item)=>{
-					if(index === 0) $(item).removeClass('selected');
-					else  $(item).addClass('selected');
-				});
-			}
-		});
-
-		if(callSummary){
-			callSummary({
-				containerData:{
-					'league':leagueName
-				}
-			});
-			callSummary({
-				containerData:{
-					'year':'2022',
-					'league':leagueName
-				},
-				containerIndex : 1 
-			});
+	if(isIndex){
+		if($(this).val() =='none'){
+		  promiseAjax([...callTotalSummary() ]);
+		} else {
+		  promiseAjax([callTeam.bind(this)(), ...callLeagueSummary.bind(this)()]);
 		}
-		
+	}else{
+		if($(this).val() !='none') promiseAjax([callTeam.bind(this)()]);
+	}
+	
+	if($(this).val() =='none') {
+		arrowImgEffect(".header-selecter-sign.sign2 > img", 1);
+		removeOriginElement([dropdownMenu[2]]);
+	}
+	
+	/*if(isIndex) promiseAjax([callTeam.bind(this)(), ...callLeagueSummary.bind(this)()]);
+	else promiseAjax([callTeam.bind(this)()]);*/
 });
 
 //league 선택시  header에 teams데이터 가저오기
 $("#header-team").change(function(){
-	if(callSummary){
-    const teamName = $(this).val();
-		callSummary({
-			containerData:{
-				team:teamName
-			}
-		});
-		callSummary({
-			containerData:{
-				year:'2022',
-				team:teamName
-			},
-			containerIndex : 1 
-		});
+	if(isIndex){
+		if($(this).val() =='none'){
+		 promiseAjax([...callLeagueSummary.bind($("#header-league"))()]);
+		}else{
+		 promiseAjax([...callTeamSummary.bind(this)()]);	
+		}
 	}
-	$(".header-selecter-sign.sign2 > img").each((index,item)=>{
-		if(index === 1) $(item).removeClass('selected');
-		else  $(item).addClass('selected');
-	});
+	arrowImgEffect(".header-selecter-sign.sign2 > img", $(this).val() =='none' ? 0 : 1);
 });
 
 //header에 자세히보기 버튼클릭 시 함수
 $(".header-detail-btn").click(function(){
-	const leagueName = $(document.querySelector("#header-league")).val() ==="none" ? null : $(document.querySelector("#header-league")).val();
-	const teamName = $(document.querySelector("#header-team")).val() === "none" ? null : $(document.querySelector("#header-team")).val();
-	let url = getContextPath() + "/transfer/transferList?"
+	const leagueValue = $(document.querySelector("#header-league")).val();
+	const teamValue =$(document.querySelector("#header-team")).val();
+	const leagueName = leagueValue ==="none" ? null : leagueValue;
+	const teamName = teamValue === "none" ? null : teamValue;
+	let url = PATH + "/transfer/transferList?"
 	let needAndChar = false;
 	if (leagueName !== null) {
 		url += "league=" + leagueName;
@@ -180,11 +161,18 @@ $(".header-detail-btn").click(function(){
 });
 
 //home버튼 클릭 시 함수
-$(".header-homelogo").click(() => location.href = getContextPath());
+$(".header-homelogo").click(() => location.href = PATH);
 
 //login버튼 클릭 시 함수
-$(".login-container").click(function(){
-	console.log('login버튼 클릭 --> 코딩필요');
+$(".login-container").click(() => {
+	location.href = PATH +"/login/login.jsp"
+	/*callAjax({
+	url: getContextPath() + "/login/login.jsp",
+	method:"post",
+	success: function(res){
+		console.log(res);
+	}
+});*/
 });
 
 //logout버튼 클릭 시 함수
@@ -264,3 +252,40 @@ function getContextPath() {
   return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 } 
 
+//다수의 ajax가 순차적 실행되도록 promise함수생성 : 23.04.25 jin
+async function promiseAjax(params){
+	 params.map(async obj => {
+		const data = obj.data || {};
+		await obj.f(data);
+	})
+}
+
+
+function optionTagCreateFunction(response,parent){
+	response.sort();
+	response.forEach((el) => {
+		createElement({
+			tag:'option', 
+			appndElement:parent, 
+			innerText:el, 
+			value:el
+		});
+	});	
+}
+
+function removeOriginElement (array){
+	array.forEach(classEl=>{
+		 const classElement = document.querySelector(classEl);
+		 while (classElement.children.length > 1) {
+			    classElement.removeChild(classElement.lastChild);
+		 }
+	});
+}
+
+function arrowImgEffect (element,removeIndex) {
+	console.log(element,removeIndex)
+	$(element).each((i,item)=>{
+		   if(i==removeIndex) $(item).removeClass('selected');
+		   else $(item).addClass('selected');
+	});
+}

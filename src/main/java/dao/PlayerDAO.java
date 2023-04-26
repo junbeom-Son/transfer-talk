@@ -106,5 +106,59 @@ public class PlayerDAO {
 			util.dbDisconnect(null, pst, conn);
 		}
 		return players;
-	}	
+	}
+
+	/**
+	 * 모든 플레이어 조회
+	 * @return 모든 플레이어
+	 * 작성자 : 손준범
+	 */
+	public List<PlayerVO> selectAllPlayers() {
+		String sql = "select * from player";
+		List<PlayerVO> players = new ArrayList<>();
+		conn = util.getConnection();
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				PlayerVO player = new PlayerVO();
+				player.setPlayer_id(rs.getInt("player_id"));
+				player.setPlayer_name(rs.getString("player_name"));
+				players.add(player);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(rs, st, conn);
+		}
+		return players;
+	}
+	
+	/**
+	 * 플레이어 업데이트
+	 * 대량으로 받아서 한번에 처리
+	 * 작성자 : 손준범
+	 */
+	public void updatePlayers(List<PlayerVO> players) {
+		String sql = "update player set player_name = ?, player_img_src = ? where player_id = ?";
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			for (PlayerVO player : players) {
+				pst.setString(1, player.getPlayer_name());
+				pst.setString(2, player.getImg_src());
+				pst.setInt(3, player.getPlayer_id());
+				
+				pst.addBatch();
+				pst.clearParameters();
+			}
+			pst.executeBatch();
+			pst.clearBatch();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(rs, pst, conn);
+		}
+	}
 }

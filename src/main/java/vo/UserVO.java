@@ -4,13 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlayerVO {
-	private int player_id;
-	private String player_name;
-	private String img_src;
+@ToString
+public class UserVO {
+	private String user_id;
+	private String user_pw;
+	private String user_name;
+	private String phone;
+	private String email;
 }

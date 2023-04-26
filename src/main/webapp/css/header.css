@@ -1,7 +1,7 @@
 header{
 	position: relative;
 	height: var(--topGap);
-	margin-bottom:20px;
+	margin-bottom:var(--topMarginB);
 	background-color:beige;
 }
 
@@ -12,7 +12,7 @@ header{
 	align-items:center;
 	height: 65%;
     top: calc((var(--topGap) * 0.3 - var(--loginButtonHeight)) / 2);
-    left: 20px;	
+    left: 2rem;	
 }
 .header-homelogo > img{
 	width:inherit;
@@ -34,7 +34,7 @@ header{
 	display:flex;
 	width: 90%;
 	height: 50%;
-	margin-right:20px;
+	margin-right:2rem;
     justify-content: end;
 }
 .header-selecter-contents{
@@ -49,35 +49,40 @@ header{
     position:relative;
 }
 .header-selecter-select{
-	width: 100%;
-    height: 80%;
-    border-radius: 10px;
-    background: transparent;
-    padding: 10px;
-    z-index: 2;
-    
-	-o-appearance: none;
+	display: inline-block;
+  	width: 100%;
+  	height: calc(2.25rem + 2px);
+  	padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+  	line-height: 1.5;
+  	color: #495057;
+  	vertical-align: middle;
+  	background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
+  	background-size: 8px 10px;
+  	border: 1px solid #ced4da;
+ 	 border-radius: 0.25rem;
+  
   	-webkit-appearance: none;
   	-moz-appearance: none;
   	appearance: none;
+  	font-size: 110%;
 }
 .header-selecter-select::-ms-expand { 
 	display: none;
 }
 
-.iconArrow{
+/* .iconArrow{
 	position:absolute;
 	right:10px;
 }
 .iconArrow > img{
-  width: 15px; 
+  width: 1.5rem; 
   height: inherit;
-}
+} */
 
 
 .header-selecter-sign{
 	position:relative;
-	width:40px;
+	width:2rem;
 	display:flex;
 	align-items:center;
 }
@@ -97,14 +102,20 @@ header{
 }
 
 
-
 /* menu hover css */
 .header-hover-container{ 
 	height: 30%;
     display: flex;
-    margin-right:10px;
+    margin-right:1rem;
     justify-content: end;
 }
+.header-hover-loginOut{
+    display: flex;
+    align-items: center;
+    width: calc(100% - var(--navWidth));
+    margin-left: 2rem;
+}
+
 .header-hover-contents{
  	height:100%;
 	display:flex;
@@ -117,12 +128,13 @@ header .header-item{
 	height: 100%;
 }
 header .header-item .item-name{
-	padding:0 20px;
+	padding:0 2rem;
 	font-family: Arial, sans-serif;
-	font-size:18px;
+	font-size:20px;
 	height: 100%;
     text-align: center;
     line-height: calc(var(--topGap)*0.3);
+    font-weight:700;
 }
 header .header-item:hover .item-name{
   background-color: #669900;
@@ -149,7 +161,7 @@ header .header-item .item-contents .contents-menu .inner > li {
     width: 100%;
 	background-color: gray;
 	color:white;
-	padding:15px 0;
+	padding:1rem 0;
 	left:0;
 	text-align:center;
 	z-index: 10;
@@ -162,10 +174,7 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
 
 /* login css */
 .login-container{
-	position:fixed;
-	top: calc(var(--topGap) - var(--loginButtonHeight) - var(--loginButtonButtomGap));
-	left:calc((100vw - var(--bodyWidth))/2 + 25px);
-	width:60px;
+	width:4rem;
 	transition:width 1s;
 	height:var(--loginButtonHeight);
 }
@@ -178,17 +187,16 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
 	display:flex;
 	align-items:center;
 	justify-content:center;
-	border:none;
+	border: none;
 }
 .login-container:hover{	
-	width: 150px;
+	width: 9rem;
 	transition:width 1s;
 }
 
 .login-container:hover > .login-button{
-	background-color:#4661f5;
+	background-color:#0069d9;
 	cursor:pointer;
-	color:black;
 	transition:background-color 1s;
 }
 
@@ -215,10 +223,7 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
 
 /* logout css */
 .logout-container{
-	position:fixed;
-	top: calc(var(--topGap) - var(--loginButtonHeight) - var(--loginButtonButtomGap));
-	left:calc((100vw - var(--bodyWidth))/2 + 20px);
-	width:150px;
+ 	width:9rem;
 	height:var(--loginButtonHeight);
 }
 
@@ -247,10 +252,10 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
   }
   .header-homelogo{
   	position:static;
-  	height:40px;
+  	height:2rem;
   	justify-content: start;
-    padding-top: 10px;
-    margin-left: 20px;
+    padding-top: 1rem;
+    margin-left: 2rem;
   }
   .header-dropdown-container, .header-hover-container{
   	width:100%;
@@ -265,13 +270,13 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
   	width: 100%;
     display: flex;
     justify-content: center;
-    margin: 10px 0;
+    margin: 1rem 0;
   }
   .header-selecter-sign{
     display: none;
   }
   .header-detail-btn{
-  	height: 40px;
+  	height: 2.5rem;
   }
   .header-detail-btn > button{
   	width: 30%;
@@ -290,13 +295,10 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
   header .header-item .item-contents .contents-menu .inner {
   	width: 100%;
   }
-  header .header-item .item-contents .contents-menu .inner > li {
-  	width : calc(100% - 2px);
-  }
-  
-  .login-container, .logout-container{
-    top: 10px;
-    left: auto;
-    right: 20px;
+  .header-hover-loginOut{
+  	position:fixed;
+    top: 1rem;
+    width:auto;
+    right: 1rem;
   }
 }

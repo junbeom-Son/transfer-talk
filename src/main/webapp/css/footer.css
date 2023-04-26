@@ -1,6 +1,6 @@
 footer{
 	height: var(--bottomGap);
-	margin: 20px 0;
+	margin: var(--bottomMarginT) 0 0;
 }
 #footer-container{
 	position:relative;

@@ -22,12 +22,12 @@ public class InitCrawling implements ServletContextListener {
     }
 
     public void contextInitialized(ServletContextEvent sce)  { // 실행시 수행 크롤링
-//    	Crawling crawling = new Crawling();
+    	Crawling crawling = new Crawling();
 //    	try {
-//			crawling.crawl();
+////			crawling.crawl();
 ////    		crawling.crawlTeams();
+//			crawling.crawlPlayerImageSource();
 //		} catch (IOException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
     }

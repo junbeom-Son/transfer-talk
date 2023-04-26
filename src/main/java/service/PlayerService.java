@@ -48,6 +48,22 @@ public class PlayerService {
 		
 		return playerDao.selectPlayersByName(playerName);
 	}
+
+	/**
+	 * 모든 플레이어 조회
+	 * @return 모든 플레이어
+	 */
+	public List<PlayerVO> selectAllPlayers() {
+		
+		return playerDao.selectAllPlayers();
+	}
 	
-	
+	/**
+	 * 플레이어 업데이트
+	 * 대량으로 받아서 한번에 처리
+	 * 작성자 : 손준범
+	 */
+	public void updatePlayers(List<PlayerVO> players) {
+		playerDao.updatePlayers(players);
+	}
 }

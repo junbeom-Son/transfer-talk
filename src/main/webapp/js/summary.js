@@ -1,10 +1,8 @@
-
-
-
-callSummary = function ({
+const callSummary = function ({
 	containerData = {},
 	containerIndex = 0,
-	
+	loadingStart = true, //23.04.25 jin 추가
+	loadingEnd = true //23.04.25 jin 추가
 }) {
 	callAjax({
 		url: "transfer/summary",
@@ -12,6 +10,8 @@ callSummary = function ({
 			top5:true,
 			...containerData
 		},
+		loadingStart: loadingStart,
+		loadingEnd : loadingEnd,
 		beforeSend:function(){
 			const parent =$(".summary-contents").get(containerIndex);
 			while(parent.children.length > 6){
@@ -33,7 +33,7 @@ callSummary = function ({
 					const playerName = document.createElement("div");
 					const playerLink = document.createElement("a");
 					playerLink.innerText = item.player.player_name;
-					playerLink.href = playerLink.href = getContextPath() + "/player/detail?playerId=" + item.player.player_id;
+					playerLink.href = PATH + "/player/" + item.player.player_id;
 					playerName.append(playerLink);
 					playerName.className = "summary-name";
 					const fee = document.createElement("div");
@@ -61,9 +61,29 @@ callSummary = function ({
 	});
 }
 
+function callTotalSummary (){
+	const array = [
+		{f:callSummary, data:{loadingEnd:false}},
+		{f:callSummary, data:{containerData:{'year':'2022'},containerIndex:1, loadingStart:false}}
+	];
+	return array;
+}
+function callLeagueSummary (){
+	const leagueName = $(this).val();
+	const array = [
+		{f:callSummary, data:{ containerData:{'league':leagueName}, loadingStart:false, loadingEnd:false}},
+		{f:callSummary, data:{ containerData:{'year':'2022','league':leagueName}, containerIndex : 1, loadingStart:false}}
+	];
+	return array;
+}
+function callTeamSummary (){
+	const teamName = $(this).val();
+	const array = [
+		{f:callSummary, data:{ containerData:{team:teamName}, loadingEnd:false}},
+		{f:callSummary, data:{ containerData:{year:'2022', team:teamName}, containerIndex:1, loadingStart:false}}
+	];
+	return array;
+}
 
-callSummary({});
-callSummary({
-	containerData:{'year':'2022'}, 
-	containerIndex:1
-});
+//다수의 ajax가 실행되고 화면이 보여지도록 refactoring : 23.04.25 jin
+promiseAjax([...callTotalSummary() ]);
