@@ -39,7 +39,7 @@ header{
 }
 .header-selecter-contents{
 	margin:0 var(--headerItemMarginRight);
-	width: 20%;
+	width: 30%;
 }
 .header-selecter-form{
 	width: 100%;
