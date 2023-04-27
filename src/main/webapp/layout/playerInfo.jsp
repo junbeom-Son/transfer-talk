@@ -24,30 +24,28 @@ request.setCharacterEncoding("utf-8");
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<main>
 
-
+        <c:set var="pre_img" value="${transfers[0].previous_team.team_img_src}"></c:set>
+        <c:set var="new_img" value="${transfers[0].new_team.team_img_src}"></c:set>
+        <c:set var="no_img" value="${path}/images/defaultTeam.webp"></c:set>
 		<div class="playerInfo-container">
 			<div id="player_name">이름 : ${player.player_name}</div>
 			<div id="player_age">${transfers[0].age }</div>
-			<div id="picture_player">
-				<!-- <img
-					src="https://img.a.transfermarkt.technology/portrait/header/427568-1681828000.jpg?lm=1"> -->
-			</div>
+			<div id="picture_player"></div>
 			<div id="previousteam">${transfers[0].previous_team.team_name }</div>
 			<div id="picture_previousteam">
-				<img
-					src="https://tmssl.akamaized.net/images/wappen/head/281.png?lm=1467356331">
+				<img src="${pre_img==null?no_img:pre_img}" alt="전이미지">
 			</div>
 			<div id="newteam">${transfers[0].new_team.team_name }</div>
 			<div id="picture_newteam">
-				<img
-					src="https://tmssl.akamaized.net/images/wappen/head/11.png?lm=1489787850">
+				<img src="${transfers[0].new_team.team_img_src}">
 			</div>
 			<div id="position">${transfers[0].player_position }</div>
 			<div id="picture_arrow">
-			 <img src="../images/arrow-right.png"> 
+				<img src="../images/arrow-right.png">
 			</div>
 			<div id="fee">${transfers[0].fee }</div>
 		</div>
+		
 	</main>
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	<jsp:include page="/layout/spinner.jsp"></jsp:include>

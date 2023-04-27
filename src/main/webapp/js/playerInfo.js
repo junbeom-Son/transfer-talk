@@ -20,3 +20,27 @@ callAjax({
 		parent.appendChild(imgEl);
 	},
 })
+/*callAjax({
+	url : getContextPath() + "/player/img",
+	data: getContainerDataFromParameters(),
+	success : (res)=>{
+		const imgSrc = res || getContextPath() + "/images/defaultTeam.webp";
+		console.log(imgSrc);
+		const parent = document.querySelector("#picture_previousteam");
+		const imgEl = document.createElement("img");
+		imgEl.setAttribute("src",imgSrc);
+		parent.appendChild(imgEl);
+	},
+})
+callAjax({
+	url : getContextPath() + "/player/img",
+	data: getContainerDataFromParameters(),
+	success : (res)=>{
+		const imgSrc = res || getContextPath() + "/images/defaultTeam.webp";
+		console.log(imgSrc);
+		const parent = document.querySelector("#picture_newteam");
+		const imgEl = document.createElement("img");
+		imgEl.setAttribute("src",imgSrc);
+		parent.appendChild(imgEl);
+	},
+})*/
