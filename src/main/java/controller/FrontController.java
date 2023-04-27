@@ -31,6 +31,9 @@ public class FrontController extends HttpServlet {
 		case "/login/loginPage":
 			controller = new LoginPageController();
 			break;
+		case "/login/logoutPage":
+			controller = new LogOutPageController();
+			break;
 		case "/login/MainPage":
 			controller = new LoginCheckController();
 			break;
@@ -70,6 +73,9 @@ public class FrontController extends HttpServlet {
 		case "/transfer/summary":
 			controller = new RankerController();
 			break;
+		case "/transfer/summaryDetail":
+			controller = new TransferSummaryDetail();
+			break;	
 //		case "/site-result/changePhoto.do":
 //			controller = new ChangePhotoController();
 //			break;

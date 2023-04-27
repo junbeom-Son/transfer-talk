@@ -61,9 +61,9 @@ const callSummary = function ({
 				  	contentEl.append(age);
 				  	
 				  	contentEl.addEventListener("click",function(){
-						location.href = PATH + "/player/" + this.getAttribute("value");
-						});
+						location.href = PATH +"/player/detail?playerId=" + this.getAttribute("value");
 					});
+				});
 			}
 		}
 	});
@@ -95,7 +95,7 @@ function callTeamSummary (){
 document.querySelectorAll(".summary-detail-container").forEach((element,index)=>{
 	console.log('///',element.parentElement.querySelector(".summary-category").innerHTML)
 	element.addEventListener('click',()=>{
-		const titleText = this.parentElement.querySelector(".summary-category").innerHTML;
+		const titleText = element.parentElement.querySelector(".summary-category").innerHTML;
 		console.log(index, titleText);
 		location.href = PATH + "/transfer/summaryDetail?index="+index+"&title="+titleText;
 	});
@@ -107,6 +107,5 @@ $(".summary-contents-content").click(function(){
 	console.log(this.getAttribute("value"))
 	/*location.href = PATH + "/player/" + item.player.player_id;*/
 });
-
 //다수의 ajax가 실행되고 화면이 보여지도록 refactoring : 23.04.25 jin
 if(isIndex) promiseAjax([...totalSummaryArray ]);

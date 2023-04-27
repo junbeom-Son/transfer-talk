@@ -70,7 +70,7 @@
 					</div>
 				</div>
 			</li>
-			<li class="header-item">
+			<li class="header-item login-item hidden">
 				<div class="item-name">나의 메뉴</div>
 				<div class="item-contents">
 					<div class="contents-menu">

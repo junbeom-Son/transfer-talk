@@ -20,6 +20,7 @@ callAjax({
 		parent.appendChild(imgEl);
 	},
 })
+
 /*callAjax({
 	url : getContextPath() + "/player/img",
 	data: getContainerDataFromParameters(),

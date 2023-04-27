@@ -116,12 +116,15 @@ public class UserDAO {
 		try {
 			pst = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			pst.setString(1, user_id);
-			pst.setString(2, user_pw);
+			pst.setString(2, passwordHash(user_pw));
 			rs = pst.executeQuery();
 			rs.last();
 			resultCount = rs.getRow();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			resultCount = -1;
 		} finally {
 			util.dbDisconnect(rs, pst, conn);
 		}

@@ -76,13 +76,13 @@ window.addEventListener('scroll', function(){
 	if(this.scrollY >= headerHeight && this.innerWidth >= mediaQueryWidth){
 		headerHoverContainer.style.position = 'fixed';
 		headerHoverContainer.style.top = 0;
-		headerHoverContainer.style.backgroundColor = 'beige';
+		headerHoverContainer.style.backgroundColor = '#ACC2FA';
 		headerHoverContainer.style.width = '100%';
 		headerHoverContainer.style.height = '50px';
 	}else if(this.scrollY >= headerHeight && this.innerWidth < mediaQueryWidth){
 			headerHoverContainer.style.position = 'fixed';
 			headerHoverContainer.style.top = 0;
-			headerHoverContainer.style.backgroundColor = 'beige';
+			headerHoverContainer.style.backgroundColor = '#ACC2FA';
 	}else{
 		headerHoverContainer.style.position = 'static';
 	}
@@ -166,19 +166,27 @@ $(".header-homelogo").click(() => location.href = PATH);
 //login버튼 클릭 시 함수
 $(".login-container").click(() => {
 	location.href = PATH +"/login/loginPage";
-	/*callAjax({
-	url: getContextPath() + "/login/login.jsp",
-	method:"post",
-	success: function(res){
-		console.log(res);
-	}
-});*/
 });
 
 //logout버튼 클릭 시 함수
 $(".logout-container").click(function(){
-	console.log('logout버튼 클릭 --> 코딩필요');
+	location.href = PATH +"/login/logoutPage";
 });
+
+console.log($("#loginUserId").val());
+//login 처리 함수
+const loginContainer = document.querySelector(".login-container");
+const logoutContainer = document.querySelector(".logout-container");
+const myMenu = document.querySelector(".login-item");
+if ($("#loginUserId").val() === '1') { // 로그인시
+	loginContainer.classList.add("hidden");
+	if(logoutContainer.classList.contains('hidden'))logoutContainer.classList.remove("hidden");
+	if(myMenu.classList.contains('hidden'))myMenu.classList.remove("hidden");
+}else{ // 로그아웃, 미 로그인 시
+	if(loginContainer.classList.contains('hidden'))loginContainer.classList.remove("hidden");
+	logoutContainer.classList.add("hidden");
+	myMenu.classList.add("hidden");
+}
 
 //** 생성한 함수 ------------------------------------------------------------------------------------------------------------------------------------------------
 

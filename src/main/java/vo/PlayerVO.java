@@ -13,4 +13,5 @@ public class PlayerVO {
 	private int player_id;
 	private String player_name;
 	private String img_src;
+	private String player_nationality;
 }

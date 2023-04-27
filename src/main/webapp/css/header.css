@@ -232,7 +232,7 @@ header .header-item .item-contents .contents-menu .inner > li:hover{
 }
 
 /* login, logout 공통  */
-.login-container.hidden, .logout-container.hidden, .login-container.scrollHidden, .logout-container.scrollHidden{
+.header-item.hidden, .login-container.hidden, .logout-container.hidden, .login-container.scrollHidden, .logout-container.scrollHidden{
 	display:none;
 }
 
