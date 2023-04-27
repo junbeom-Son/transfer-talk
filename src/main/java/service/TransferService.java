@@ -95,8 +95,8 @@ public class TransferService {
 	 * @param year
 	 * 작성자 : 서준호
 	 */
-	public List<TransferVO> selectInTransfers(String year, String leagueName, String teamName, boolean top5) {
-		return transferDao.selectTransfers(year, leagueName, teamName, top5, true);
+	public List<TransferVO> selectInTransfers(String year, String leagueName, String teamName, boolean top5, boolean isSummary) {
+		return transferDao.selectTransfers(year, leagueName, teamName, top5, true, isSummary);
 	}
 	
 	/**
@@ -108,8 +108,8 @@ public class TransferService {
 	 * @param
 	 * 작성자 : 손준범
 	 */
-	public List<TransferVO> selectFromTransfers(String year, String leagueName, String teamName, boolean top5) {
-		return transferDao.selectTransfers(year, leagueName, teamName, top5, false);
+	public List<TransferVO> selectFromTransfers(String year, String leagueName, String teamName, boolean top5, boolean isSummary) {
+		return transferDao.selectTransfers(year, leagueName, teamName, top5, false, isSummary);
 	}
 	/**
 	 * 특정 선수의 총 이적내역 조회
