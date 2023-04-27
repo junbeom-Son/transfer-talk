@@ -2,7 +2,7 @@ header{
 	position: relative;
 	height: var(--topGap);
 	margin-bottom:var(--topMarginB);
-	background-color:beige;
+	background-color:var(--headerColor);
 }
 
 /* 홈버튼 */
@@ -69,15 +69,6 @@ header{
 .header-selecter-select::-ms-expand { 
 	display: none;
 }
-
-/* .iconArrow{
-	position:absolute;
-	right:10px;
-}
-.iconArrow > img{
-  width: 1.5rem; 
-  height: inherit;
-} */
 
 
 .header-selecter-sign{

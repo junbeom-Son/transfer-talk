@@ -60,4 +60,3 @@ $(".register-id-check").click(function(){
 	})
 }
 */
-
