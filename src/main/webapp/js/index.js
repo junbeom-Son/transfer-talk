@@ -177,8 +177,23 @@ $(".login-container").click(() => {
 
 //logout버튼 클릭 시 함수
 $(".logout-container").click(function(){
-	console.log('logout버튼 클릭 --> 코딩필요');
+	
 });
+
+console.log($("#loginUserId").val());
+//login 처리 함수
+const loginContainer = document.querySelector(".login-container");
+const logoutContainer = document.querySelector(".logout-container");
+const myMenu = document.querySelector(".login-item");
+if ($("#loginUserId").val() === '1') { // 로그인시
+	loginContainer.classList.add("hidden");
+	if(logoutContainer.classList.contains('hidden'))logoutContainer.classList.remove("hidden");
+	if(myMenu.classList.contains('hidden'))myMenu.classList.remove("hidden");
+}else{ // 로그아웃, 미 로그인 시
+	if(loginContainer.classList.contains('hidden'))loginContainer.classList.remove("hidden");
+	logoutContainer.classList.add("hidden");
+	myMenu.classList.add("hidden");
+}
 
 //** 생성한 함수 ------------------------------------------------------------------------------------------------------------------------------------------------
 

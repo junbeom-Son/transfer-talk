@@ -25,13 +25,13 @@
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="">
-				<form method="post" action="${pageContext.request.contextPath}/index.jsp">
+				<form method="post" action="${path}/login/MainPage">
 					<h3 style="text-align: center;">로그인 화면</h3>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="아이디" name="userid" maxlength="20">
+						<input type="text" class="form-control" placeholder="아이디" name="user_id" maxlength="20">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="비밀번호" name="userpw" maxlength="20">
+						<input type="text" class="form-control" placeholder="비밀번호" name="user_pw" maxlength="20">
 					</div>
 					<div>
 						<input type="submit" class="btn btn-primary form-control" value="로그인">
