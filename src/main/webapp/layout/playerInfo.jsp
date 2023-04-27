@@ -23,28 +23,47 @@ request.setCharacterEncoding("utf-8");
 <body>
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<main>
-		<div id="playerInfo">
-			<c:set var="pre_img" value="${transfers[0].previous_team.team_img_src}"></c:set>
-			<c:set var="new_img" value="${transfers[0].new_team.team_img_src}"></c:set>
-			<c:set var="no_img" value="${path}/images/defaultTeam.webp"></c:set>
-			<div class="playerInfo-container">
-				<div id="player_name">이름 : ${player.player_name}</div>
-				<div id="player_age">${transfers[0].age }</div>
-				<div id="picture_player"></div>
-				<div id="previousteam">${transfers[0].previous_team.team_name }</div>
-				<div id="picture_previousteam">
-					<img src="${pre_img==null?no_img:pre_img}" alt="전이미지">
-				</div>
-				<div id="newteam">${transfers[0].new_team.team_name }</div>
-				<div id="picture_newteam">
-					<img src="${transfers[0].new_team.team_img_src}">
-				</div>
-				<div id="position">${transfers[0].player_position }</div>
-				<div id="picture_arrow">
-					<img src="../images/arrow-right.png">
-				</div>
-				<div id="fee">${transfers[0].fee }</div>
+        <c:set var="pre_img" value="${transfer.previous_team.team_img_src}"></c:set>
+        <c:set var="new_img" value="${transfer.new_team.team_img_src}"></c:set>
+        <c:set var="no_img" value="${path}/images/defaultTeam.webp"></c:set>
+		<div class="playerInfo-container">
+			<div id="player_name">${player.player_name}</div>
+			<div id="player_age">${transfer.age }</div>
+			<div id="picture_player"></div>
+			<div id="previousteam">${transfer.previous_team.team_name }</div>
+			<div id="picture_previousteam">
+				<img src="${pre_img==null ? no_img : pre_img}">
 			</div>
+			<div id="newteam">${transfer.new_team.team_name }</div>
+			<div id="picture_newteam">
+				<img src="${new_img==null ? no_img : new_img}">
+			</div>
+			<div id="position">${transfer.player_position }</div>
+			<div id="picture_arrow">
+				<img src="../images/arrow-right.png">
+			</div>
+			<div id="fee">${transfer.fee }</div>
+		</div>
+		<h2 class="in-out-header">History</h2>
+		<div class="transferHistory-container">
+				<div class="history-title">
+					<div id="history-transfer_year">이적년도</div>
+					<div id="history-player_age">이적당시 나이</div>
+					<div id="history-position">포지션</div>
+					<div id="history-fee">이적료</div>
+					<div id="history-previousteam">이전팀</div>
+					<div id="history-newteam">새팀</div>
+				</div>
+			<c:forEach var="history" items="${transferHistory}">
+				<div class="history-items">
+					<div id="history-transfer_year">${history.transfer_year }</div>
+					<div id="history-player_age">${history.age }</div>
+					<div id="history-position">${history.player_position }</div>
+					<div id="history-fee">${history.fee }</div>
+					<div id="history-previousteam">${history.previous_team.team_name }</div>
+					<div id="history-newteam">${history.new_team.team_name }</div>
+				</div>
+			</c:forEach>
 			<i class="fas fa-star starImg " style="font-size: 48px; color: yellow; -webkit-text-stroke: 2px gray;"></i> 
 			<i class="fas fa-star starImg hidden" style="font-size: 48px; color: white; -webkit-text-stroke: 2px gray;"></i>
 		</div>
@@ -52,5 +71,4 @@ request.setCharacterEncoding("utf-8");
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	<jsp:include page="/layout/spinner.jsp"></jsp:include>
 </body>
-
 </html>

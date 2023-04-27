@@ -75,7 +75,7 @@ public class TransferService {
 	 * @return 해당하는 id가 있으면 TransferVO, 없으면 null return
 	 * 작성자 : 서준호
 	 */
-	public List<TransferVO> selectTransfersByPlayerId(int playerId) {
+	public TransferVO selectTransfersByPlayerId(int playerId) {
 		return transferDao.selectTransfersByPlayerId(playerId); 
 	}
 	/**
@@ -110,5 +110,13 @@ public class TransferService {
 	 */
 	public List<TransferVO> selectFromTransfers(String year, String leagueName, String teamName, boolean top5) {
 		return transferDao.selectTransfers(year, leagueName, teamName, top5, false);
+	}
+	/**
+	 * 특정 선수의 총 이적내역 조회
+	 * @param playerId
+	 * 작성자 : 서준호
+	 */
+	public List<TransferVO> selectHistoryByPlayerId(int playerId) {
+		return transferDao.selectHistoryByPlayerId(playerId);
 	}
 }

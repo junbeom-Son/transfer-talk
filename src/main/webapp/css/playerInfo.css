@@ -11,6 +11,9 @@
 		"picture_player fee picture_previousteam picture_arrow picture_newteam"
 }
 
+
+
+
 #player_name{ grid-area: name; }
 #player_age{ grid-area: age; }
 #picture_player{ grid-area: picture_player; }
@@ -31,7 +34,7 @@
 	text-align:center;
 	margin : auto 0px; 
 }
-#player_name, #player_age, #position, #fee{
+#player_name, #player_age, #position, #fee, #transfer_year{
 	margin : auto 0px auto 20px; 
 }
 
@@ -40,11 +43,38 @@
 	justify-content:center;
 	align-items:center;
 }
+#picture_player > img{
+	width:130px;
+	height:150px;
+}
+.in-out-header{
+	margin-left:5%;
+}
 #picture_previousteam img, #picture_newteam img{
-	
 	width:100px;
 	height:100px;
 }
+
+.history-title > div{
+	background-color:orange;
+}
+.history-items, .history-title{
+	display:flex;
+	justify-content:center;
+}
+.history-items>div , .history-title>div{
+	width:15%;
+	border:1px solid gray;
+	text-align:center;
+}
+.transferHistory-container{
+/* 	display:grid;
+	grid-template-columns:repeat(6, 1fr);
+	grid-template-areas:
+		"transfer_year age position fee previousteam newteam" */
+		
+}
+#transfer_year{ grid-area: transfer_year;}
 
 #playerInfo{
    position:relative;
@@ -58,4 +88,5 @@
 .starImg.hidden{
    display:none;
 }
+
 
