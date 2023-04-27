@@ -8,7 +8,19 @@ const totalSummaryDetailArray = [
 		{f:callSummaryDetail, data:{containerData:{'year':'2022'},containerIndex:1}}
 ];
 const detailDatas = totalSummaryDetailArray[Number(summaryIndex)];
-console.log(summaryTitleText,summaryIndex);
+
+const toTopEl = document.querySelector('.top-btn');
+toTopEl.addEventListener('click', function(){
+	// scrollTo로 위치 상단으로 옮기기 (ScrollToPlugin 라이브러리 사용 시 가능)	
+	gsap.to(window, 0.7, { scrollTo : 0 });
+});
+
+const toDownEl = document.querySelector('.down-btn');
+toDownEl.addEventListener('click', function(){
+	// scrollTo로 위치 하단으로 옮기기 (ScrollToPlugin 라이브러리 사용 시 가능)	
+	gsap.to(window, 0.7, { scrollTo : $('body').prop('scrollHeight') }); //scroll엘리먼트 높이  $('body').prop('scrollHeight')
+});
+	
 //시작
 document.querySelector(".summaryDetail-category").innerHTML = summaryTitleText;
 promiseAjax([detailDatas]);

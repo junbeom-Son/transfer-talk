@@ -49,14 +49,16 @@
 	right:0;
 }
 
-/* .summaryDetail-detail-container{
-	height:3rem;
-    bottom: 0.3rem;
-    left: 0.6rem;
-    margin-bottom :0.6rem;
-    display:flex;
-    justify-content:end;
-} */
+.top-btn{
+	position:fixed;
+	top:20px;
+	right:10px;
+}
+.down-btn{
+	position:fixed;
+	top:60px;
+	right:10px;
+}
 
 .grid-noData-style {
 	grid-column : 1/-1;
