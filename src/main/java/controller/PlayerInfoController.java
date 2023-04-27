@@ -25,10 +25,11 @@ public class PlayerInfoController implements Controller {
 		PlayerService playerservice = new PlayerService();
 		int playerId = Integer.parseInt(request.getParameter("playerId"));
 		PlayerVO player = playerservice.selectPlayerById(playerId);
-		List<TransferVO> transfers = transferservice.selectTransfersByPlayerId(playerId);
-		request.setAttribute("transfers", transfers);
+		TransferVO transfer = transferservice.selectTransfersByPlayerId(playerId);
+		request.setAttribute("transfer", transfer);
 		request.setAttribute("player", player);
-			
+		List<TransferVO> transferHistory = transferservice.selectHistoryByPlayerId(playerId);
+		request.setAttribute("transferHistory", transferHistory);
 		return "/layout/playerInfo.jsp";
 	}
 }
