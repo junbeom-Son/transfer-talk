@@ -20,6 +20,7 @@
 <body>
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <main>
+	<input type="hidden" id="loginUserId" value="${sessionScope.loginUser }">
 	<h1>요약</h1>
 	<jsp:include page="/layout/summary.jsp">
 		<jsp:param name="category" value="역대 이적료 TOP 5" />
