@@ -10,7 +10,6 @@ import service.UserService;
 public class LoginCheckController implements Controller {
 	@Override
 	public String execute(Map<String, Object> data) {
-		String method = (String) data.get("method");
 		String page = "";
 		if (data.get("method").equals("GET")) {
 			page = "login.jsp";
@@ -20,15 +19,15 @@ public class LoginCheckController implements Controller {
 			String user_pw = request.getParameter("user_pw");
 			UserService userService = new UserService();
 			int loginResult = userService.loginCheck(user_id, user_pw);
+			String path = request.getContextPath();
 			if (loginResult != 0) {
 				//로그인 성공시 메인페이지 이동
 				HttpSession session = request.getSession();
 				session.setAttribute("loginUser", loginResult);
-				String path = request.getContextPath();
 				page = "redirect:" + path + "/index.jsp";
 			} else {
 				//로그인 실패
-				page = "redirect:"+request.getContextPath()+"/login/loginPage";
+				page = "redirect:"+ path +"/login/loginPage";
 			}
 		}
 		return page;
