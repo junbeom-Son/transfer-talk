@@ -60,12 +60,12 @@
 				</div>
 			</li>
 			<li class="header-item">
-				<div class="item-name">선수정보</div>
+				<div class="item-name hover-playerInfo">선수정보</div>
 				<div class="item-contents">
 					<div class="contents-menu">
 						<ul class="inner">
 							<li>선수상세정보</li>
-							<li>선수 검색</li>
+							<li class="hover-playerSearch">선수 검색</li>
 						</ul>
 					</div>
 				</div>
