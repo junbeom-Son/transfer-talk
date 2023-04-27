@@ -46,3 +46,16 @@
 	height:100px;
 }
 
+#playerInfo{
+   position:relative;
+   height:400px;
+}
+.starImg{
+   position:absolute;
+   height:30px;
+   left:120px;
+}
+.starImg.hidden{
+   display:none;
+}
+
