@@ -16,6 +16,7 @@ request.setCharacterEncoding("utf-8");
 <link rel="stylesheet" href="${path}/css/summaryDetail.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js" integrity="sha512-f8mwTB+Bs8a5c46DEm7HQLcJuHMBaH/UFlcgyetMqqkvTcYg4g5VXsYR71b3qC82lZytjNYvBj2pf0VekA9/FQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script defer src="${path}/js/index.js"></script>
 <script defer src="${path}/js/summaryDetail.js"></script>
 </head>
@@ -43,7 +44,8 @@ request.setCharacterEncoding("utf-8");
 			</div>
 		</div>
 	</div>
-	
+	<button class="top-btn">top</button>
+	<button class="down-btn">down</button>
 	</main>
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	<jsp:include page="/layout/spinner.jsp"></jsp:include>
