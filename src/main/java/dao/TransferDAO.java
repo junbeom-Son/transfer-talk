@@ -106,7 +106,8 @@ public class TransferDAO {
 		String sql = """
 				select transfer_id, player_position, transfer_year, fee, age, t.player_id as player_id, player_name,
 				t.previous_team_id as p_team_id, p_team.team_name as p_team_name,
-				t.new_team_id as n_team_id, n_team.team_name as n_team_name
+				t.new_team_id as n_team_id, n_team.team_name as n_team_name,
+			    p_team.team_img_src as p_team_img, n_team.team_img_src as n_team_img 
 				from transfer t
 				join player on(player.player_id = t.player_id)
 				join team p_team on (t.previous_team_id = p_team.team_id)
@@ -135,20 +136,24 @@ public class TransferDAO {
 				TeamVO previousteam = new TeamVO();
 				previousteam.setTeam_id(rs.getInt("p_team_id"));
 				previousteam.setTeam_name(rs.getString("p_team_name"));
+				previousteam.setTeam_img_src(rs.getString("p_team_img"));
 				transfer.setPrevious_team(previousteam);
-
+				
+				
 				TeamVO newteam = new TeamVO();
 				newteam.setTeam_id(rs.getInt("n_team_id"));
 				newteam.setTeam_name(rs.getString("n_team_name"));
+				newteam.setTeam_img_src(rs.getString("n_team_img"));
 				transfer.setNew_team(newteam);
 				transfers.add(transfer);
-
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			util.dbDisconnect(null, pst, conn);
 		}
+
 		return transfers;
 	}
 
