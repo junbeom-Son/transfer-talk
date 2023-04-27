@@ -6,7 +6,7 @@ footer{
 	position:relative;
 	width: var(--viewWidth);
 	height:100%;
-	background-color : beige;
+	background-color:var(--headerColor);
 	display:flex;
 	align-items: center;
 }
