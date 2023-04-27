@@ -93,8 +93,7 @@ function callTeamSummary (){
 }
 
 document.querySelectorAll(".summary-detail-container").forEach((element,index)=>{
-	console.log('///',element.parentElement.querySelector(".summary-category").innerHTML)
-	element.addEventListener('click',()=>{
+	element.querySelector("button").addEventListener('click',()=>{
 		const titleText = element.parentElement.querySelector(".summary-category").innerHTML;
 		console.log(index, titleText);
 		location.href = PATH + "/transfer/summaryDetail?index="+index+"&title="+titleText;
