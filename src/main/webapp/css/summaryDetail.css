@@ -50,16 +50,26 @@
 }
 
 .top-btn{
-	position:fixed;
-	top:20px;
-	right:10px;
+	bottom:calc(var(--bottomGap) + 50px);
 }
 .down-btn{
+	top:calc(var(--topGap) + 50px);
+	
+
+}
+.top-btn, .down-btn{
 	position:fixed;
-	top:60px;
 	right:10px;
+	width:50px;
+	height:50px;
+	border-radius:0.5rem;
+	border:none;
+	cursor:pointer;
 }
 
+.top-btn.hidden, .top-btn.hidden{
+	display:none;
+}
 .grid-noData-style {
 	grid-column : 1/-1;
 }

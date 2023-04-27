@@ -10,27 +10,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/css/index.css">
+<link rel="stylesheet" href="${path}/css/external.css">
 <link rel="stylesheet" href="${path}/css/summary.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script defer src="${path}/js/index.js"></script>
 <script defer src="${path}/js/summary.js"></script>
+
 </head>
 
 <body>
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <main>
 	<input type="hidden" id="loginUserId" value="${sessionScope.loginUser }">
-	<h1>요약</h1>
-	<jsp:include page="/layout/summary.jsp">
-		<jsp:param name="category" value="역대 이적료 TOP 5" />
-	</jsp:include>
-	<jsp:include page="/layout/summary.jsp">
-		<jsp:param name="category" value="올시즌 이적료 TOP 5" />
-	</jsp:include>
-	<jsp:include page="/layout/summary.jsp">
-		<jsp:param name="category" value="포지션 별 이적료 TOP 5" />
-	</jsp:include>
+	<div id="summary">
+		<h1>요약</h1>
+		<jsp:include page="/layout/summary.jsp">
+			<jsp:param name="category" value="역대 이적료 TOP 5" />
+		</jsp:include>
+		<jsp:include page="/layout/summary.jsp">
+			<jsp:param name="category" value="올시즌 이적료 TOP 5" />
+		</jsp:include>
+		<%-- <jsp:include page="/layout/summary.jsp">
+			<jsp:param name="category" value="포지션 별 이적료 TOP 5" />
+		</jsp:include> --%>
+	</div>
+	<div id="external">
+		<div class="siteLink">
+		</div>
+		<iframe width="40%" height="100%" src="https://www.youtube.com/embed/OSEFivkqPtc?autoplay=1&mute=1&loop=1" title="YouTube video player" 
+		         frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+        </iframe>
+        
+	</div>
 </main>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <jsp:include page="/layout/spinner.jsp"></jsp:include>
