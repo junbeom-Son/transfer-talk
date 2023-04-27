@@ -43,13 +43,14 @@ function callTransferList({
 					transferDivElements[index].append(noData);	
 				}
 				transfers.forEach(function(item) {
+					const contentEl =document.createElement("div");
+		            transferDivElements[index].append(contentEl);
+		            contentEl.className="transfer-contents-content"
+					contentEl.setAttribute ("value",item.player.player_id);
+					
 					const playerName = document.createElement("div");
 					playerName.className = "transfer-name";
-
-					const playerLink = document.createElement("a");
-					playerLink.innerText = item.player.player_name;
-					playerLink.href = getContextPath() + "/player/detail?playerId=" + item.player.player_id;
-					playerName.append(playerLink);
+					playerName.innerText = item.player.player_name;
 
 					const fee = document.createElement("div");
 					fee.innerText = item.fee;
@@ -75,15 +76,20 @@ function callTransferList({
 					transfer_year.innerText = item.transfer_year;
 					transfer_year.className = "transfer-year";
 
-					transferDivElements[index].append(playerName);
-					transferDivElements[index].append(fee);
-					transferDivElements[index].append(previousTeam);
-					transferDivElements[index].append(newTeam);
-					transferDivElements[index].append(age);
-					transferDivElements[index].append(player_position);
-					transferDivElements[index].append(transfer_year);
+					contentEl.append(playerName);
+					contentEl.append(fee);
+					contentEl.append(previousTeam);
+					contentEl.append(newTeam);
+					contentEl.append(age);
+					contentEl.append(player_position);
+					contentEl.append(transfer_year);
+					
+					contentEl.addEventListener("click",function(){
+						location.href = PATH +"/player/detail?playerId=" + this.getAttribute("value");
+						});
+					});
 				});
-			});
+		
 		}
 	});
 }

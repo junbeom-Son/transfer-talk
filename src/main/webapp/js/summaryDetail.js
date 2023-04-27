@@ -1,6 +1,6 @@
 
 let playerDatas;
-const onePageListCount = 20;
+const onePageListCount = 100;
 let currentPage= 1;
 const {title:summaryTitleText, index:summaryIndex} = getContainerDataFromParameters(); 
 const totalSummaryDetailArray = [
@@ -10,7 +10,7 @@ const totalSummaryDetailArray = [
 const detailDatas = totalSummaryDetailArray[Number(summaryIndex)];
 console.log(summaryTitleText,summaryIndex);
 //시작
-document.querySelector(".summary-category").innerHTML = summaryTitleText;
+document.querySelector(".summaryDetail-category").innerHTML = summaryTitleText;
 promiseAjax([detailDatas]);
 $(".summary-detail-btn").hide();
 
@@ -42,7 +42,7 @@ function callSummaryDetail ({
 		loadingStart: true,
 		loadingEnd : true,
 		success:function(data) {
-				const parentElement = $(".summary-contents");
+				const parentElement = $(".summaryDetail-contents");
 				if(data.length == 0){
 					const noData = document.createElement("div");
 					noData.innerText = "선수 정보가 없습니다.";
@@ -51,7 +51,7 @@ function callSummaryDetail ({
 				}else {
 					playerDatas = data;
 					btnAction('start',playerDatas);
-					$(".summary-detail-btn").show();
+					$(".summaryDetail-btn").show();
 				}
 		}
 	});
@@ -62,8 +62,8 @@ $('.next-btn').click(()=>btnAction('next',playerDatas));
 
 function btnAction(type, playerInfo){	
 		//기존 데이터 지우기
-		const classElement = document.querySelector(".summary-contents");
-		 while (classElement.children.length > 6) {
+		const classElement = document.querySelector(".summaryDetail-contents");
+		 while (classElement.children.length > 1) {
 			    classElement.removeChild(classElement.lastChild);
 		 }
 		if(type==='start'){ //처음 start 
@@ -75,42 +75,41 @@ function btnAction(type, playerInfo){
 		}
 		playerInfo.forEach((item,i) => {	
 			if(onePageListCount * (currentPage) > i && (currentPage-1)*onePageListCount <= i){
+				const contentEl =document.createElement("div");
+	            classElement.appendChild(contentEl);
+	            contentEl.className="summaryDetail-contents-content"
+				contentEl.setAttribute ("value",item.player.player_id);
+				
 				const playerRank = document.createElement("div");
 				playerRank.innerText = i+1;
-				playerRank.className = "summary-rank";
+				playerRank.className = "summaryDetail-rank";
 				const playerName = document.createElement("div");
-				const playerLink = document.createElement("a");
-				if(!item.player) console.log(item) 
-				playerLink.innerText = item.player.player_name;
-				playerLink.href = PATH + "/player/" + item.player.player_id;
-				playerName.append(playerLink);
-				playerName.className = "summary-name";
+				playerName.innerText = item.player.player_name;
+				playerName.className = "summaryDetail-name";
 				const fee = document.createElement("div");
 				fee.innerText = item.fee;
-				fee.className = "summary-fee";
+				fee.className = "summaryDetail-fee";
 				const previousTeam = document.createElement("div");
 				previousTeam.innerText = item.previous_team.team_name;
-				previousTeam.className = "summary-previous-team";
+				previousTeam.className = "summaryDetail-previous-team";
 				const newTeam = document.createElement("div");
 				newTeam.innerText = item.new_team.team_name;
-				newTeam.className = "summary-new-team"
+				newTeam.className = "summaryDetail-new-team"
 				const age = document.createElement("div");
 				age.innerText = item.age;
-				age.className = "summary-age";
+				age.className = "summaryDetail-age";
 				
-				classElement.appendChild(playerRank);
-				classElement.appendChild(playerName);
-				classElement.appendChild(fee);
-				classElement.appendChild(previousTeam);
-				classElement.appendChild(newTeam);
-				classElement.appendChild(age);
+				contentEl.appendChild(playerRank);
+				contentEl.appendChild(playerName);
+				contentEl.appendChild(fee);
+				contentEl.appendChild(previousTeam);
+				contentEl.appendChild(newTeam);
+				contentEl.appendChild(age);
 				
-				//parentElement.append(playerRank);
-			  	//parentElement.append(playerName);
-			  	//parentElement.append(fee);
-			  	//parentElement.append(previousTeam);
-			  	//parentElement.append(newTeam);
-			  	//parentElement.append(age);
+				contentEl.addEventListener("click",function(){
+						location.href = PATH +"/player/detail?playerId="+ this.getAttribute("value");
+				});
 			}
 		});
+		document.querySelector(".summaryDetail").setAttribute("height","100%");
 }	
