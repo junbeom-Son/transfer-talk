@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import dbUtil.util;
 import vo.PlayerVO;
@@ -161,5 +162,28 @@ public class PlayerDAO {
 		} finally {
 			util.dbDisconnect(rs, pst, conn);
 		}
+	}
+
+
+	public void addPlayerNationality(Set<PlayerVO> players) {
+		String sql = "update player set player_nationality = ? where player_id = ?";
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			for (PlayerVO player : players) {
+				pst.setString(1, player.getPlayer_nationality());
+				pst.setInt(2, player.getPlayer_id());
+				
+				pst.addBatch();
+				pst.clearParameters();
+			}
+			pst.executeBatch();
+			pst.clearBatch();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(rs, pst, conn);
+		}
+		
 	}
 }
