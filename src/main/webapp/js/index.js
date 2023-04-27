@@ -101,6 +101,11 @@ window.addEventListener("resize", function(){
     promiseAjax([callLeague.bind(this)()]);
 });*/
 
+$(".hover-playerSearch").click(function(){
+	location.href = PATH +"/player/searchPage";
+});
+
+
 //league 선택시  header에 teams데이터 가저오기
 $("#header-league").change(function(){
 	if(isIndex){
