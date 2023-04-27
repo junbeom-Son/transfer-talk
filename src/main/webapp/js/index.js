@@ -173,12 +173,14 @@ $(".logout-container").click(function(){
 	location.href = PATH +"/login/logoutPage";
 });
 
-console.log($("#loginUserId").val());
+console.log("///",$("#loginUserId").val(),"///");
+if($("#loginUserId").val()!==undefined) localStorage.setItem("loginState", $("#loginUserId").val());
+console.log(localStorage)
 //login 처리 함수
 const loginContainer = document.querySelector(".login-container");
 const logoutContainer = document.querySelector(".logout-container");
 const myMenu = document.querySelector(".login-item");
-if ($("#loginUserId").val() === '1') { // 로그인시
+if (localStorage.getItem("loginState")==='1') { // 로그인시
 	loginContainer.classList.add("hidden");
 	if(logoutContainer.classList.contains('hidden'))logoutContainer.classList.remove("hidden");
 	if(myMenu.classList.contains('hidden'))myMenu.classList.remove("hidden");
@@ -187,6 +189,16 @@ if ($("#loginUserId").val() === '1') { // 로그인시
 	logoutContainer.classList.add("hidden");
 	myMenu.classList.add("hidden");
 }
+
+/*if ($("#loginUserId").val() === '1') { // 로그인시
+	loginContainer.classList.add("hidden");
+	if(logoutContainer.classList.contains('hidden'))logoutContainer.classList.remove("hidden");
+	if(myMenu.classList.contains('hidden'))myMenu.classList.remove("hidden");
+}else if($("#loginUserId").val() ===' '){ // 로그아웃, 미 로그인 시
+	if(loginContainer.classList.contains('hidden'))loginContainer.classList.remove("hidden");
+	logoutContainer.classList.add("hidden");
+	myMenu.classList.add("hidden");
+}*/
 
 //** 생성한 함수 ------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -13,12 +13,23 @@ const toTopEl = document.querySelector('.top-btn');
 toTopEl.addEventListener('click', function(){
 	// scrollTo로 위치 상단으로 옮기기 (ScrollToPlugin 라이브러리 사용 시 가능)	
 	gsap.to(window, 0.7, { scrollTo : 0 });
+    // down버튼 보이기
+    gsap.to('.down-btn', 0.2, {
+      	opacity : 1,
+  		display:'block'
+    });
 });
 
 const toDownEl = document.querySelector('.down-btn');
 toDownEl.addEventListener('click', function(){
 	// scrollTo로 위치 하단으로 옮기기 (ScrollToPlugin 라이브러리 사용 시 가능)	
 	gsap.to(window, 0.7, { scrollTo : $('body').prop('scrollHeight') }); //scroll엘리먼트 높이  $('body').prop('scrollHeight')
+	//top 버튼 보이기
+    gsap.to('.top-btn', 0.2, {
+        opacity : 1,
+  		display:'block'
+    });
+    
 });
 	
 //시작
@@ -26,6 +37,31 @@ document.querySelector(".summaryDetail-category").innerHTML = summaryTitleText;
 promiseAjax([detailDatas]);
 $(".summary-detail-btn").hide();
 
+window.addEventListener('scroll',_.throttle(function(){
+	if(window.scrollY > 1000){
+	    //top 버튼 보이기
+	    gsap.to('.top-btn', 0.2, {
+	        opacity : 1,
+      		display:'block'
+	    });
+	     // down버튼 숨기기
+	    gsap.to('.down-btn', 0.2, {
+	      	opacity : 0,
+      		display:'none'
+	    });
+	  }else {
+	   	 //top 버튼 숨기기
+	    gsap.to('.top-btn', 0.2, {
+	        opacity : 0,
+      		display:'none'
+	    });
+	     // down버튼 보이기
+	    gsap.to('.down-btn', 0.2, {
+	      	opacity : 1,
+      		display:'block'
+	    });
+	  }
+}));
 
 function getContainerDataFromParameters() {
 	let data = {};
@@ -123,5 +159,4 @@ function btnAction(type, playerInfo){
 				});
 			}
 		});
-		document.querySelector(".summaryDetail").setAttribute("height","100%");
 }	
