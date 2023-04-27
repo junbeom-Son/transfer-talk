@@ -76,13 +76,13 @@ window.addEventListener('scroll', function(){
 	if(this.scrollY >= headerHeight && this.innerWidth >= mediaQueryWidth){
 		headerHoverContainer.style.position = 'fixed';
 		headerHoverContainer.style.top = 0;
-		headerHoverContainer.style.backgroundColor = 'beige';
+		headerHoverContainer.style.backgroundColor = '#ACC2FA';
 		headerHoverContainer.style.width = '100%';
 		headerHoverContainer.style.height = '50px';
 	}else if(this.scrollY >= headerHeight && this.innerWidth < mediaQueryWidth){
 			headerHoverContainer.style.position = 'fixed';
 			headerHoverContainer.style.top = 0;
-			headerHoverContainer.style.backgroundColor = 'beige';
+			headerHoverContainer.style.backgroundColor = '#ACC2FA';
 	}else{
 		headerHoverContainer.style.position = 'static';
 	}
@@ -166,13 +166,6 @@ $(".header-homelogo").click(() => location.href = PATH);
 //login버튼 클릭 시 함수
 $(".login-container").click(() => {
 	location.href = PATH +"/login/loginPage";
-	/*callAjax({
-	url: getContextPath() + "/login/login.jsp",
-	method:"post",
-	success: function(res){
-		console.log(res);
-	}
-});*/
 });
 
 //logout버튼 클릭 시 함수

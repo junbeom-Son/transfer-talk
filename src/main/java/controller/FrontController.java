@@ -70,6 +70,9 @@ public class FrontController extends HttpServlet {
 		case "/transfer/summary":
 			controller = new RankerController();
 			break;
+		case "/transfer/summaryDetail":
+			controller = new TransferSummaryDetail();
+			break;	
 //		case "/site-result/changePhoto.do":
 //			controller = new ChangePhotoController();
 //			break;

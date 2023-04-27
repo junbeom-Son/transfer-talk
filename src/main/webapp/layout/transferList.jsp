@@ -40,23 +40,27 @@ request.setCharacterEncoding("utf-8");
 		
 		<div class="transfer-contents-in">
 			<h2 class="in-out-header">in</h2>
-			<div class="transfer-name transfer-title">이름</div>
-			<div class="transfer-fee transfer-title">이적료</div>
-			<div class="transfer-previous-team transfer-title">이전팀</div>
-			<div class="transfer-new-team transfer-title">새팀</div>
-			<div class="transfer-age-at-transfer transfer-title">이적 당시 나이</div>
-			<div class="transfer-position transfer-title">포지션</div>
-			<div class="transfer-year transfer-title">이적 년도</div>
+			<div class="transfer-contents-title">
+				<div class="transfer-name transfer-title">이름</div>
+				<div class="transfer-fee transfer-title">이적료</div>
+				<div class="transfer-previous-team transfer-title">이전팀</div>
+				<div class="transfer-new-team transfer-title">새팀</div>
+				<div class="transfer-age-at-transfer transfer-title">이적 당시 나이</div>
+				<div class="transfer-position transfer-title">포지션</div>
+				<div class="transfer-year transfer-title">이적 년도</div>
+			</div>	
 		</div>
 		<div class="transfer-contents-out">
 			<h2 class="in-out-header">out</h2>
-			<div class="transfer-name transfer-title">이름</div>
-			<div class="transfer-fee transfer-title">이적료</div>
-			<div class="transfer-previous-team transfer-title">이전팀</div>
-			<div class="transfer-new-team transfer-title">새팀</div>
-			<div class="transfer-age-at-transfer transfer-title">이적 당시 나이</div>
-			<div class="transfer-position transfer-title">포지션</div>
-			<div class="transfer-year transfer-title">이적 년도</div>
+			<div class="transfer-contents-title">
+				<div class="transfer-name transfer-title">이름</div>
+				<div class="transfer-fee transfer-title">이적료</div>
+				<div class="transfer-previous-team transfer-title">이전팀</div>
+				<div class="transfer-new-team transfer-title">새팀</div>
+				<div class="transfer-age-at-transfer transfer-title">이적 당시 나이</div>
+				<div class="transfer-position transfer-title">포지션</div>
+				<div class="transfer-year transfer-title">이적 년도</div>
+			</div>
 		</div>
 
 	</main>
