@@ -66,4 +66,13 @@ public class PlayerService {
 	public void updatePlayers(List<PlayerVO> players) {
 		playerDao.updatePlayers(players);
 	}
+
+	/**
+	 * 국적을 받아서 한번에 업데이트
+	 * @param players
+	 */
+	public void addPlayerNationality(Set<PlayerVO> players) {
+		playerDao.addPlayerNationality(players);
+		
+	}
 }

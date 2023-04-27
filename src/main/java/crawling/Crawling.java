@@ -26,8 +26,8 @@ import vo.TeamVO;
 import vo.TransferVO;
 
 public class Crawling {
-	private static int FIRST_YEAR = 2021; // 시작은 1992
-	private static int CUR_YEAR = 2023; // test 목적으로 변경, 추후 2023으로 복귀
+	private static int FIRST_YEAR = 2005; // 시작은 1992
+	private static int CUR_YEAR = 1992; // test 목적으로 변경, 추후 2023으로 복귀
 
 	private static char INTO_THE_TEAM = 'i';
 	private static char OUT_OF_THE_TEAM = 'o';
@@ -107,7 +107,7 @@ public class Crawling {
 	public void crawl() throws IOException {
 		initializeDefaultLeagueNames();
 		initializeContryCodes(leagueCodes);
-		for (int year = FIRST_YEAR; year <= CUR_YEAR; ++year) {
+		for (int year = FIRST_YEAR; year >= CUR_YEAR; --year) {
 			curYear = year;
 			System.out.println(year + "*************");
 			crawlBySeason('s');
@@ -154,6 +154,7 @@ public class Crawling {
 			}
 //			시즌별로 저장한 정보 service에 저장하기 위한 호출 코드 입력 하기
 
+			playerService.addPlayerNationality(players);
 //			playerService.insertPlayers(players);
 //			leagueService.insertLeagues(leagues);
 //			teamService.insertTeams(teams);
@@ -206,73 +207,77 @@ public class Crawling {
 			}
 			String idStr = idElements.get(0).attr("href");
 			int player_id = Integer.parseInt(idStr.substring(idStr.lastIndexOf("/") + 1, idStr.length()));
-			String player_name = playerElement.select("td > .di > .hide-for-small > a").get(0).text();
-			String ageStr = playerElement.select("td").get(1).text().replaceAll("[^0-9]", "");
-			int age = 0;
-			if (!ageStr.equals("")) {
-				age = Integer.parseInt(ageStr);
-			}
+//			String player_name = playerElement.select("td > .di > .hide-for-small > a").get(0).text();
+//			String ageStr = playerElement.select("td").get(1).text().replaceAll("[^0-9]", "");
+//			int age = 0;
+//			if (!ageStr.equals("")) {
+//				age = Integer.parseInt(ageStr);
+//			}
 			String nation = null;
 			if (playerElement.select("td > img").size() > 0) {
 				nation = playerElement.select("td > img").get(0).attr("title");
 			}
 
-			if (playerElement.select("td").size() < 3) {
-				System.out.println(player_name + "doesn't have a position******");
-			}
+//			if (playerElement.select("td").size() < 3) {
+//				System.out.println(player_name + "doesn't have a position******");
+//			}
 
-			String position = playerElement.select("td").get(3).text();
+//			String position = playerElement.select("td").get(3).text();
+//
+//			String previousTeamName = null;
+//			String previousLeagueName = null;
+//			String newTeamName = null;
+//			String newLeagueName = null;
+//			LeagueVO league = null;
+//
+//			if (inOrOut == 'i') {
+//				newTeamName = teamName;
+//				if (playerElement.select("td.zentriert > a > img").size() > 0) {
+//					previousTeamName = playerElement.select("td.zentriert > a > img").get(0).attr("alt");
+//				} else {
+//					previousTeamName = playerElement.select("td.zentriert > img").get(playerElement.select("td.zentriert > img").size() - 1).attr("alt");
+//				}
+//				previousLeagueName = playerElement.select("td.verein-flagge-transfer-cell > img").size() == 0 ? "-"
+//						: playerElement.select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
+//				if (leagueNames.get(previousLeagueName) == null) {
+//					leagueNames.put(previousLeagueName, previousLeagueName + "_league");
+//				}
+//				league = makeLeagueVO(leagueNames.get(previousLeagueName), previousLeagueName);
+//			} else {
+//				previousTeamName = teamName;
+//				if (playerElement.select("td.zentriert > a > img").size() > 0) {
+//					newTeamName = playerElement.select("td.zentriert > a > img").get(0).attr("alt");
+//				} else {
+//					newTeamName = playerElement.select("td.zentriert > img").get(playerElement.select("td.zentriert > img").size() - 1).attr("alt");
+//				}
+//				newLeagueName = playerElement.select("td.verein-flagge-transfer-cell > img").size() == 0 ? "-"
+//						: playerElement.select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
+//
+//				if (leagueNames.get(newLeagueName) == null) {
+//					leagueNames.put(newLeagueName, newLeagueName + "_league");
+//				}
+//				league = makeLeagueVO(leagueNames.get(newLeagueName), newLeagueName);
+//			}
+//
+//			String fee = playerElement.select("td.rechts > a").get(0).text();
+//			if (fee.contains("loan")) {
+//				continue;
+//			}
 
-			String previousTeamName = null;
-			String previousLeagueName = null;
-			String newTeamName = null;
-			String newLeagueName = null;
-			LeagueVO league = null;
-
-			if (inOrOut == 'i') {
-				newTeamName = teamName;
-				if (playerElement.select("td.zentriert > a > img").size() > 0) {
-					previousTeamName = playerElement.select("td.zentriert > a > img").get(0).attr("alt");
-				} else {
-					previousTeamName = playerElement.select("td.zentriert > img").get(playerElement.select("td.zentriert > img").size() - 1).attr("alt");
-				}
-				previousLeagueName = playerElement.select("td.verein-flagge-transfer-cell > img").size() == 0 ? "-"
-						: playerElement.select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
-				if (leagueNames.get(previousLeagueName) == null) {
-					leagueNames.put(previousLeagueName, previousLeagueName + "_league");
-				}
-				league = makeLeagueVO(leagueNames.get(previousLeagueName), previousLeagueName);
-			} else {
-				previousTeamName = teamName;
-				if (playerElement.select("td.zentriert > a > img").size() > 0) {
-					newTeamName = playerElement.select("td.zentriert > a > img").get(0).attr("alt");
-				} else {
-					newTeamName = playerElement.select("td.zentriert > img").get(playerElement.select("td.zentriert > img").size() - 1).attr("alt");
-				}
-				newLeagueName = playerElement.select("td.verein-flagge-transfer-cell > img").size() == 0 ? "-"
-						: playerElement.select("td.verein-flagge-transfer-cell > img").get(0).attr("title");
-
-				if (leagueNames.get(newLeagueName) == null) {
-					leagueNames.put(newLeagueName, newLeagueName + "_league");
-				}
-				league = makeLeagueVO(leagueNames.get(newLeagueName), newLeagueName);
-			}
-
-			String fee = playerElement.select("td.rechts > a").get(0).text();
-			if (fee.contains("loan")) {
-				continue;
-			}
-
-			PlayerVO player = makePlayer(player_id, player_name);
+//			PlayerVO player = makePlayer(player_id, player_name);
+//			players.add(player);
+//			leagues.add(league);
+			PlayerVO player = new PlayerVO();
+			player.setPlayer_id(player_id);
+			player.setPlayer_nationality(nation);
 			players.add(player);
-			leagues.add(league);
 			
-			TeamVO previousTeam = makeTeamVO(previousTeamName, league);
-			TeamVO newTeam = makeTeamVO(newTeamName, league);
-			teams.add(previousTeam);
-			teams.add(newTeam);
-			TransferVO transfer = makeTransferVO(age, fee, player, position, previousTeam, newTeam);
-			transfers.add(transfer);
+//			TeamVO previousTeam = makeTeamVO(previousTeamName, league);
+//			TeamVO newTeam = makeTeamVO(newTeamName, league);
+//			teams.add(previousTeam);
+//			teams.add(newTeam);
+//			TransferVO transfer = makeTransferVO(age, fee, player, position, previousTeam, newTeam);
+//			transfers.add(transfer);
 		}
 	}
 	
