@@ -170,7 +170,7 @@ $(".login-container").click(() => {
 
 //logout버튼 클릭 시 함수
 $(".logout-container").click(function(){
-	
+	location.href = PATH +"/login/logoutPage";
 });
 
 console.log($("#loginUserId").val());
