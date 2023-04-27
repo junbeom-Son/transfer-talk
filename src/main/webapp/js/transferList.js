@@ -18,6 +18,7 @@ function callTransferList({
 		url: getContextPath() + "/transfer/summary",
 		data: {
 			top5: false,
+			isSummary:false,
 			...containerData
 		},
 		async: false,
