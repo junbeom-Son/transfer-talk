@@ -10,6 +10,7 @@
 		"picture_player position picture_previousteam picture_arrow picture_newteam"
 		"picture_player fee picture_previousteam picture_arrow picture_newteam"
 }
+
 #player_name{ grid-area: name; }
 #player_age{ grid-area: age; }
 #picture_player{ grid-area: picture_player; }
@@ -38,5 +39,10 @@
 	display: flex;
 	justify-content:center;
 	align-items:center;
+}
+#picture_previousteam img, #picture_newteam img{
+	
+	width:100px;
+	height:100px;
 }
 
