@@ -14,10 +14,12 @@ const callSummary = function ({
 		loadingStart: loadingStart,
 		loadingEnd : loadingEnd,
 		beforeSend:function(){
-			const parent =$(".summary-contents").get(containerIndex);
-			while(parent.children.length > 6){
-				parent.removeChild(parent.lastChild);
-			}
+			document.querySelectorAll(".summary-contents").forEach(parent=>{
+				while(parent.children.length > 1){
+					parent.removeChild(parent.lastChild);
+				}
+			})
+			
 		},
 		success:function(data) {
 			const parentElement = $(".summary-contents");
@@ -37,10 +39,7 @@ const callSummary = function ({
 					playerRank.className = "summary-rank";
 					const playerName = document.createElement("div");
 					playerName.className = "summary-name";
-					const playerLink = document.createElement("a"); 
-					playerLink.innerText = item.player.player_name;
-					/*playerLink.href = PATH + "/player/" + item.player.player_id;
-					playerName.append(playerLink);*/
+					playerName.innerText = item.player.player_name;
 					const fee = document.createElement("div");
 					fee.innerText = item.fee;
 					fee.className = "summary-fee";
