@@ -25,7 +25,7 @@
 	</div>
 	<div class="header-hover-container">
 		<div class="header-hover-loginOut">
-			<div class="login-container">
+			<div class="login-container hidden">
 				<button class="login-button">
 					<img alt="loginIcon" src="${path}/images/login.png">
 					<div>Login</div>
