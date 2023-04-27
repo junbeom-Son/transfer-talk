@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="${path}/css/summary.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script defer src="${path}/js/youtube.js"></script>
 <script defer src="${path}/js/index.js"></script>
 <script defer src="${path}/js/summary.js"></script>
 
@@ -36,12 +37,12 @@
 		</jsp:include> --%>
 	</div>
 	<div id="external">
-		<div class="siteLink">
-		</div>
-		<iframe width="40%" height="100%" src="https://www.youtube.com/embed/OSEFivkqPtc?autoplay=1&mute=1&loop=1" title="YouTube video player" 
-		         frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-        </iframe>
-        
+      <section class="siteLink">
+	  </section>
+         <!-- YOUTUBE VIDEO -->
+	  <section class="youtube">
+	      <div id="player"></div>
+	  </section>
 	</div>
 </main>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
