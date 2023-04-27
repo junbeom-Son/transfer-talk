@@ -101,8 +101,8 @@ public class TransferDAO {
 	 *
 	 *                 작성자 : 서준호
 	 */
-	public List<TransferVO> selectTransfersByPlayerId(int playerId) {
-
+	public TransferVO selectTransfersByPlayerId(int playerId) {
+		TransferVO transfer=null;
 		String sql = """
 				select transfer_id, player_position, transfer_year, fee, age, t.player_id as player_id, player_name,
 				t.previous_team_id as p_team_id, p_team.team_name as p_team_name,
@@ -112,16 +112,15 @@ public class TransferDAO {
 				join player on(player.player_id = t.player_id)
 				join team p_team on (t.previous_team_id = p_team.team_id)
 				join team n_team on (t.new_team_id = n_team.team_id)
-				where t.player_id = ? order by transfer_id desc limit 1
+				where t.player_id = ? order by transfer_id
 				""";
-		List<TransferVO> transfers = new ArrayList<>();
 		conn = util.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, playerId);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				TransferVO transfer = new TransferVO();
+				transfer = new TransferVO();
 				transfer.setTransfer_id(rs.getInt("transfer_id"));
 				transfer.setPlayer_position(rs.getString("player_position"));
 				transfer.setTransfer_year(rs.getInt("transfer_year"));
@@ -145,7 +144,7 @@ public class TransferDAO {
 				newteam.setTeam_name(rs.getString("n_team_name"));
 				newteam.setTeam_img_src(rs.getString("n_team_img"));
 				transfer.setNew_team(newteam);
-				transfers.add(transfer);
+
 				
 			}
 		} catch (SQLException e) {
@@ -154,7 +153,7 @@ public class TransferDAO {
 			util.dbDisconnect(null, pst, conn);
 		}
 
-		return transfers;
+		return transfer;
 	}
 
 	/**
@@ -313,6 +312,48 @@ public class TransferDAO {
 				newTeam.setLeague(newLeague);
 
 				transfers.add(transfer);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(null, pst, conn);
+		}
+		return transfers;
+	}
+	/**
+	 * 특정 선수의 총 이적내역 조회
+	 * @param playerId
+	 * 작성자 : 서준호
+	 */
+	public List<TransferVO> selectHistoryByPlayerId(int playerId) {
+		String sql = "select transfer_year, age, player_position, fee, p_team.team_name, n_team.team_name"
+				+ " from transfer t "
+				+ " join team p_team on (t.previous_team_id = p_team.team_id)"
+				+ " join team n_team on (t.new_team_id = n_team.team_id)"
+				+ " where player_id = ?";
+		List<TransferVO> transfers = new ArrayList<>();
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, playerId);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				TransferVO transfer = new TransferVO();
+				transfer.setTransfer_year(rs.getInt("transfer_year"));
+				transfer.setAge(rs.getInt("age"));
+				transfer.setPlayer_position(rs.getString("player_position"));
+				transfer.setFee(rs.getString("fee"));
+				
+				TeamVO previousteam = new TeamVO();
+				previousteam.setTeam_name(rs.getString("p_team.team_name"));
+				transfer.setPrevious_team(previousteam);
+
+				TeamVO newteam = new TeamVO();
+				newteam.setTeam_name(rs.getString("n_team.team_name"));
+				transfer.setNew_team(newteam);
+				
+				transfers.add(transfer);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
