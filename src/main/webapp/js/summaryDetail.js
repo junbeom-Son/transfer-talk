@@ -68,8 +68,6 @@ function getContainerDataFromParameters() {
 	let params = location.search.substring(location.search.indexOf("?") + 1).split("&");
 	for (let i = 0; i < params.length; ++i) {
 		let tmp = params[i].split("=");
-		console.log(decodeURIComponent(tmp))
-		console.log(tmp)
 		const val =  decodeURIComponent(tmp[1]).replace(" TOP 5","");
 		data[tmp[0]] = val;
 	}
