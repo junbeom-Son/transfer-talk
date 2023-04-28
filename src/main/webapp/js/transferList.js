@@ -1,5 +1,8 @@
 const transferYearSelector = document.querySelector("#transfer-year");
 optionTagCreateFunction(makeYearArray(),transferYearSelector);
+const isTransferList = location.pathname.indexOf('/transferList')!== -1;
+let transfers;
+
 
 function makeYearArray(){
 	const array = [];
@@ -23,24 +26,22 @@ function callTransferList({
 		},
 		//async: false,
 		beforeSend: () => {
-			const transferIn =  document.querySelector(".transfer-contents-in");
-			while(transferIn.children.length > 8){
-				transferIn.removeChild(transferIn.lastChild);
-			}
-			const transferOut = document.querySelector(".transfer-contents-out");
-			while(transferOut.children.length > 8){
-				transferOut.removeChild(transferOut.lastChild);
-			}
+				const doc = document.querySelectorAll(".transfer-contents-content");
+				for (const elem of doc) {
+				    elem.remove();
+				}
 		},
 		success: function(data) {
-			console.log(data);
 			const transferDivElements = [$(".transfer-contents-in"),$(".transfer-contents-out")];
 			data.forEach(function(transfers, index) {
 				if(transfers.length == 0){ //값이 없을 때
+					const contentEl =document.createElement("div");
 					const noData = document.createElement("div");
 					noData.innerText = "선수 정보가 없습니다.";
+					contentEl.className = "transfer-contents-content";
 					noData.className = "transfer-noData-style";
-					transferDivElements[index].append(noData);	
+					contentEl.append(noData)
+					transferDivElements[index].append(contentEl);	
 				}
 				transfers.forEach(function(item) {
 					const contentEl =document.createElement("div");
@@ -105,9 +106,12 @@ function getContainerDataFromParameters(year) {
 	return data;
 }
 
-let transfers = callTransferList({
-		containerData: getContainerDataFromParameters(2022)
-});
+//transferList로 들어왔을 때,
+if(isTransferList){
+	 transfers = callTransferList({
+			containerData: getContainerDataFromParameters(2022)
+	});
+}
 
 $("#transfer-in-show-btn").click(function() {
 	$(".transfer-contents-out").hide();
@@ -128,9 +132,11 @@ $("#transfer-all-show-btn").click(function() {
 	
 });
 
-$("#transfer-year").change(function(){
-	const selectYear = $(this).val() == 'none' ? 2022 : $(this).val();
-	transfers = callTransferList({
-		containerData: getContainerDataFromParameters(selectYear)
-	});
-})
+if(isTransferList){
+	$("#transfer-year").change(function(){
+		const selectYear = $(this).val() == 'none' ? 2022 : $(this).val();
+		transfers = callTransferList({
+			containerData: getContainerDataFromParameters(selectYear)
+		});
+	})
+}

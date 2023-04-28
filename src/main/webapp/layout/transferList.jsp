@@ -24,7 +24,7 @@ request.setCharacterEncoding("utf-8");
 <body>
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<main>
-		<h1>${title != null ? title : '전체데이터'}</h1>
+		<h1>${title != null ? title : ''}</h1>
 		<div class="transfer-menu">
 			<div class="transfer-menu-btn">
 				<button id="transfer-in-show-btn" class="btn-info">in</button>
