@@ -83,4 +83,8 @@ public class PlayerService {
 	public List<PlayerVO> selectFavoritePlayersByUserId(String userId) {
 		return playerDao.selectFavoritePlayersByUserId(userId);
 	}
+	
+	public void addFavoritePlayer(String user_id, int player_id) {
+		playerDao.addFavoritePlayer(user_id, player_id);
+	}
 }
