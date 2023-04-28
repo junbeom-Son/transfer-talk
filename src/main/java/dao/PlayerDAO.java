@@ -17,8 +17,8 @@ public class PlayerDAO {
 	private Statement st;
 	private PreparedStatement pst; // ?지원
 	private ResultSet rs;
-	private int resultCount; 
-	
+	private int resultCount;
+
 	/**
 	 * 1. player_id, player_name insert 하는것
 	 * @param player
@@ -33,30 +33,30 @@ public class PlayerDAO {
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, player.getPlayer_id());
 			pst.setString(2, player.getPlayer_name());
-			resultCount = pst.executeUpdate(); 
+			resultCount = pst.executeUpdate();
 		} catch (SQLException e) {
 			resultCount = -1;
 			e.printStackTrace();
 		} finally {
 			util.dbDisconnect(null, pst, conn);
 		}
-		
+
 		return resultCount;
 	}
 	
-	
+
 	/**
-	*****Null return 가능*****
-    * player_id를 받아 아이디에 해당하는 PlayerVO 리턴 
-    * @param player_id
-    * @return 해당하는 아이디가 있으면 PlayerVO, 없으면 null return
+	 ***** Null return 가능***** player_id를 받아 아이디에 해당하는 PlayerVO 리턴
+	 * 
+	 * @param player_id
+	 * @return 해당하는 아이디가 있으면 PlayerVO, 없으면 null return
 	 */
 	public PlayerVO selectPlayerById(int player_id) {
-		String sql ="""
+		String sql = """
 				select player_id, player_name, player_img_src
-				from player 
+				from player
 				where player_id = """ + player_id;
-		
+
 		PlayerVO player = null;
 		conn = util.getConnection();
 		try {
@@ -75,21 +75,21 @@ public class PlayerDAO {
 		}
 		return player;
 	}
-	
+
 	/**
-	 * 검색하는 이름에 해당하는 모든선수 조회 메서드
+	 * 검색하는 이름에 해당하는 모든선수 조회 메서드 
 	 * playerName을 받아 %이름%에 해당하는 모든선수 조회
 	 * @param playerName
-	 * @return List<PlayerVO> players
+	 * @return List<PlayerVO> players 
 	 * 작성자 : 서준호
 	 */
 	public List<PlayerVO> selectPlayersByName(String playerName) {
-		String sql ="""
+		String sql = """
 				select *
 				from player
 				where player_name like ?
 				""";
-		
+
 		List<PlayerVO> players = new ArrayList<>();
 		conn = util.getConnection();
 		try {
@@ -112,7 +112,7 @@ public class PlayerDAO {
 
 	/**
 	 * 모든 플레이어 조회
-	 * @return 모든 플레이어
+	 * @return 모든 플레이어 
 	 * 작성자 : 손준범
 	 */
 	public List<PlayerVO> selectAllPlayers() {
@@ -135,10 +135,10 @@ public class PlayerDAO {
 		}
 		return players;
 	}
-	
+
 	/**
-	 * 플레이어 업데이트
-	 * 대량으로 받아서 한번에 처리
+	 * 플레이어 업데이트 
+	 * 대량으로 받아서 한번에 처리 
 	 * 작성자 : 손준범
 	 */
 	public void updatePlayers(List<PlayerVO> players) {
@@ -150,13 +150,13 @@ public class PlayerDAO {
 				pst.setString(1, player.getPlayer_name());
 				pst.setString(2, player.getImg_src());
 				pst.setInt(3, player.getPlayer_id());
-				
+
 				pst.addBatch();
 				pst.clearParameters();
 			}
 			pst.executeBatch();
 			pst.clearBatch();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -164,7 +164,7 @@ public class PlayerDAO {
 		}
 	}
 
-
+	
 	public void addPlayerNationality(Set<PlayerVO> players) {
 		String sql = "update player set player_nationality = ? where player_id = ?";
 		conn = util.getConnection();
@@ -173,7 +173,7 @@ public class PlayerDAO {
 			for (PlayerVO player : players) {
 				pst.setString(1, player.getPlayer_nationality());
 				pst.setInt(2, player.getPlayer_id());
-				
+
 				pst.addBatch();
 				pst.clearParameters();
 			}
@@ -184,6 +184,6 @@ public class PlayerDAO {
 		} finally {
 			util.dbDisconnect(rs, pst, conn);
 		}
-		
+
 	}
 }

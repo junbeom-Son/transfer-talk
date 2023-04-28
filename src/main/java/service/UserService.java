@@ -29,11 +29,11 @@ public class UserService {
 	 * 로그인
 	 * @param user_id
 	 * @param user_pw
-	 * @return 1 -> 로그인 성공, 0 -> 로그인 실패
+	 * @return  -> 로그인 성공,  -> 로그인 실패
 	 * 작성자: 김창겸
 	 */
-	public int loginCheck(String user_id, String user_pw) {
-		return userDao.loginCheck(user_id, user_pw);
+	public UserVO login(String user_id, String user_pw) {
+		return userDao.login(user_id, user_pw);
 	}
 
 }
