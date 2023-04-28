@@ -13,12 +13,14 @@ $(".btn-search").click(function(){
 			$.each(response, function(index, player){
 				console.log(player);
 				var div = $("<div>").attr("value",player.player_id);
-				var img = $("<img>").attr("src",player.img_src);
-				var name = $("<span>").text(player.player_name);
-				var country = $("<span>").text(player.player_nationality);
+				var img = $("<img>").attr("src",player.img_src).addClass('elMargin-right');
+				var name = $("<span>").text(player.player_name).addClass('elMargin-right');
+				var line = $('<span>').text('|')
+				var country = $("<span>").text(player.player_nationality).addClass('elMargin-right');
 				
 				div.append(img);
 				div.append(name);
+				div.append(line);
 				div.append(country);
 				$(div).click(function(){
 					location.href = PATH +"/player/detail?playerId="+ this.getAttribute("value");
