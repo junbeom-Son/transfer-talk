@@ -236,7 +236,29 @@ public class PlayerDAO {
 			util.dbDisconnect(null, pst, conn);
 		}
 	}
-	
+
+
+	public int isFavorite(String user_id, int player_id) {
+		String sql = """
+				select * from my_favorite_player where user_id = ? and player_id = ?
+				""";
+		resultCount = 0;
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pst.setString(1, user_id);
+			pst.setInt(2, player_id);
+			rs = pst.executeQuery();
+			rs.last();
+			resultCount = rs.getRow();
+		} catch (SQLException e) {
+			resultCount = -1;
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(null, pst, conn);
+		}
+		return resultCount;
+	}
 	
 	
 }
