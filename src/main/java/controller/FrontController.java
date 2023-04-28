@@ -49,6 +49,9 @@ public class FrontController extends HttpServlet {
 		case "/transfer/country":
 			controller = new AllTransferCountryController();
 			break;
+		case "/transfer/country/searchLeague": 
+			controller = new SearchLeagueInCountryController(); 
+			break;
 		case "/transfer/country/leagues": 
 			controller = new AllTransferLeaguesInCountryController(); 
 			break; 
