@@ -26,6 +26,7 @@ public class AllplayerInfoController implements Controller {
 		String playerName = request.getParameter("playerName");		
 		List<PlayerVO> players = playerService.selectPlayersByName(playerName);
 		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.writeValueAsString(players);
 		return "responseBody:" + objectMapper.writeValueAsString(players);
 	}
 }
