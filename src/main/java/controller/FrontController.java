@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet({"/transfer/*", "/player/*", "/login/*"}) //기본주소 : /transferTalk
+@WebServlet({"/transfer/*", "/player/*", "/login/*", "/user/*"}) //기본주소 : /transferTalk
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

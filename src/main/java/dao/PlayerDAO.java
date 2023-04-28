@@ -188,4 +188,55 @@ public class PlayerDAO {
 		}
 
 	}
+	
+	
+	public List<PlayerVO> selectFavoritePlayersByUserId(String userId) {
+		List<PlayerVO> favoritePlayers = new ArrayList<>();
+		String sql = """
+				select user_id, player.player_id, player_name, player_img_src, player_nationality
+				from my_favorite_player
+				join player on (my_favorite_player.player_id = player.player_id)
+				where user_id = ?;
+				""";
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, userId);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				PlayerVO player = new PlayerVO();
+				player.setPlayer_id(rs.getInt("player_id"));
+				player.setPlayer_name(rs.getString("player_name"));
+				player.setImg_src(rs.getString("player_img_src"));
+				player.setPlayer_nationality(rs.getString("player_nationality"));
+				favoritePlayers.add(player);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(rs, pst, conn);
+		}
+		return favoritePlayers;
+	}
+
+	public void addFavoritePlayer(String user_id, int player_id) {
+		String sql = """
+				insert into my_favorite_player(user_id, player_id) values (?, ?)
+				""";
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1,user_id);
+			pst.setInt(2, player_id);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			resultCount = -1;
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(null, pst, conn);
+		}
+	}
+	
+	
+	
 }
