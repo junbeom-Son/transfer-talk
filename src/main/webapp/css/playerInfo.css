@@ -26,7 +26,7 @@
 #picture_arrow{grid-area: picture_arrow;}
 
 #picture_arrow > img{
-	width: 80%; 
+	width: 60%; 
 	height: inherit;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .history-title > div{
-	background-color:orange;
+	background-color:#ffc75e;
 }
 .history-items, .history-title{
 	display:flex;
