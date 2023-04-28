@@ -199,6 +199,10 @@ if (localStorage.getItem("loginUserId") !== "") { // 로그인시
 	myMenu.classList.add("hidden");
 }
 
+$(".hover-myFavoritePlayers").click(function() {
+	location.href=getContextPath() + "/user/myFavoritePlayers";
+});
+
 
 //** 생성한 함수 ------------------------------------------------------------------------------------------------------------------------------------------------
 

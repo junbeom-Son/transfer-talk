@@ -84,7 +84,10 @@ public class FrontController extends HttpServlet {
 			break;	
 		case "/user/favoritePlayer":
 			controller = new FavoritePlayerCotroller();
-			break;	
+			break;
+		case "/user/myFavoritePlayers":
+			controller = new UserFavoritePlayers();
+			break;
 //		case "/site-result/changePhoto.do":
 //			controller = new ChangePhotoController();
 //			break;

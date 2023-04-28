@@ -76,7 +76,7 @@
 					<div class="contents-menu">
 						<ul class="inner">
 							<li>My Team</li>
-							<li>My Player</li>
+							<li class="hover-myFavoritePlayers">My Player</li>
 						</ul>
 					</div>
 				</div>
