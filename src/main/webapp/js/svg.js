@@ -20,20 +20,20 @@ const nations = [
 	{'nation':'독일', 'transform':[240,460], 'country':'Germany'},
 	{'nation':'체코', 'transform':[345,500], 'country':'Czech Republic'},
 	{'nation':'오스트리아', 'transform':[305,565], 'country':'Austria',fontSize:'13'},
-	{'nation':'슬로베니아', 'transform':[320,605], 'country':'Slovenia',fontSize:'6'},
+	{'nation':'슬로베니아', 'transform':[320,605], 'country':'Slovenia',fontSize:'8'},
 	{'nation':'폴란드', 'transform':[420,410], 'country':'Poland'},
 	{'nation':'우크라이나', 'transform':[620,500], 'country':'Ukraine'},
 	{'nation':'헝가리', 'transform':[419,572], 'country':'Hungary'},
-	{'nation':'크로아티아', 'transform':[370,620], 'country':'Croatia',fontSize:'6'},
+	{'nation':'크로아티아', 'transform':[370,620], 'country':'Croatia',fontSize:'8'},
 	{'nation':'그리스', 'transform':[480,800], 'country':'Greece'},
 	{'nation':'루마니아', 'transform':[520,610], 'country':'Romania'},
 	{'nation':'세르비아', 'transform':[450,660], 'country':'Serbia'},
 	{'nation':'덴마크', 'transform':[210,290], 'country':'Denmark'},
 	{'nation':'터키', 'transform':[750,800], 'country':'Turkey'},
-	{'nation':'슬로바키아', 'transform':[419,525], 'country':'Slovakia',fontSize:'6'}
-	
+	{'nation':'슬로바키아', 'transform':[419,525], 'country':'Slovakia',fontSize:'8'}
 ]
-g.transform('t'+[50,-100]+' s'+0.8);
+//g.transform('t'+[50,-100]+' s'+0.8);
+g.transform('t'+[50,-400]+' s'+1.5);
 const group=[]
 nations.forEach((el,i) => {
 	group[i] = g.g();
