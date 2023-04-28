@@ -29,7 +29,9 @@ public class PlayerInfoController implements Controller {
 		request.setAttribute("transfer", transfer);
 		request.setAttribute("player", player);
 		List<TransferVO> transferHistory = transferservice.selectHistoryByPlayerId(playerId);
+		boolean isFavorite = playerservice.isFavorite((String)request.getSession().getAttribute("loginUserId"), playerId);
 		request.setAttribute("transferHistory", transferHistory);
+		request.setAttribute("isFavorite", isFavorite);
 		return "/layout/playerInfo.jsp";
 	}
 }

@@ -27,13 +27,6 @@ function myFunction() {
 	const starFilled = document.querySelector('.starImg:not(.hidden)');
 	const starEmpty = document.querySelector('.starImg.hidden');
 
-/*	if (starFilled) {
-		starFilled.classList.add('hidden');
-		starEmpty.classList.remove('hidden');
-	} else {
-		starEmpty.classList.add('hidden');
-		document.querySelector('.starImg:not(.hidden)').classList.remove('hidden');
-	}*/
 	callAjax({
 		url: getContextPath() + "/user/addFavoritePlayer",
 		type: "POST",
@@ -49,6 +42,14 @@ function myFunction() {
 		}
 
 	});
+	
+	/*	if (starFilled) {
+		starFilled.classList.add('hidden');
+		starEmpty.classList.remove('hidden');
+	} else {
+		starEmpty.classList.add('hidden');
+		document.querySelector('.starImg:not(.hidden)').classList.remove('hidden');
+	}*/
 
 }  
 
