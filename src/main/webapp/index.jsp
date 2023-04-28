@@ -23,7 +23,7 @@
 <body>
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <main>
-	<input type="hidden" id="loginUserId" value="${sessionScope.loginUser }">
+	<input type="hidden" id="loginUserId" value="${sessionScope.loginUserId}">
 	<div id="summary">
 		<h1>요약</h1>
 		<jsp:include page="/layout/summary.jsp">
