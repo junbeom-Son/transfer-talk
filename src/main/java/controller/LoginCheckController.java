@@ -24,7 +24,7 @@ public class LoginCheckController implements Controller {
 			if (loginUser != null) {
 				//로그인 성공시 메인페이지 이동
 				HttpSession session = request.getSession();
-				session.setAttribute("loginUser", loginUser);
+				session.setAttribute("loginUserId", user_id);
 				page = "redirect:" + path + "/index.jsp";
 			} else {
 				//로그인 실패

@@ -179,14 +179,14 @@ $(".logout-container").click(function(){
 });
 
 //localStorage 로그인 되었는지 상태저장
-if($("#loginUserId").val()!==undefined) localStorage.setItem("loginState", $("#loginUserId").val());
+if($("#loginUserId").val()!==undefined) localStorage.setItem("loginUserId", $("#loginUserId").val());
 
 //login 처리 함수
 const loginContainer = document.querySelector(".login-container");
 const logoutContainer = document.querySelector(".logout-container");
 const myMenu = document.querySelector(".login-item");
-console.log(localStorage.getItem("loginState"));
-if (localStorage.getItem("loginState")==='1') { // 로그인시
+console.log(localStorage.getItem("loginUserId"));
+if (localStorage.getItem("loginUserId") !== "") { // 로그인시
 	loginContainer.classList.add("hidden");
 	if(logoutContainer.classList.contains('hidden')){
 		logoutContainer.classList.remove("hidden");
