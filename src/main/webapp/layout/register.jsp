@@ -81,7 +81,7 @@
 						<tr>
 							<td style="text-align: right" colspan="3"><input
 								class="btn btn-primary pull-right" type="button" value="로그인하러가기"
-								onclick="location.href='login.jsp';"></td>
+								onclick="location.href='${path}/layout/login.jsp';"></td>
 						</tr>
 					</tbody>
 				</table>
