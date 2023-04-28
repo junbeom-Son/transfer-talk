@@ -11,6 +11,7 @@ request.setCharacterEncoding("utf-8");
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/css/index.css">
+<link rel="stylesheet" href="${path}/css/playerSearch.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script defer src="${path}/js/index.js"></script>
@@ -19,8 +20,7 @@ request.setCharacterEncoding("utf-8");
 <body>
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<main>
-	<div>
-		<div>
+		<div class="search">
 			<label>선수명 <input type="text" id="playerName"></label>
 			<div class="btn-search">
 				<input type="submit" value="검색">
