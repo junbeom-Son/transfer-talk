@@ -21,7 +21,7 @@ function callTransferList({
 			isSummary:false,
 			...containerData
 		},
-		async: false,
+		//async: false,
 		beforeSend: () => {
 			const transferIn =  document.querySelector(".transfer-contents-in");
 			while(transferIn.children.length > 8){

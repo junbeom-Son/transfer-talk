@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import service.PlayerService;
 import vo.PlayerVO;
 
@@ -23,8 +25,8 @@ public class AllplayerInfoController implements Controller {
 		PlayerService playerService = new PlayerService();
 		String playerName = request.getParameter("playerName");		
 		List<PlayerVO> players = playerService.selectPlayersByName(playerName);
-		request.setAttribute("PlayerAll", players);
-				
-		return "PlayerAll.jsp";
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.writeValueAsString(players);
+		return "responseBody:" + objectMapper.writeValueAsString(players);
 	}
 }

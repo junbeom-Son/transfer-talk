@@ -100,6 +100,8 @@ public class PlayerDAO {
 				PlayerVO player = new PlayerVO();
 				player.setPlayer_id(rs.getInt("player_id"));
 				player.setPlayer_name(rs.getString("player_name"));
+				player.setImg_src(rs.getString("player_img_src"));
+				player.setPlayer_nationality(rs.getString("player_nationality"));
 				players.add(player);
 			}
 		} catch (SQLException e) {
