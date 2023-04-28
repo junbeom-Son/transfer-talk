@@ -1,6 +1,7 @@
 //input창에 입력이 들어와서 검색 버튼을 눌렀을때
 //ajax요청
 $(".btn-search").click(function(){
+	$(".search-result").empty();
 	const inputData =$("input[type=text]").val();
 	if(inputData === '') return;
 	callAjax({

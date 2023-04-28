@@ -10,6 +10,7 @@ main {
 }
 .search{
 	display:flex;
+	
 }
 .btn-search input[type="submit"] {
   margin-left:5px;
@@ -19,6 +20,8 @@ main {
   padding: 3px 20px;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
 }
 
 .btn-search input[type="submit"]:hover {
