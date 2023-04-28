@@ -112,23 +112,23 @@ public class UserDAO {
 		UserVO user = null;
 		String sql = "select * from users where user_id=? and user_pw = ?";
 		conn = util.getConnection();
-		resultCount = 0;
 		try {
 			pst = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			pst.setString(1, user_id);
 			pst.setString(2, passwordHash(user_pw));
 			rs = pst.executeQuery();
-			user = new UserVO();
-			user.setUser_id(user_id);
-			user.setEmail(rs.getString("email"));
-			user.setPhone(rs.getString("phone"));
-			user.setUser_name(rs.getString("name"));
-			user.setUser_pw(user_pw);
+			if (rs.next()) {
+				user = new UserVO();
+				user.setUser_id(user_id);
+				user.setUser_pw(user_pw);
+				user.setEmail(rs.getString("email"));
+				user.setPhone(rs.getString("phone"));
+				user.setUser_name(rs.getString("user_name"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
-			resultCount = -1;
 		} finally {
 			util.dbDisconnect(rs, pst, conn);
 		}
