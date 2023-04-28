@@ -67,10 +67,8 @@ request.setCharacterEncoding("utf-8");
 			<c:choose>
 				<c:when test="${isFavorite }">
 					<i class="fas fa-star starImg" style="font-size: 48px; color: yellow; -webkit-text-stroke: 2px gray;" onclick="myFunction()"></i> 
-					<i class="fas fa-star starImg hidden" style="font-size: 48px; color: white; -webkit-text-stroke: 2px gray;" onclick="myFunction()"></i>
 				</c:when>
 				<c:otherwise>
-					<i class="fas fa-star starImg hidden" style="font-size: 48px; color: yellow; -webkit-text-stroke: 2px gray;" onclick="myFunction()"></i> 
 					<i class="fas fa-star starImg" style="font-size: 48px; color: white; -webkit-text-stroke: 2px gray;" onclick="myFunction()"></i>
 				</c:otherwise>
 			</c:choose>

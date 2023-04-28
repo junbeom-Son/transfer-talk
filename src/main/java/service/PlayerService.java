@@ -95,4 +95,8 @@ public class PlayerService {
 		}
 		return false;
 	}
+
+	public void deleteFavoritePlayer(String user_id, int player_id) {
+		playerDao.deleteFavoritePlayer(user_id, player_id);
+	}
 }
