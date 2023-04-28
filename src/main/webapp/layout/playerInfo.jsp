@@ -40,7 +40,7 @@ request.setCharacterEncoding("utf-8");
 			</div>
 			<div id="position">${transfer.player_position }</div>
 			<div id="picture_arrow">
-				<img src="../images/arrow-right.png">
+				<img src="../images/free-icon-right-arrow-7013540.png">
 			</div>
 			<div id="fee">${transfer.fee }</div>
 		</div>
