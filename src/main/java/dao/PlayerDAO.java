@@ -259,6 +259,20 @@ public class PlayerDAO {
 		}
 		return resultCount;
 	}
-	
-	
+
+
+	public void deleteFavoritePlayer(String user_id, int player_id) {
+		String sql = "delete from my_favorite_player where user_id = ? and player_id = ?";
+		conn = util.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, user_id);
+			pst.setInt(2, player_id);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.dbDisconnect(null, pst, conn);
+		}
+	}
 }

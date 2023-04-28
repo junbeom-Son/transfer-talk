@@ -9,49 +9,61 @@ function getContainerDataFromParameters() {
 }
 
 callAjax({
-	url : getContextPath() + "/player/img",
+	url: getContextPath() + "/player/img",
 	data: getContainerDataFromParameters(),
-	success : (res)=>{
+	success: (res) => {
 		const imgSrc = res || getContextPath() + "/images/defaultPlayer.webp";
 		console.log(imgSrc);
 		const parent = document.querySelector("#picture_player");
 		const imgEl = document.createElement("img");
-		imgEl.setAttribute("src",imgSrc);
+		imgEl.setAttribute("src", imgSrc);
 		parent.appendChild(imgEl);
 	},
 })
 
-function myFunction() {
+function myFunction(isFavorite) {
 	const user_id = localStorage.getItem("loginUserId"); // 사용자 ID
 	const player_id = new URLSearchParams(location.search).get('playerId'); // 선수 ID
-	const starFilled = document.querySelector('.starImg:not(.hidden)');
-	const starEmpty = document.querySelector('.starImg.hidden');
+	const star = document.querySelector('.starImg');
+	if (star.style.color == 'yellow') {
+		star.style.color= 'white';
+		callAjax({
+			url: getContextPath() + "/user/favoritePlayer",
+			type: "POST",
+			data: {
+				user_id: user_id,
+				player_id: player_id,
+				isAdd: false
+			},
+			success: function(response) {
+				console.log("데이터 저장 완료");
+			},
+			error: function(xhr, status, error) {
+				console.error("에러 발생:", error);
+			}
 
-	callAjax({
-		url: getContextPath() + "/user/addFavoritePlayer",
-		type: "POST",
-		data: {
-			user_id: user_id,
-			player_id: player_id
-		},
-		success: function(response) {
-			console.log("데이터 저장 완료");
-		},
-		error: function(xhr, status, error) {
-			console.error("에러 발생:", error);
-		}
-
-	});
-	
-	/*	if (starFilled) {
-		starFilled.classList.add('hidden');
-		starEmpty.classList.remove('hidden');
+		});
 	} else {
-		starEmpty.classList.add('hidden');
-		document.querySelector('.starImg:not(.hidden)').classList.remove('hidden');
-	}*/
+		star.style.color= 'yellow';
+		callAjax({
+			url: getContextPath() + "/user/favoritePlayer",
+			type: "POST",
+			data: {
+				user_id: user_id,
+				player_id: player_id,
+				isAdd: true
+			},
+			success: function(response) {
+				console.log("데이터 저장 완료",response);
+			},
+			error: function(xhr, status, error) {
+				console.error("에러 발생:", xhr, status, error);
+			}
 
-}  
+		});
+	}
+
+}
 
 /*callAjax({
 	url : getContextPath() + "/player/img",
