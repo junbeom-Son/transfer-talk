@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
-<%
-request.setCharacterEncoding("utf-8");
-%>
+<% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,19 +10,40 @@ request.setCharacterEncoding("utf-8");
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/css/index.css">
-<link rel="stylesheet" href="${path}/css/summary.css">
 <link rel="stylesheet" href="${path}/css/transferList.css">
+<link rel="stylesheet" href="${path}/css/leagueSearch.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script defer src="${path}/js/index.js"></script>
 <script defer src="${path}/js/transferList.js"></script>
-
+<script defer src="${path}/js/leagueSearch.js"></script>
 </head>
-
+<style>
+</style>
 <body>
-	<jsp:include page="/layout/header.jsp"></jsp:include>
-	<main>
-		<h1>${title != null ? title : ''}</h1>
+<jsp:include page="/layout/header.jsp"></jsp:include>
+<main>
+<div id="search-title">
+	<div class="map-nation-div">
+		<div>선택한 국가 : ${country}</div>
+	</div>
+	<div class="map-selecter-contents">
+		<form class="map-selecter-form">
+		  <select name="map-league" id="map-league" class="map-selecter-select">
+		  	<option value="none" class="header-selecter-option">리그를 선택하세요.</option>
+		  </select>
+	  	</form>
+	</div>
+  	<div class="map-selecter-contents">
+		<form class="map-selecter-form">
+		  <select name="map-team" id="map-team" class="map-selecter-select">
+		  	<option value="none" class="header-selecter-option">팀을 선택하세요.</option>
+		  </select>
+		 </form>
+	</div>
+</div>
+<div id="search-content">
+	<h1>${title != null ? title : ''}</h1>
 		<div class="transfer-menu">
 			<div class="transfer-menu-btn">
 				<button id="transfer-in-show-btn" class="btn-info">in</button>
@@ -32,7 +51,7 @@ request.setCharacterEncoding("utf-8");
 				<button id="transfer-all-show-btn" class="btn-info">in & out</button>
 			</div>
 			<div class="transfer-menu-select">
-				<select name="transfer-year" id="transfer-year" class="transfer-year-select">
+				<select name="transfer-year" id="transfer-year" class="transfer-year-select leagueSearch-year">
 				  	<option value="none" class="transfer-year-selecter-option">연도</option>
 				</select>
 			</div>
@@ -62,10 +81,10 @@ request.setCharacterEncoding("utf-8");
 				<div class="transfer-year transfer-title">이적 년도</div>
 			</div>
 		</div>
-
-	</main>
-	<jsp:include page="/layout/footer.jsp"></jsp:include>
-	<jsp:include page="/layout/spinner.jsp"></jsp:include>
+</div> 
+</main>
+<jsp:include page="/layout/footer.jsp"></jsp:include>
+<jsp:include page="/layout/spinner.jsp"></jsp:include>
 </body>
 
 </html>

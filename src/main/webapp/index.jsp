@@ -14,9 +14,11 @@
 <link rel="stylesheet" href="${path}/css/summary.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script type="text/javascript" src="${path}/external/snap.svg-min.js"></script>
 <script defer src="${path}/js/youtube.js"></script>
 <script defer src="${path}/js/index.js"></script>
 <script defer src="${path}/js/summary.js"></script>
+<script defer src="${path}/js/svg.js"></script>
 
 </head>
 
@@ -36,14 +38,15 @@
 			<jsp:param name="category" value="포지션 별 이적료 TOP 5" />
 		</jsp:include> --%>
 	</div>
-	<div id="external">
-      <section class="siteLink">
-	  </section>
-         <!-- YOUTUBE VIDEO -->
-	  <section class="youtube">
-	      <div id="player"></div>
-	  </section>
-	</div>
+	<section class="map">
+       <svg version="1.1" id="frame" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px" y="0px" width="100%" height="83.333%" viewBox="0 0 800 500" enable-background="new 0 0 800 500"
+        xml:space="preserve"></svg>
+	 </section>
+     <!-- YOUTUBE VIDEO -->
+	 <section class="youtube">
+	     <div id="player"></div>
+	 </section>
 </main>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 <jsp:include page="/layout/spinner.jsp"></jsp:include>

@@ -185,7 +185,6 @@ if($("#loginUserId").val()!==undefined) localStorage.setItem("loginUserId", $("#
 const loginContainer = document.querySelector(".login-container");
 const logoutContainer = document.querySelector(".logout-container");
 const myMenu = document.querySelector(".login-item");
-console.log(localStorage.getItem("loginUserId"));
 if (localStorage.getItem("loginUserId") !== "") { // 로그인시
 	loginContainer.classList.add("hidden");
 	if(logoutContainer.classList.contains('hidden')){
@@ -238,7 +237,7 @@ function callAjax({
 		},
 		error:function(err){
 			console.warn('error',err)
-			if(error)error(res);
+			if(error)error(err);
 			if(loadingEnd) $("#my-spinner").hide();
 		}
 	});
