@@ -75,4 +75,12 @@ public class PlayerService {
 		playerDao.addPlayerNationality(players);
 		
 	}
+	
+	/**
+	 * userid로 저장된 playerid 조회
+	 * 
+	 */
+	public List<PlayerVO> selectFavoritePlayersByUserId(String userId) {
+		return playerDao.selectFavoritePlayersByUserId(userId);
+	}
 }

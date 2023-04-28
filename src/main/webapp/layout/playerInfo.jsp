@@ -64,8 +64,8 @@ request.setCharacterEncoding("utf-8");
 					<div id="history-newteam">${history.new_team.team_name }</div>
 				</div>
 			</c:forEach>
-			<i class="fas fa-star starImg " style="font-size: 48px; color: yellow; -webkit-text-stroke: 2px gray;"></i> 
-			<i class="fas fa-star starImg hidden" style="font-size: 48px; color: white; -webkit-text-stroke: 2px gray;"></i>
+			<i class="fas fa-star starImg" style="font-size: 48px; color: yellow; -webkit-text-stroke: 2px gray;" onclick="myFunction()"></i> 
+			<i class="fas fa-star starImg hidden" style="font-size: 48px; color: white; -webkit-text-stroke: 2px gray;" onclick="myFunction()"></i>
 		</div>
 	</main>
 	<jsp:include page="/layout/footer.jsp"></jsp:include>

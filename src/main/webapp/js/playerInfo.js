@@ -21,6 +21,51 @@ callAjax({
 	},
 })
 
+function myFunction() {
+  const starFilled = document.querySelector('.starImg:not(.hidden)');
+  const starEmpty = document.querySelector('.starImg.hidden');
+
+  if (starFilled) {
+    starFilled.classList.add('hidden');
+    starEmpty.classList.remove('hidden');
+  } else {
+    starEmpty.classList.add('hidden');
+    document.querySelector('.starImg:not(.hidden)').classList.remove('hidden');
+  }
+}  
+
+function myFunction() {
+  const user_id = "??"; // 사용자 ID
+  const player_id = new URLSearchParams(location.search).get('playerId'); // 선수 ID
+
+  callAjax({
+    url: "",
+    type: "POST",
+    data: {
+      user_id: user_id,
+      player_id: player_id
+    },
+    success: function(response) {
+      console.log("데이터 저장 완료");
+    },
+    error: function(xhr, status, error) {
+      console.error("에러 발생:", error);
+    }
+   
+  });
+  
+  }
+  
+
+  
+
+
+
+
+
+
+
+
 /*callAjax({
 	url : getContextPath() + "/player/img",
 	data: getContainerDataFromParameters(),

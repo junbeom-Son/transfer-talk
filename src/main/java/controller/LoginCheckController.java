@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import service.UserService;
+import vo.UserVO;
 
 public class LoginCheckController implements Controller {
 	@Override
@@ -18,12 +19,12 @@ public class LoginCheckController implements Controller {
 			String user_id = request.getParameter("user_id");
 			String user_pw = request.getParameter("user_pw");
 			UserService userService = new UserService();
-			int loginResult = userService.loginCheck(user_id, user_pw);
+			UserVO loginUser = userService.login(user_id, user_pw);
 			String path = request.getContextPath();
-			if (loginResult != 0) {
+			if (loginUser != null) {
 				//로그인 성공시 메인페이지 이동
 				HttpSession session = request.getSession();
-				session.setAttribute("loginUser", loginResult);
+				session.setAttribute("loginUser", loginUser);
 				page = "redirect:" + path + "/index.jsp";
 			} else {
 				//로그인 실패
