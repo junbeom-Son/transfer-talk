@@ -1,26 +1,23 @@
-#external{
-	height: 400px;
-	display:flex;
-	justify-content:center;
-	align-items:center;
-}
-.siteLink{
-	width:46%;
+
+.map{
+	width:100%;
 	height:100%;
-	border:1px solid red;
-	margin-right:4%;
+	/* margin-right:4%; */
+	margin-bottom:20px;
 }
 
 /* YOUTUBE VIDEO */
 .youtube {
-  position:relative;
-  width:50%;	
-  height: 100%;
-  border:1px solid blue;
-  overflow: hidden;
+	  display:flex;
+	  justify-content:center;
+	  position:relative;
+	  width:100%;	
+	  height: 400px;
+	  overflow: hidden;
+	  background-color: #EDEDF8;
 }
 #player {
-  width: 100%;
+  width: 80%;
   height: 100%;
   position: absolute;
   top: 0;
